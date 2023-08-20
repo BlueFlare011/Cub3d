@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 12:19:18 by socana-b          #+#    #+#             */
-/*   Updated: 2021/12/02 12:19:20 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/08/20 17:29:43 by socana-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*get_the_read(int fd, char *line)
 		apt = read(fd, buffer, BUFFER_SIZE);
 		if ((apt == 0) || (apt == -1))
 			break ;
-		line = ft_strjoin(line, buffer, apt);
+		line = ft_strjoin2(line, buffer, apt);
 		free_all_mem(line2);
 	}
 	free_all_mem(buffer);

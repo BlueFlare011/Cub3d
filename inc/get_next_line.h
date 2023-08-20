@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:05:19 by socana-b          #+#    #+#             */
-/*   Updated: 2021/12/10 18:05:20 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/08/20 17:28:11 by socana-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define MAX_FD 65535
 
 char	*get_next_line(int fd);
-char	*ft_strjoin(char const *s1, char const *s2, int apt);
+char	*ft_strjoin2(char const *s1, char const *s2, int apt);
 int		contains(char *str, char c, int flag);
 char	*ft_strdup(const char *s1);
 size_t	ft_strlen(const char *str);

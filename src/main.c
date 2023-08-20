@@ -21,7 +21,7 @@ int	check_arguments(int num, char **args)
 		throw("The file doesn't have extension");
 		return (0);
 	}
-	if (!ft_strncmp(extension, ".cub", 4))
+	if (ft_strncmp(extension, ".cub", 4))
 	{
 		throw("Not a valid extension");
 		return (0);
@@ -29,10 +29,28 @@ int	check_arguments(int num, char **args)
 	return(1);
 }
 
+// int	check(void)
+// {
+// 	char	**matrix;
+// 	char *str = "Prueba  uno y    2  ";
+	
+// 	matrix = ft_split(str, ' ');
+// 	while (*matrix)
+// 	{
+// 		printf("%s\n", *matrix);
+// 		matrix++;
+// 	}
+// 	exit(2);
+// }
+
 int	main(int argc, char **argv)
 {
+	t_info	*info;
+
 	if (!check_arguments(argc, argv))
 		return (1);
-	printf("GG\n");
+	info = extract_file_info(argv[1]);
+	if (!info)
+		return (1);
 	return (0);
 }

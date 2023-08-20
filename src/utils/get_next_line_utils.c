@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 18:04:48 by socana-b          #+#    #+#             */
-/*   Updated: 2021/12/10 18:04:50 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/08/20 17:28:06 by socana-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char const *s1, char const *s2, int apt)
+char	*ft_strjoin2(char const *s1, char const *s2, int apt)
 {
 	char	*aux;
 	int		i;
