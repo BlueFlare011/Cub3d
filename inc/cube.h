@@ -6,7 +6,7 @@
 # include <stdlib.h>
 # include <errno.h>
 # include <math.h>
-# include <mlx.h>
+//# include <mlx.h>
 # include "libft.h"
 # include "get_next_line.h"
 
@@ -47,5 +47,6 @@ t_info	*extract_file_info(char *file);
 void	delete_meta_spaces(char *str);
 int		create_struct(t_info *info);
 void	free_double_pointer(void **matrix);
+int		len_double_pointer(void **matrix);
 
 #endif

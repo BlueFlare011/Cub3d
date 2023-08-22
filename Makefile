@@ -9,8 +9,8 @@ $(LIBFTNAME):
 	$(MAKE) -C $(LIBFT)
 
 $(NAME): $(OBJS) $(LDFLAGS)
-	$(CC) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit $(OBJS) $(LIBFTNAME) $(addprefix -l, $(LIB_ALL)) -o $@
-
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFTNAME) $(addprefix -l, $(LIB_ALL)) -o $@
+#-lmlx -framework OpenGL -framework AppKit
 clean:
 	$(RM) $(OBJS) $(DPNDS)
 	$(MAKE) -C $(LIBFT) fclean

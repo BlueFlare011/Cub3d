@@ -1,6 +1,6 @@
 #include "cube.h"
 
-void	get_texture(t_info *info, char *line)
+void	get_texture(t_info *info, char **data)
 {
 	char		**aux;
 
@@ -28,7 +28,7 @@ void	get_texture(t_info *info, char *line)
 	free_double_pointer((void **)aux);
 }
 
-void	get_color(t_info *info, char *line)
+void	get_color(t_info *info, char **data)
 {
 	char		**aux;
 	char		**num;
@@ -64,34 +64,47 @@ void	get_map(t_info *info, char *line, int fd)
 
 int	analyse_line(t_info *info, char *line)
 {
-	int	i;
+	char	*data;
+	int		status;
 
-	i = 0;
-	while (line[i] == ' ' && line[i])
-		i++;
-	if (line[i] == 'C' || line[i] == 'F')
-		get_color(info, line);
-	else if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
-		get_texture(info, line);
-	else if (line[i] == 1 || line[i] == 0)
-		return (-1);
+	status = 0;
+	if (*line == '\n')
+		return (0);
+	data = ft_split(line, ' ');
+	if (!data)
+		return (1);
+	if (len_double_pointer((void **)data) != 2)
+	{
+		free_double_pointer(data);
+		return (1);
+	}
+	//Continue
+
 	return (0);
 }
 
-void	get_attribbutes(t_info *info, int fd)
+int	get_attribbutes(t_info *info, int fd)
 {
 	char	*line;
+	int		flag;
 
+	flag = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
 		delete_meta_spaces(line);
-		if (analyse_line(info, line) == -1)
-			break;
+		if (analyse_line(info, line))
+		{
+			flag = 1;
+			break ;
+		}
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (flag)
+		return (1);
 	get_map(info, line, fd);
+	return (0);
 }
 
 t_info	*extract_file_info(char *file)
@@ -100,11 +113,18 @@ t_info	*extract_file_info(char *file)
 	int		fd;
 
 	info = malloc(sizeof(t_info));
-	create_struct(info);
+	if (!info)
+		return (NULL);
+	if (create_struct(info))
+		return (NULL);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
-	get_attribbutes(info, fd);
-
+	if (get_attribbutes(info, fd))
+	{
+		close(fd);
+		return (NULL);
+	}
+	close(fd);
 	return (info);
 }

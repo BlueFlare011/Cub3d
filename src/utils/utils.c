@@ -10,6 +10,16 @@ void	delete_meta_spaces(char *str)
 	}
 }
 
+int	len_double_pointer(void **matrix)
+{
+	int	i;
+
+	i = 0;
+	while (matrix && matrix[i])
+		i++;
+	return (i);
+}
+
 void	free_double_pointer(void **matrix)
 {
 	while (*matrix)
