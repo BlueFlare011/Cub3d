@@ -44,18 +44,33 @@ int	create_struct(t_info *info)
 
 void	delete_struct(t_info *info)
 {
-	int	i;
-
-	i = 0;
-	while (info->texture && i < 4)
-	{
-		if (info->texture[i].path)
-			free(info->texture[i].path);
-		i++;
-	}
 	if (info->map)
 		free_double_pointer((void **)info->map);
-	free(info->texture);
-	free(info->color);
-	free(info);
+	if (info->texture)
+		free(info->texture);
+	if (info->color)
+		free(info->color);
+	if (info)
+		free(info);
+}
+
+int	is_num(char **rgb)
+{
+	int	i;
+	int	j;
+	int	aux;
+
+	i = 0;
+	j = 0;
+	aux = 1;
+	while (rgb[i] && aux)
+	{
+		while (rgb[i][j] && aux)
+		{
+			aux = ft_isdigit(rgb[i][j]);
+			j++;
+		}
+		i++;
+	}
+	return (!aux);
 }

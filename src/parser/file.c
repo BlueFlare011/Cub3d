@@ -1,65 +1,68 @@
 #include "cube.h"
 
-void	get_texture(t_info *info, char **data)
+int	get_texture_aux(t_info *info, char **data, int id)
 {
-	char		**aux;
-
-	aux = ft_split(line, ' ');
-	if (ft_strncmp(aux[0], "NO", 3) == 0)
-	{
-		info->texture[NORTH].id = NORTH;
-		info->texture[NORTH].path = ft_strdup(aux[1]);
-	}
-	else if (ft_strncmp(aux[0], "SO", 3) == 0)
-	{
-		info->texture[SOUTH].id = SOUTH;
-		info->texture[SOUTH].path = ft_strdup(aux[1]);
-	}
-	else if (ft_strncmp(aux[0], "EA", 3) == 0)
-	{
-		info->texture[EAST].id = EAST;
-		info->texture[EAST].path = ft_strdup(aux[1]);
-	}
-	else if (ft_strncmp(aux[0], "WE", 3) == 0)
-	{
-		info->texture[WEST].id = WEST;
-		info->texture[WEST].path = ft_strdup(aux[1]);
-	}
-	free_double_pointer((void **)aux);
+	info->texture[id].id = id;
+	info->texture[id].fd_texture = open(data[1], O_RDONLY);
+	if (info->texture[id].fd_texture < 0)
+		return (1);
+	return (0);
 }
 
-void	get_color(t_info *info, char **data)
+int	get_texture(t_info *info, char **data)
 {
-	char		**aux;
-	char		**num;
+	if (!ft_strncmp(data[0], "NO", 3))
+		return(get_texture_aux(info, data, NORTH));
+	if (!ft_strncmp(data[0], "SO", 3))
+		return(get_texture_aux(info, data, SOUTH));
+	if (!ft_strncmp(data[0], "EA", 3))
+		return(get_texture_aux(info, data, EAST));
+	if (!ft_strncmp(data[0], "WE", 3))
+		return(get_texture_aux(info, data, WEST));
+	return (1);
+}
 
-	aux = ft_split(line, ' ');
-	num = ft_split(aux[1], ',');
-	if (ft_strncmp(aux[0], "F", 2) == 0)
+int	get_color(t_info *info, char **data)
+{
+	char	**rgb;
+	int		num;
+
+	rgb = ft_split(data[1], ',');
+	if (!rgb)
+		return (1);
+	if (is_num(rgb))
 	{
-		info->color[0].id = FLOOR;
-		info->color[0].red = ft_atoi(num[0]);
-		info->color[0].green = ft_atoi(num[1]);
-		info->color[0].blue = ft_atoi(num[2]);
+		free_double_pointer((void **)rgb);
+		return (1);
 	}
-	else if (ft_strncmp(aux[0], "C", 2) == 0)
+	if (!ft_strncmp(data[0], "C", 2))
 	{
-		info->color[0].id = FLOOR;
-		info->color[0].red = ft_atoi(num[0]);
-		info->color[0].green = ft_atoi(num[1]);
-		info->color[0].blue = ft_atoi(num[2]);
+		info->color[1].id = CEILING;
+		info->color[1].red = ft_atoi(rgb[0]);
+		info->color[1].green = ft_atoi(rgb[1]);
+		info->color[1].blue = ft_atoi(rgb[2]);
 	}
-	free_double_pointer((void **)num);
-	free_double_pointer((void **)aux);
+	else if (!ft_strncmp(data[0], "F", 2))
+	{
+		info->color[0].id = CEILING;
+		info->color[0].red = ft_atoi(rgb[0]);
+		info->color[0].green = ft_atoi(rgb[1]);
+		info->color[0].blue = ft_atoi(rgb[2]);
+	}
+	else
+	{
+		free_double_pointer((void **)rgb);
+		return (1);
+	}
+	return (0);
 }
 
 void	get_map(t_info *info, char *line, int fd)
 {
 	(void)line;
 	(void)fd;
-	info->map = malloc(sizeof(char *));
-	free(info->map);
-	info->map = NULL;
+	(void)info;
+	write(1, "Aqui va el Mapa\n", 16);
 }
 
 int	analyse_line(t_info *info, char *line)
@@ -75,12 +78,20 @@ int	analyse_line(t_info *info, char *line)
 		return (1);
 	if (len_double_pointer((void **)data) != 2)
 	{
-		free_double_pointer(data);
+		free_double_pointer((void **)data);
 		return (1);
 	}
-	//Continue
-
-	return (0);
+	status = get_texture(info, data);
+	status = get_color(info, data);
+	free_double_pointer((void **)data);
+	if (status)
+	{
+		while (*line && *line != 1)
+			line++;
+		if (*line == 1)
+			status = 2;
+	}
+	return (status);
 }
 
 int	get_attribbutes(t_info *info, int fd)
@@ -90,18 +101,16 @@ int	get_attribbutes(t_info *info, int fd)
 
 	flag = 0;
 	line = get_next_line(fd);
-	while (line)
+	while (line && flag != 2)
 	{
 		delete_meta_spaces(line);
-		if (analyse_line(info, line))
-		{
-			flag = 1;
+		flag = analyse_line(info, line);
+		if (flag)
 			break ;
-		}
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (flag)
+	if (flag == 1)
 		return (1);
 	get_map(info, line, fd);
 	return (0);

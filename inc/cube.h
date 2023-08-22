@@ -21,7 +21,7 @@ enum{
 
 typedef struct {
 	int		id;
-	char	*path;
+	int		fd_texture;
 }t_texture;
 
 typedef struct {
@@ -48,5 +48,6 @@ void	delete_meta_spaces(char *str);
 int		create_struct(t_info *info);
 void	free_double_pointer(void **matrix);
 int		len_double_pointer(void **matrix);
+int		is_num(char **rgb);
 
 #endif
