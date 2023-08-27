@@ -25,14 +25,13 @@ int	get_texture(t_info *info, char **data)
 int	get_color(t_info *info, char **data)
 {
 	char	**rgb;
-	int		num;
 
 	rgb = ft_split(data[1], ',');
 	if (!rgb)
 		return (1);
 	if (is_num(rgb))
 	{
-		free_double_pointer((void **)rgb);
+		free_double_pointer(rgb);
 		return (1);
 	}
 	if (!ft_strncmp(data[0], "C", 2))
@@ -51,7 +50,7 @@ int	get_color(t_info *info, char **data)
 	}
 	else
 	{
-		free_double_pointer((void **)rgb);
+		free_double_pointer(rgb);
 		return (1);
 	}
 	return (0);
@@ -67,7 +66,7 @@ void	get_map(t_info *info, char *line, int fd)
 
 int	analyse_line(t_info *info, char *line)
 {
-	char	*data;
+	char	**data;
 	int		status;
 
 	status = 0;
@@ -76,14 +75,14 @@ int	analyse_line(t_info *info, char *line)
 	data = ft_split(line, ' ');
 	if (!data)
 		return (1);
-	if (len_double_pointer((void **)data) != 2)
+	if (len_double_pointer(data) != 2)
 	{
-		free_double_pointer((void **)data);
+		free_double_pointer(data);
 		return (1);
 	}
 	status = get_texture(info, data);
 	status = get_color(info, data);
-	free_double_pointer((void **)data);
+	free_double_pointer(data);
 	if (status)
 	{
 		while (*line && *line != 1)

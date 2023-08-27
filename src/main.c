@@ -31,16 +31,13 @@ int	check_arguments(int num, char **args)
 
 // int	check(void)
 // {
-// 	char	**matrix;
-// 	char *str = "Prueba  uno y    2  ";
-	
-// 	matrix = ft_split(str, ' ');
-// 	while (*matrix)
-// 	{
-// 		printf("%s\n", *matrix);
-// 		matrix++;
-// 	}
-// 	exit(2);
+	// char	**matrix;
+	// char *str = "Prueba  uno y    2  ";
+	// 
+	// matrix = ft_split(str, ',');
+	// printf("%s\n", *matrix);
+	// pito(matrix);
+	// return(0);
 // }
 
 int	main(int argc, char **argv)
@@ -52,5 +49,6 @@ int	main(int argc, char **argv)
 	info = extract_file_info(argv[1]);
 	if (!info)
 		return (1);
+	print_info(info);
 	return (0);
 }

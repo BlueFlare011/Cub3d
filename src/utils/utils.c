@@ -10,7 +10,7 @@ void	delete_meta_spaces(char *str)
 	}
 }
 
-int	len_double_pointer(void **matrix)
+int	len_double_pointer(char **matrix)
 {
 	int	i;
 
@@ -20,14 +20,15 @@ int	len_double_pointer(void **matrix)
 	return (i);
 }
 
-void	free_double_pointer(void **matrix)
+void	free_double_pointer(char **matrix)
 {
-	while (*matrix)
+	while (matrix && *matrix)
 	{
 		free(*matrix);
 		matrix++;
 	}
-	free(matrix);
+	if (matrix)
+		free(matrix);
 }
 
 int	create_struct(t_info *info)
@@ -45,7 +46,7 @@ int	create_struct(t_info *info)
 void	delete_struct(t_info *info)
 {
 	if (info->map)
-		free_double_pointer((void **)info->map);
+		free_double_pointer(info->map);
 	if (info->texture)
 		free(info->texture);
 	if (info->color)
@@ -73,4 +74,17 @@ int	is_num(char **rgb)
 		i++;
 	}
 	return (!aux);
+}
+
+void	print_info(t_info *info)
+{
+	for (int i = 0; i < 4; i++)
+		printf("%d - %d\n", info->texture[i].id, info->texture[i].fd_texture);
+	for (int i = 0; i < 2; i++)
+		printf("%d - (%d,%d,%d)\n", info->color[i].id, info->color[i].red, info->color[i].green, info->color[i].blue);
+	while (info->map && *(info->map))
+	{
+		printf("%s\n", *(info->map));
+		info->map++;
+	}
 }

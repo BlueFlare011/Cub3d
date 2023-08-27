@@ -1,16 +1,17 @@
 #ifndef CUBE_H
-# define CUBE_H
-# include <unistd.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <stdlib.h>
-# include <errno.h>
-# include <math.h>
-//# include <mlx.h>
-# include "libft.h"
-# include "get_next_line.h"
+#define CUBE_H
+#include <unistd.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <math.h>
+// # include <mlx.h>
+#include "libft.h"
+#include "get_next_line.h"
 
-enum{
+enum
+{
 	NORTH = 0,
 	SOUTH = 1,
 	EAST = 2,
@@ -19,35 +20,36 @@ enum{
 	CEILING = 5,
 };
 
-typedef struct {
-	int		id;
-	int		fd_texture;
-}t_texture;
-
-typedef struct {
-	int		id;
-	int		red;
-	int		green;
-	int		blue;
-}t_color;
+typedef struct
+{
+	int id;
+	int fd_texture;
+} t_texture;
 
 typedef struct
 {
-	char		**map;
-	t_color		*color;
-	t_texture	*texture;
-}t_info;
+	int id;
+	int red;
+	int green;
+	int blue;
+} t_color;
 
-
+typedef struct
+{
+	char **map;
+	t_color *color;
+	t_texture *texture;
+} t_info;
 
 /************** PARSER ***************/
-t_info	*extract_file_info(char *file);
+t_info *extract_file_info(char *file);
 
 /************** UTILS ***************/
-void	delete_meta_spaces(char *str);
-int		create_struct(t_info *info);
-void	free_double_pointer(void **matrix);
-int		len_double_pointer(void **matrix);
-int		is_num(char **rgb);
+void delete_meta_spaces(char *str);
+int create_struct(t_info *info);
+void free_double_pointer(char **matrix);
+int len_double_pointer(char **matrix);
+int is_num(char **rgb);
+void	print_info(t_info *info);
 
 #endif
