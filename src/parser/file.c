@@ -2,10 +2,17 @@
 
 int	get_texture_aux(t_info *info, char **data, int id)
 {
+	char	*aux;
+
+	aux = ft_strtrim(data[1], "\n");
 	info->texture[id].id = id;
-	info->texture[id].fd_texture = open(data[1], O_RDONLY);
+	info->texture[id].fd_texture = open(aux, O_RDONLY);
 	if (info->texture[id].fd_texture < 0)
+	{
+		free(aux);
 		return (1);
+	}
+	free(aux);
 	return (0);
 }
 
@@ -81,6 +88,7 @@ int	analyse_line(t_info *info, char *line)
 		return (1);
 	}
 	status = get_texture(info, data);
+	printf("%d - %d\n", info->texture->fd_texture, info->texture->id);
 	status = get_color(info, data);
 	free_double_pointer(data);
 	if (status)

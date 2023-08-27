@@ -1,7 +1,7 @@
-NO ./ruta_a_la_textura_norte
-SO ./ruta_a_la_textura_sur
-WE ./ruta_a_la_textura_oeste
-EA ./ruta_a_la_textura_este
+NO ./files/textures/north.txt
+SO ./files/textures/south.txt
+WE ./files/textures/west.txt
+EA ./files/textures/east.txt
 
 F 220,100,0
 C 225,30,0
