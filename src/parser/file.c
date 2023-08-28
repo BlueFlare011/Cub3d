@@ -77,7 +77,7 @@ int	analyse_line(t_info *info, char *line)
 	int		status;
 
 	status = 0;
-	if (*line == '\n')
+	if (*line == '\0')
 		return (0);
 	data = ft_split(line, ' ');
 	if (!data)
@@ -88,8 +88,8 @@ int	analyse_line(t_info *info, char *line)
 		return (1);
 	}
 	status = get_texture(info, data);
-	printf("%d - %d\n", info->texture->fd_texture, info->texture->id);
-	status = get_color(info, data);
+	if (status)
+		status = get_color(info, data);
 	free_double_pointer(data);
 	if (status)
 	{
@@ -110,7 +110,9 @@ int	get_attribbutes(t_info *info, int fd)
 	line = get_next_line(fd);
 	while (line && flag != 2)
 	{
+		ft_putendl_fd("Hola", STDERR_FILENO);
 		delete_meta_spaces(line);
+		line = trim_line(line);
 		flag = analyse_line(info, line);
 		if (flag)
 			break ;

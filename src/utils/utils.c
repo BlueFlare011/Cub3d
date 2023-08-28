@@ -22,10 +22,13 @@ int	len_double_pointer(char **matrix)
 
 void	free_double_pointer(char **matrix)
 {
-	while (matrix && *matrix)
+	int	i;
+
+	i = 0;
+	while (matrix && matrix[i])
 	{
-		free(*matrix);
-		matrix++;
+		free(matrix[i]);
+		i++;
 	}
 	if (matrix)
 		free(matrix);
@@ -74,6 +77,17 @@ int	is_num(char **rgb)
 		i++;
 	}
 	return (!aux);
+}
+
+char	*trim_line(char *line)
+{
+	char	*result;
+
+	result = ft_strtrim(line, "\n");
+	if (!result)
+		return (NULL);
+	free(line);
+	return (result);
 }
 
 void	print_info(t_info *info)
