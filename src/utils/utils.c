@@ -40,14 +40,22 @@ int	create_struct(t_info *info)
 	if (!info->color)
 		return (1);
 	info->texture = malloc(sizeof(t_texture) * 4);
-	if (!info->color)
+	if (!info->texture)
+	{
+		free(info->color);
 		return (1);
+	}
 	info->map = NULL;
 	return (0);
 }
 
 void	delete_struct(t_info *info)
 {
+	int	i;
+
+	i = 0;
+	while (i < 4)
+		close(info->texture[i++].fd_texture);
 	if (info->map)
 		free_double_pointer(info->map);
 	if (info->texture)
@@ -65,10 +73,11 @@ int	is_num(char **rgb)
 	int	aux;
 
 	i = 0;
-	j = 0;
 	aux = 1;
+	//printf("-%s-%s-%s-\n", rgb[0], rgb[1], rgb[2]);
 	while (rgb[i] && aux)
 	{
+		j = 0;
 		while (rgb[i][j] && aux)
 		{
 			aux = ft_isdigit(rgb[i][j]);
@@ -92,13 +101,16 @@ char	*trim_line(char *line)
 
 void	print_info(t_info *info)
 {
+	int	it;
+
+	it = 0;
 	for (int i = 0; i < 4; i++)
 		printf("%d - %d\n", info->texture[i].id, info->texture[i].fd_texture);
 	for (int i = 0; i < 2; i++)
 		printf("%d - (%d,%d,%d)\n", info->color[i].id, info->color[i].red, info->color[i].green, info->color[i].blue);
-	while (info->map && *(info->map))
+	while (info->map && info->map[it])
 	{
-		printf("%s\n", *(info->map));
-		info->map++;
+		printf("%s\n", info->map[it]);
+		it++;
 	}
 }

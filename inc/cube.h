@@ -44,7 +44,7 @@ typedef struct
 /************** PARSER ***************/
 t_info *extract_file_info(char *file);
 
-/************** UTILS ***************/
+/************** UTILS ****************/
 void 	delete_meta_spaces(char *str);
 int 	create_struct(t_info *info);
 void	 free_double_pointer(char **matrix);
@@ -52,5 +52,6 @@ int 	len_double_pointer(char **matrix);
 int 	is_num(char **rgb);
 char	*trim_line(char *line);
 void	print_info(t_info *info);
+void	delete_struct(t_info *info);
 
 #endif

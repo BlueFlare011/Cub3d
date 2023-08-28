@@ -50,7 +50,7 @@ int	get_color(t_info *info, char **data)
 	}
 	else if (!ft_strncmp(data[0], "F", 2))
 	{
-		info->color[0].id = CEILING;
+		info->color[0].id = FLOOR;
 		info->color[0].red = ft_atoi(rgb[0]);
 		info->color[0].green = ft_atoi(rgb[1]);
 		info->color[0].blue = ft_atoi(rgb[2]);
@@ -65,61 +65,62 @@ int	get_color(t_info *info, char **data)
 
 void	get_map(t_info *info, char *line, int fd)
 {
-	(void)line;
-	(void)fd;
-	(void)info;
-	write(1, "Aqui va el Mapa\n", 16);
+	char	*super_string;
+	char	*aux;
+
+	super_string = line;
+	while (line)
+	{
+		line = get_next_line(fd);
+		if (line)
+		{
+			aux = ft_strjoin(super_string, line);
+			free(line);
+			free(super_string);
+			super_string = aux;
+		}
+	}
+	info->map = ft_split(super_string, '\n');
 }
 
-int	analyse_line(t_info *info, char *line)
+int	analyse_line(t_info *info, char *line, int status)
 {
 	char	**data;
-	int		status;
 
-	status = 0;
 	if (*line == '\0')
-		return (0);
+		return (status);
 	data = ft_split(line, ' ');
 	if (!data)
-		return (1);
+		return (-1);
 	if (len_double_pointer(data) != 2)
 	{
 		free_double_pointer(data);
-		return (1);
+		return (-1);
 	}
-	status = get_texture(info, data);
-	if (status)
-		status = get_color(info, data);
+	if (get_texture(info, data) == 0 || get_color(info, data) == 0)
+		status += 1;
+	else
+		status = -1;
 	free_double_pointer(data);
-	if (status)
-	{
-		while (*line && *line != 1)
-			line++;
-		if (*line == 1)
-			status = 2;
-	}
 	return (status);
 }
 
 int	get_attribbutes(t_info *info, int fd)
 {
 	char	*line;
-	int		flag;
+	int		limit;
 
-	flag = 0;
+	limit = 0;
 	line = get_next_line(fd);
-	while (line && flag != 2)
+	while (line && limit < 6)
 	{
-		ft_putendl_fd("Hola", STDERR_FILENO);
 		delete_meta_spaces(line);
 		line = trim_line(line);
-		flag = analyse_line(info, line);
-		if (flag)
-			break ;
+		limit = analyse_line(info, line, limit);
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (flag == 1)
+	if (limit == -1)
 		return (1);
 	get_map(info, line, fd);
 	return (0);
