@@ -5,12 +5,14 @@ int	get_texture_aux(t_info *info, char **data, int id)
 	char	*aux;
 
 	aux = ft_strtrim(data[1], "\n");
+	if (!aux)
+		return (error_int(strerror(errno), 1));
 	info->texture[id].id = id;
 	info->texture[id].fd_texture = open(aux, O_RDONLY);
 	if (info->texture[id].fd_texture < 0)
 	{
 		free(aux);
-		return (1);
+		return (error_int(strerror(errno), 1));
 	}
 	free(aux);
 	return (0);
@@ -35,12 +37,13 @@ int	get_color(t_info *info, char **data)
 
 	rgb = ft_split(data[1], ',');
 	if (!rgb)
-		return (1);
+		return (error_int(strerror(errno), 1));
 	if (is_num(rgb))
 	{
 		free_double_pointer(rgb);
-		return (1);
+		return (error_int(NO_NUMBER, 1));
 	}
+	//Mejorar esta puta mierda
 	if (!ft_strncmp(data[0], "C", 2))
 	{
 		info->color[1].id = CEILING;
@@ -60,6 +63,7 @@ int	get_color(t_info *info, char **data)
 		free_double_pointer(rgb);
 		return (1);
 	}
+	free_double_pointer(rgb);
 	return (0);
 }
 
@@ -81,6 +85,7 @@ void	get_map(t_info *info, char *line, int fd)
 		}
 	}
 	info->map = ft_split(super_string, '\n');
+	free(super_string);
 }
 
 int	analyse_line(t_info *info, char *line, int status)
@@ -91,16 +96,19 @@ int	analyse_line(t_info *info, char *line, int status)
 		return (status);
 	data = ft_split(line, ' ');
 	if (!data)
-		return (-1);
+		return (error_int(strerror(errno), -1));
 	if (len_double_pointer(data) != 2)
 	{
 		free_double_pointer(data);
-		return (-1);
+		return (error_int(INVALID_LINE_NUM, -1));
 	}
 	if (get_texture(info, data) == 0 || get_color(info, data) == 0)
-		status += 1;
+		status++;
 	else
+	{
+		(void)error(INVALID_LINE);
 		status = -1;
+	}
 	free_double_pointer(data);
 	return (status);
 }
@@ -112,14 +120,18 @@ int	get_attribbutes(t_info *info, int fd)
 
 	limit = 0;
 	line = get_next_line(fd);
-	while (line && limit < 6)
+	while (line && limit < 6 && limit != -1)
 	{
 		delete_meta_spaces(line);
 		line = trim_line(line);
+		if (!line)
+			break;
 		limit = analyse_line(info, line, limit);
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (!line)
+		return (error_int(strerror(errno), 1));
 	if (limit == -1)
 		return (1);
 	get_map(info, line, fd);
@@ -133,12 +145,15 @@ t_info	*extract_file_info(char *file)
 
 	info = malloc(sizeof(t_info));
 	if (!info)
-		return (NULL);
+		return(error(strerror(errno)));
 	if (create_struct(info))
+	{
+		free(info);
 		return (NULL);
+	}
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		return (NULL);
+		return(error(strerror(errno)));
 	if (get_attribbutes(info, fd))
 	{
 		close(fd);

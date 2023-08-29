@@ -5,21 +5,12 @@ int	check_arguments(int num, char **args)
 	char	*extension;
 
 	if (num != 2)
-	{
-		printf("Wrong number of arguments\n");
-		return (0);
-	}
+		return (error_int(ERROR_NUM_ARGS, 0));
 	extension = ft_strrchr(args[1], '.');
 	if (!extension)
-	{
-		printf("The file %s doesn't have extension\n", args[1]);
-		return (0);
-	}
+		return (error_int(NO_EXTENSION, 0));
 	if (ft_strncmp(extension, ".cub", 4))
-	{
-		printf("%s is not a valid extension\n", extension);
-		return (0);
-	}
+		return (error_int(NO_VALID_EXTENSION, 0));
 	return(1);
 }
 

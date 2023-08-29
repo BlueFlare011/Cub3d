@@ -38,12 +38,12 @@ int	create_struct(t_info *info)
 {
 	info->color = malloc(sizeof(t_color) * 2);
 	if (!info->color)
-		return (1);
+		return(error_int(strerror(errno), 1));
 	info->texture = malloc(sizeof(t_texture) * 4);
 	if (!info->texture)
 	{
 		free(info->color);
-		return (1);
+		return(error_int(strerror(errno), 1));
 	}
 	info->map = NULL;
 	return (0);
@@ -74,7 +74,6 @@ int	is_num(char **rgb)
 
 	i = 0;
 	aux = 1;
-	//printf("-%s-%s-%s-\n", rgb[0], rgb[1], rgb[2]);
 	while (rgb[i] && aux)
 	{
 		j = 0;
@@ -94,7 +93,10 @@ char	*trim_line(char *line)
 
 	result = ft_strtrim(line, "\n");
 	if (!result)
+	{
+		free(line);
 		return (NULL);
+	}
 	free(line);
 	return (result);
 }

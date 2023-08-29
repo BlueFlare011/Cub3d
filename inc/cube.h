@@ -1,13 +1,9 @@
 #ifndef CUBE_H
 #define CUBE_H
-#include <unistd.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <errno.h>
 #include <math.h>
+#include <string.h>
 // # include <mlx.h>
-#include "libft.h"
+#include "errors.h"
 #include "get_next_line.h"
 
 enum
