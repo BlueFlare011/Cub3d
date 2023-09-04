@@ -36,6 +36,9 @@ void	free_double_pointer(char **matrix)
 
 int	create_struct(t_info *info)
 {
+	int	i;
+
+	i = 0;
 	info->color = malloc(sizeof(t_color) * 2);
 	if (!info->color)
 		return(error_int(strerror(errno), 1));
@@ -45,6 +48,8 @@ int	create_struct(t_info *info)
 		free(info->color);
 		return(error_int(strerror(errno), 1));
 	}
+	while (i < 4)
+		info->texture[i++].fd_texture = -2;
 	info->map = NULL;
 	return (0);
 }
@@ -55,7 +60,10 @@ void	delete_struct(t_info *info)
 
 	i = 0;
 	while (i < 4)
-		close(info->texture[i++].fd_texture);
+	{
+		if (info->texture[i].fd_texture > 0)
+			close(info->texture[i++].fd_texture);
+	}
 	if (info->map)
 		free_double_pointer(info->map);
 	if (info->texture)

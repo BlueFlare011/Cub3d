@@ -33,7 +33,10 @@ int	main(int argc, char **argv)
 		return (1);
 	info = extract_file_info(argv[1]);
 	if (!info)
+	{
+		delete_struct(info);
 		return (1);
+	}
 	print_info(info);
 	delete_struct(info);
 	return (0);
