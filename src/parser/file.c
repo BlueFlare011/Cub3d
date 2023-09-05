@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
+/*   Updated: 2023/09/05 17:54:15 by socana-b         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 int	get_texture_aux(t_info *info, char **data, int id)
@@ -43,8 +55,8 @@ int	get_color_aux(t_info *info, char **rgb, int id)
 	info->color[id - 4].green = ft_atoi(rgb[1]);
 	info->color[id - 4].blue = ft_atoi(rgb[2]);
 	if ((info->color[id - 4].red < 0 || info->color[id - 4].red > 255) ||
-		(info->color[id - 4].red < 0 || info->color[id - 4].red > 255) ||
-			(info->color[id - 4].red < 0 || info->color[id - 4].red > 255))
+		(info->color[id - 4].green < 0 || info->color[id - 4].green > 255) ||
+			(info->color[id - 4].blue < 0 || info->color[id - 4].blue > 255))
 	{
 		free_double_pointer(rgb);
 		return (1);
@@ -79,7 +91,7 @@ void	get_map(t_info *info, char *line, int fd)
 	super_string = line;
 	while (line)
 	{
-		line = get_next_line(fd);
+		line = get_next_line(fd);	// Anular \n 
 		if (line)
 		{
 			aux = ft_strjoin(super_string, line);
@@ -159,9 +171,13 @@ t_info	*extract_file_info(char *file)
 	}
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
+	{
+		free(info);
 		return(error(strerror(errno)));
+	}
 	if (get_attribbutes(info, fd))
 	{
+		delete_struct(info);
 		close(fd);
 		return (NULL);
 	}

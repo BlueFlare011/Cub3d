@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/05 17:34:12 by socana-b          #+#    #+#             */
+/*   Updated: 2023/09/05 17:34:13 by socana-b         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cube.h>
 
 int	check_arguments(int num, char **args)
@@ -33,10 +45,7 @@ int	main(int argc, char **argv)
 		return (1);
 	info = extract_file_info(argv[1]);
 	if (!info)
-	{
-		delete_struct(info);
 		return (1);
-	}
 	print_info(info);
 	delete_struct(info);
 	return (0);

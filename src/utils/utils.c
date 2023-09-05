@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/05 17:34:18 by socana-b          #+#    #+#             */
+/*   Updated: 2023/09/05 17:34:18 by socana-b         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 void	delete_meta_spaces(char *str)
@@ -59,15 +71,18 @@ void	delete_struct(t_info *info)
 	int	i;
 
 	i = 0;
-	while (i < 4)
-	{
-		if (info->texture[i].fd_texture > 0)
-			close(info->texture[i++].fd_texture);
-	}
 	if (info->map)
 		free_double_pointer(info->map);
 	if (info->texture)
+	{
+		while (i < 4)
+		{
+			if (info->texture[i].fd_texture > 0)
+				close(info->texture[i].fd_texture);
+			i++;
+		}
 		free(info->texture);
+	}
 	if (info->color)
 		free(info->color);
 	if (info)

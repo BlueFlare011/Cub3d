@@ -1,4 +1,4 @@
-NO ./files/txtures/north.txt
+NO ./files/textures/north.txt
 C 200,200,200
 WE ./files/textures/west.txt
 F 200,200,200
