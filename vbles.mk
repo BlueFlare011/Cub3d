@@ -10,13 +10,14 @@ CUBE		=		main.c
 
 UTILS		=		$(addprefix $(UTILS_DIR), \
 						utils.c \
-						errors.c	\
+						errors.c \
 						get_next_line.c \
 						get_next_line_utils.c \
 					)
 
 PARSER		=		$(addprefix $(PARSER_DIR), \
 						file.c \
+						map.c \
 					)
 
 SRCS		= 		$(addprefix $(SRC_DIR), \

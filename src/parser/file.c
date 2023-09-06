@@ -91,7 +91,13 @@ void	get_map(t_info *info, char *line, int fd)
 	super_string = line;
 	while (line)
 	{
-		line = get_next_line(fd);	// Anular \n 
+		line = get_next_line(fd);
+		if (*line == '\n')
+		{
+			free(line);
+			free(super_string);
+			return ;
+		}
 		if (line)
 		{
 			aux = ft_strjoin(super_string, line);
