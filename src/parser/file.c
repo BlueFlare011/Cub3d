@@ -18,13 +18,13 @@ int	get_texture_aux(t_info *info, char **data, int id)
 
 	aux = ft_strtrim(data[1], "\n");
 	if (!aux)
-		return (error_int(strerror(errno), 1));
+		error_exit(strerror(errno), info);
 	info->texture[id].id = id;
 	info->texture[id].fd_texture = open(aux, O_RDONLY);
 	if (info->texture[id].fd_texture < 0)
 	{
 		free(aux);
-		return (error_int(strerror(errno), 1));
+		error_exit(strerror(errno), info); // Mensajito customizado
 	}
 	free(aux);
 	return (0);
@@ -48,7 +48,7 @@ int	get_color_aux(t_info *info, char **rgb, int id)
 	if (is_num(rgb))
 	{
 		free_double_pointer(rgb);
-		return (error_int(NO_NUMBER, 1));
+		error_exit(NO_NUMBER, info);
 	}
 	info->color[id - 4].id = id;
 	info->color[id - 4].red = ft_atoi(rgb[0]);
@@ -59,7 +59,7 @@ int	get_color_aux(t_info *info, char **rgb, int id)
 			(info->color[id - 4].blue < 0 || info->color[id - 4].blue > 255))
 	{
 		free_double_pointer(rgb);
-		return (1);
+		error_exit(NOT_VALID_NUM, info);
 	}
 	free_double_pointer(rgb);
 	return (0);
@@ -71,7 +71,7 @@ int	get_color(t_info *info, char **data)
 
 	rgb = ft_split(data[1], ',');
 	if (!rgb)
-		return (error_int(strerror(errno), 1));
+		error_exit(strerror(errno), info);
 	if (!ft_strncmp(data[0], "C", 2))
 		return (get_color_aux(info, rgb, CEILING));
 	else if (!ft_strncmp(data[0], "F", 2))
@@ -92,7 +92,7 @@ void	get_map(t_info *info, char *line, int fd)
 	while (line)
 	{
 		line = get_next_line(fd);
-		if (*line == '\n')
+		if (line && *line == '\n')
 		{
 			free(line);
 			free(super_string);
@@ -118,26 +118,23 @@ int	analyse_line(t_info *info, char *line, int status)
 		return (status);
 	data = ft_split(line, ' ');
 	if (!data)
-		return (error_int(strerror(errno), -1));
+		error_exit(strerror(errno), info);
 	if (len_double_pointer(data) != 2)
 	{
 		free_double_pointer(data);
-		return (error_int(INVALID_LINE_NUM, -1));
+		error_exit(TO_MUCH_INFO, info);
 	}
 	if (get_texture(info, data) == 0)
 		status++;
 	else if (get_color(info, data) == 0)
 		status++;
 	else
-	{
-		(void)error(INVALID_LINE);
-		status = -1;
-	}
+		error_exit(INVALID_LINE, info); // More info
 	free_double_pointer(data);
 	return (status);
 }
 
-int	get_attribbutes(t_info *info, int fd)
+void	get_attribbutes(t_info *info, int fd)
 {
 	char	*line;
 	int		limit;
@@ -155,11 +152,12 @@ int	get_attribbutes(t_info *info, int fd)
 		line = get_next_line(fd);
 	}
 	if (!line)
-		return (error_int(strerror(errno), 1));
-	if (limit == -1)
-		return (1);
+	{
+		close (fd);
+		error_exit(strerror(errno), info);
+	}
 	get_map(info, line, fd);
-	return (0);
+	//valid_map(info);
 }
 
 t_info	*extract_file_info(char *file)
@@ -169,11 +167,11 @@ t_info	*extract_file_info(char *file)
 
 	info = malloc(sizeof(t_info));
 	if (!info)
-		return(error(strerror(errno)));
+		error_exit(strerror(errno), info);
 	if (create_struct(info))
 	{
 		free(info);
-		return (NULL);
+		exit(1);
 	}
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
@@ -181,12 +179,7 @@ t_info	*extract_file_info(char *file)
 		free(info);
 		return(error(strerror(errno)));
 	}
-	if (get_attribbutes(info, fd))
-	{
-		delete_struct(info);
-		close(fd);
-		return (NULL);
-	}
+	get_attribbutes(info, fd);
 	close(fd);
 	return (info);
 }

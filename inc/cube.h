@@ -51,6 +51,7 @@ typedef struct s_info
 
 /************** PARSER ***************/
 t_info	*extract_file_info(char *file);
+void	valid_map(t_info *map);
 
 /************** UTILS ****************/
 void	delete_meta_spaces(char *str);
@@ -61,5 +62,10 @@ int		is_num(char **rgb);
 char	*trim_line(char *line);
 void	print_info(t_info *info);
 void	delete_struct(t_info *info);
+
+/*************** ERROR ****************/
+void	*error(char *message);
+int		error_int(char *message, int returned);
+void	error_exit(char *message, t_info *info);
 
 #endif

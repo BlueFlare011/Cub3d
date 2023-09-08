@@ -131,18 +131,17 @@ int	untrim_map(char **map, int max_x)
 	return (0);
 }
 
-int	valid_map(char **map)
+void	valid_map(t_info *info)
 {
 	int	max_x;
 	int	max_y;
-
 	max_x = 0;
-	if (check_chars(map, &max_x, &max_y, 0))
-		return (1);
-	if (untrim_map(map, max_x))
-		return (1);
-	if (is_closed_up(map) || is_closed_down(map, max_y) ||
-		is_closed_left(map) || is_closed_right(map, max_x))
-		return (1);
-	return (0);
+
+	if (check_chars(info->map, &max_x, &max_y, 0))
+		exit(1);
+	if (untrim_map(info->map, max_x))
+		exit(1);
+	if (is_closed_up(info->map) || is_closed_down(info->map, max_y) ||
+		is_closed_left(info->map) || is_closed_right(info->map, max_x))
+		exit (1);
 }

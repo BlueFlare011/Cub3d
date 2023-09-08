@@ -17,14 +17,18 @@
 # include <errno.h>
 # include "libft.h"
 
+/******************** FILENAME *************************/
 # define ERROR_NUM_ARGS	"Wrong number of arguments"
 # define NO_EXTENSION	"The file doesn't have extension"
 # define NO_VALID_EXTENSION	"Not a valid extension"
-# define INVALID_LINE	"The file is invalid"
-# define INVALID_LINE_NUM	"Too much information in one element"
-# define NO_NUMBER		"No number specified in RGB element"
 
-void	*error(char *message);
-int		error_int(char *message, int returned);
+/******************** ELEMENTS *************************/
+# define INVALID_LINE	"Invalid information in element: "
+# define TO_MUCH_INFO	"Too much information in one element"
+# define NO_NUMBER		"No number specified in RGB element"
+# define NOT_VALID_NUM	"The number must be between 0 and 255"
+
+/********************** MAP ****************************/
+#define MAP_SEPARATED	"The map can't contain empty lines"
 
 #endif
