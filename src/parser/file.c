@@ -157,7 +157,7 @@ void	get_attribbutes(t_info *info, int fd)
 		error_exit(strerror(errno), info);
 	}
 	get_map(info, line, fd);
-	//valid_map(info);
+	valid_map(info);
 }
 
 t_info	*extract_file_info(char *file)

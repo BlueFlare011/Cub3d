@@ -15,7 +15,7 @@
 # include <math.h>
 # include <string.h>
 // # include <mlx.h>
-# include "errors.h"
+# include "bfs_stack.h"
 # include "get_next_line.h"
 
 enum

@@ -29,6 +29,7 @@
 # define NOT_VALID_NUM	"The number must be between 0 and 255"
 
 /********************** MAP ****************************/
-#define MAP_SEPARATED	"The map can't contain empty lines"
+# define MAP_SEPARATED	"The map can't contain empty lines"
+# define MAP_NOT_CLOSED	"The map is not closed"
 
 #endif

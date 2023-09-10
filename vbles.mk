@@ -18,6 +18,7 @@ UTILS		=		$(addprefix $(UTILS_DIR), \
 PARSER		=		$(addprefix $(PARSER_DIR), \
 						file.c \
 						map.c \
+						stack_utils.c \
 					)
 
 SRCS		= 		$(addprefix $(SRC_DIR), \
