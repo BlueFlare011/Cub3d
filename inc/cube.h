@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/05 17:38:34 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/09/12 00:02:44 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE_H
 # define CUBE_H
 # include <math.h>
-# include <string.h>
 // # include <mlx.h>
 # include "bfs_stack.h"
 # include "get_next_line.h"
+# include "errors.h"
 
 enum
 {
@@ -42,30 +42,24 @@ typedef struct s_color
 	int	blue;
 }t_color;
 
-typedef struct s_info
+typedef struct s_cube
 {
 	char		**map;
 	t_color		*color;
 	t_texture	*texture;
-}t_info;
+}	t_cube;
 
 /************** PARSER ***************/
-t_info	*extract_file_info(char *file);
-void	valid_map(t_info *map);
+t_cube	*extract_file_info(char *file);
+void	valid_map(t_cube *map);
 
 /************** UTILS ****************/
-void	delete_meta_spaces(char *str);
-int		create_struct(t_info *info);
+void	create_struct(t_cube *cube);
 void	free_double_pointer(char **matrix);
 int		len_double_pointer(char **matrix);
 int		is_num(char **rgb);
-char	*trim_line(char *line);
-void	print_info(t_info *info);
-void	delete_struct(t_info *info);
-
-/*************** ERROR ****************/
-void	*error(char *message);
-int		error_int(char *message, int returned);
-void	error_exit(char *message, t_info *info);
+char	*process_line(int fd);
+void	print_cube(t_cube *cube);
+void	delete_struct(t_cube *cube);
 
 #endif

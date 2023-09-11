@@ -13,7 +13,7 @@ void	push(t_stack *stack, int y, int x)
 		return ;
 	node = malloc(sizeof(t_node));
 	if (!node)
-		exit (1);
+		error_exit(strerror(errno), GENERAL_ERR);
 	node->x = x;
 	node->y = y;
 	node->next = *stack;

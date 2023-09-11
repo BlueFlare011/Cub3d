@@ -3,114 +3,97 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/05 17:54:15 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/09/12 00:14:26 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	get_texture_aux(t_info *info, char **data, int id)
+int	get_texture(t_cube *cube, char **data)
 {
 	char	*aux;
+	int		id;
 
+	if (!ft_strncmp(data[0], "NO", 3))
+		id = NORTH;
+	else if (!ft_strncmp(data[0], "SO", 3))
+		id = SOUTH;
+	else if (!ft_strncmp(data[0], "EA", 3))
+		id = EAST;
+	else if (!ft_strncmp(data[0], "WE", 3))
+		id = WEST;
+	else
+		return (1);
 	aux = ft_strtrim(data[1], "\n");
 	if (!aux)
-		error_exit(strerror(errno), info);
-	info->texture[id].id = id;
-	info->texture[id].fd_texture = open(aux, O_RDONLY);
-	if (info->texture[id].fd_texture < 0)
-	{
-		free(aux);
-		error_exit(strerror(errno), info); // Mensajito customizado
-	}
+		error_exit(strerror(errno), SYS_ERR);
+	cube->texture[id].id = id;
+	cube->texture[id].fd_texture = open(aux, O_RDONLY);
+	if (cube->texture[id].fd_texture < 0)
+		error_exit(strerror(errno), SYS_ERR);
 	free(aux);
 	return (0);
 }
 
-int	get_texture(t_info *info, char **data)
+int	get_color(t_cube *cube, char **data)
 {
-	if (!ft_strncmp(data[0], "NO", 3))
-		return(get_texture_aux(info, data, NORTH));
-	if (!ft_strncmp(data[0], "SO", 3))
-		return(get_texture_aux(info, data, SOUTH));
-	if (!ft_strncmp(data[0], "EA", 3))
-		return(get_texture_aux(info, data, EAST));
-	if (!ft_strncmp(data[0], "WE", 3))
-		return(get_texture_aux(info, data, WEST));
-	return (1);
-}
+	char	**rgb;
+	int		id;
 
-int	get_color_aux(t_info *info, char **rgb, int id)
-{
-	if (is_num(rgb))
-	{
-		free_double_pointer(rgb);
-		error_exit(NO_NUMBER, info);
-	}
-	info->color[id - 4].id = id;
-	info->color[id - 4].red = ft_atoi(rgb[0]);
-	info->color[id - 4].green = ft_atoi(rgb[1]);
-	info->color[id - 4].blue = ft_atoi(rgb[2]);
-	if ((info->color[id - 4].red < 0 || info->color[id - 4].red > 255) ||
-		(info->color[id - 4].green < 0 || info->color[id - 4].green > 255) ||
-			(info->color[id - 4].blue < 0 || info->color[id - 4].blue > 255))
-	{
-		free_double_pointer(rgb);
-		error_exit(NOT_VALID_NUM, info);
-	}
+	if (ft_strncmp(data[0], "C", 2) && ft_strncmp(data[0], "F", 2))
+		return (1);
+	rgb = ft_split(data[1], ',');
+	if (!rgb)
+		error_exit(strerror(errno), SYS_ERR);
+	if (!ft_strncmp(data[0], "C", 2))
+		id = CEILING;
+	else if (!ft_strncmp(data[0], "F", 2))
+		id = FLOOR;
+	if (!is_num(rgb))
+		error_exit(NO_NUMBER, SYS_ERR);
+	cube->color[id - 4].id = id;
+	cube->color[id - 4].red = ft_atoi(rgb[0]);
+	cube->color[id - 4].green = ft_atoi(rgb[1]);
+	cube->color[id - 4].blue = ft_atoi(rgb[2]);
+	if ((cube->color[id - 4].red < 0 || 255 < cube->color[id - 4].red) ||
+		(cube->color[id - 4].green < 0 || 255 < cube->color[id - 4].green) ||
+			(cube->color[id - 4].blue < 0 || 255 < cube->color[id - 4].blue))
+		error_exit(NOT_VALID_NUM, SYS_ERR);
 	free_double_pointer(rgb);
 	return (0);
 }
 
-int	get_color(t_info *info, char **data)
-{
-	char	**rgb;
-
-	rgb = ft_split(data[1], ',');
-	if (!rgb)
-		error_exit(strerror(errno), info);
-	if (!ft_strncmp(data[0], "C", 2))
-		return (get_color_aux(info, rgb, CEILING));
-	else if (!ft_strncmp(data[0], "F", 2))
-		return (get_color_aux(info, rgb, FLOOR));
-	else
-	{
-		free_double_pointer(rgb);
-		return (1);
-	}
-}
-
-void	get_map(t_info *info, char *line, int fd)
+void	get_map(t_cube *cube, char *line, int fd)
 {
 	char	*super_string;
 	char	*aux;
 
 	super_string = line;
-	while (line)
+	line = get_next_line(fd);
+	while (line && *line != '\n')
 	{
+		aux = ft_strjoin(super_string, line);
+		free(line);
+		free(super_string);
+		super_string = aux;
 		line = get_next_line(fd);
-		if (line && *line == '\n')
-		{
-			free(line);
-			free(super_string);
-			return ;
-		}
-		if (line)
-		{
-			aux = ft_strjoin(super_string, line);
-			free(line);
-			free(super_string);
-			super_string = aux;
-		}
 	}
-	info->map = ft_split(super_string, '\n');
+	if (line)
+	{
+		free(line);
+		cube->map = ft_split("", '\n');
+	}
+	else
+		cube->map = ft_split(super_string, '\n');
+	if (!cube->map)
+		error_exit(strerror(errno), SYS_ERR);
 	free(super_string);
 }
 
-int	analyse_line(t_info *info, char *line, int status)
+int	analyse_line(t_cube *cube, char *line, int status)
 {
 	char	**data;
 
@@ -118,68 +101,49 @@ int	analyse_line(t_info *info, char *line, int status)
 		return (status);
 	data = ft_split(line, ' ');
 	if (!data)
-		error_exit(strerror(errno), info);
+		error_exit(strerror(errno), SYS_ERR);
 	if (len_double_pointer(data) != 2)
-	{
-		free_double_pointer(data);
-		error_exit(TO_MUCH_INFO, info);
-	}
-	if (get_texture(info, data) == 0)
+		error_exit(TO_MUCH_INFO, GENERAL_ERR);
+	if (!get_texture(cube, data))
 		status++;
-	else if (get_color(info, data) == 0)
+	else if (!get_color(cube, data))
 		status++;
 	else
-		error_exit(INVALID_LINE, info); // More info
+		error_exit(INVALID_LINE, GENERAL_ERR);
 	free_double_pointer(data);
 	return (status);
 }
 
-void	get_attribbutes(t_info *info, int fd)
+void	get_attributes(t_cube *cube, int fd)
 {
 	char	*line;
 	int		limit;
 
 	limit = 0;
-	line = get_next_line(fd);
-	while (line && limit < 6 && limit != -1)
+	line = process_line(fd);
+	while (line && limit < 6)
 	{
-		delete_meta_spaces(line);
-		line = trim_line(line);
-		if (!line)
-			break;
-		limit = analyse_line(info, line, limit);
+		limit = analyse_line(cube, line, limit);
 		free(line);
-		line = get_next_line(fd);
+		line = process_line(fd);
 	}
-	if (!line)
-	{
-		close (fd);
-		error_exit(strerror(errno), info);
-	}
-	get_map(info, line, fd);
-	valid_map(info);
+	get_map(cube, line, fd);
+	valid_map(cube);
 }
 
-t_info	*extract_file_info(char *file)
+t_cube	*extract_file_info(char *file)
 {
-	t_info	*info;
+	t_cube	*cube;
 	int		fd;
 
-	info = malloc(sizeof(t_info));
-	if (!info)
-		error_exit(strerror(errno), info);
-	if (create_struct(info))
-	{
-		free(info);
-		exit(1);
-	}
+	cube = malloc(sizeof(t_cube));
+	if (!cube)
+		error_exit(strerror(errno), SYS_ERR);
+	create_struct(cube);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-	{
-		free(info);
-		return(error(strerror(errno)));
-	}
-	get_attribbutes(info, fd);
+		error_exit(strerror(errno), SYS_ERR);
+	get_attributes(cube, fd);
 	close(fd);
-	return (info);
+	return (cube);
 }
