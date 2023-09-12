@@ -34,7 +34,7 @@
 # define NOT_VALID_NUM	"The number must be between 0 and 255"
 
 /********************** MAP ****************************/
-# define TOO_MUCH_PLAYERS	"The map can't contain more than one player"
+# define TOO_MUCH_PLAYERS	"The map must contain only one player"
 # define INVALID_CHAR	"The map can't contain other char than '1', '0' or ' '"
 # define MAP_SEPARATED	"The map can't contain empty lines"
 # define MAP_NOT_CLOSED	"The map is not closed"

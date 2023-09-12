@@ -15,14 +15,14 @@ int	check_chars(char **map, int *max_x, int *max_y, int	num_player)
 				num_player++;
 			else if (!ft_strchr("10 ", map[i][j]))
 				error_exit(INVALID_CHAR, GENERAL_ERR);
-			if (num_player > 1)
-				error_exit(TOO_MUCH_PLAYERS, GENERAL_ERR);
 			j++;
 		}
 		if (j > *max_x)
 			*max_x = j - 1;
 		i++;
 	}
+	if (num_player != 1)
+		error_exit(TOO_MUCH_PLAYERS, GENERAL_ERR);
 	*max_y = i - 1;
 	return (0);
 }

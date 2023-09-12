@@ -84,12 +84,12 @@ int	is_num(char **rgb)
 	j = 0;
 	while (rgb[i] && (!rgb[i][j] || ft_isdigit(rgb[i][j])))
 	{
-		j = 0;
 		while (rgb[i][j] && ft_isdigit(rgb[i][j]))
 			if (ft_isdigit(rgb[i][j]))
 				j++;
 		if (!rgb[i][j])
 			i++;
+		j = 0;
 	}
 	return (!rgb[i]);
 }

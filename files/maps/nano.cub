@@ -1,13 +1,16 @@
 NO ./files/textures/north.txt
 C 200,200,200
+
 WE ./files/textures/west.txt
+
 F 200,200,200
 
 SO ./files/textures/south.txt
+
 EA ./files/textures/east.txt
 
 111111
-100101
-101001
-1100N1
+110W01
+111111
+110001
 111111
