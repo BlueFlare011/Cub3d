@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/12 00:02:44 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:32:22 by socana-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE_H
 # define CUBE_H
 # include <math.h>
-// # include <mlx.h>
+# include <mlx.h>
 # include "bfs_stack.h"
 # include "get_next_line.h"
 # include "errors.h"
@@ -42,9 +42,18 @@ typedef struct s_color
 	int	blue;
 }t_color;
 
+typedef struct s_map
+{
+	char	**map;
+	int		max_x;
+	int		max_y;
+	int		char_x;
+	int		char_y;
+}t_map;
+
 typedef struct s_cube
 {
-	char		**map;
+	t_map		*map;
 	t_color		*color;
 	t_texture	*texture;
 }	t_cube;
@@ -52,6 +61,9 @@ typedef struct s_cube
 /************** PARSER ***************/
 t_cube	*extract_file_info(char *file);
 void	valid_map(t_cube *map);
+
+/************** DEBUG ****************/
+void	debug_map(t_cube *cube);
 
 /************** UTILS ****************/
 void	create_struct(t_cube *cube);

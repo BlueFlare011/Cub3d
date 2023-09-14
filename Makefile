@@ -9,7 +9,7 @@ $(LIBFTNAME):
 	$(MAKE) -C $(LIBFT)
 
 $(NAME): $(OBJS) $(LDFLAGS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFTNAME) $(addprefix -l, $(LIB_ALL)) -o $@
+	$(CC) $(CFLAGS) $(OBJS) -lmlx -framework OpenGL -framework AppKit $(LIBFTNAME) $(addprefix -l, $(LIB_ALL)) -o $@
 #-lmlx -framework OpenGL -framework AppKit
 clean:
 	$(RM) $(OBJS) $(DPNDS)

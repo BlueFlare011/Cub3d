@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/12 00:14:26 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/14 11:35:02 by socana-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	get_color(t_cube *cube, char **data)
 	char	**rgb;
 	int		id;
 
+	id = 0;
 	if (ft_strncmp(data[0], "C", 2) && ft_strncmp(data[0], "F", 2))
 		return (1);
 	rgb = ft_split(data[1], ',');
@@ -89,8 +90,8 @@ void	get_map(t_cube *cube, char *line, int fd)
 	if (line)
 		error_exit(MAP_SEPARATED, GENERAL_ERR);
 	else
-		cube->map = ft_split(super_string, '\n');
-	if (!cube->map)
+		cube->map->map = ft_split(super_string, '\n');
+	if (!cube->map->map)
 		error_exit(strerror(errno), SYS_ERR);
 	free(super_string);
 }

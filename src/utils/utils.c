@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:18 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/12 00:05:36 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:34:19 by socana-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,12 @@ void	create_struct(t_cube *cube)
 	cube->texture = malloc(sizeof(t_texture) * 4);
 	if (!cube->texture)
 		error_exit(strerror(errno), SYS_ERR);
+	cube->map = malloc(sizeof(t_map));
+	if (!cube->map)
+		error_exit(strerror(errno), SYS_ERR);
 	while (i < 4)
 		cube->texture[i++].fd_texture = -2;
-	cube->map = NULL;
+	cube->map->map = NULL;
 }
 
 void	delete_struct(t_cube *cube)
@@ -58,7 +61,10 @@ void	delete_struct(t_cube *cube)
 
 	i = 0;
 	if (cube->map)
-		free_double_pointer(cube->map);
+	{
+		free_double_pointer(cube->map->map);
+		free(cube->map);
+	}
 	if (cube->texture)
 	{
 		while (i < 4)
@@ -126,9 +132,9 @@ void	print_cube(t_cube *cube)
 		printf("%d - %d\n", cube->texture[i].id, cube->texture[i].fd_texture);
 	for (int i = 0; i < 2; i++)
 		printf("%d - (%d,%d,%d)\n", cube->color[i].id, cube->color[i].red, cube->color[i].green, cube->color[i].blue);
-	while (cube->map && cube->map[it])
+	while (cube->map->map && cube->map->map[it])
 	{
-		printf("%s\n", cube->map[it]);
+		printf("%s\n", cube->map->map[it]);
 		it++;
 	}
 }

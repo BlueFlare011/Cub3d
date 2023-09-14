@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:12 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/11 23:59:08 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:32:02 by socana-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cube.h>
+#include "cube.h"
 
 void	check_arguments(int num, char **args)
 {
@@ -42,7 +42,9 @@ int	main(int argc, char **argv)
 
 	check_arguments(argc, argv);
 	cube = extract_file_info(argv[1]);
-	print_cube(cube);
+	if (0)
+		print_cube(cube);
+	debug_map(cube);
 	delete_struct(cube);
 	return (0);
 }

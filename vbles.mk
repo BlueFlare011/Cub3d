@@ -4,6 +4,8 @@ INC_DIR		=		inc/
 
 PARSER_DIR	=		parser/
 
+DEBUG_DIR	=		debug/
+
 UTILS_DIR	=		utils/
 
 CUBE		=		main.c
@@ -15,6 +17,10 @@ UTILS		=		$(addprefix $(UTILS_DIR), \
 						get_next_line_utils.c \
 					)
 
+DEBUG		=		$(addprefix $(DEBUG_DIR), \
+						debug.c \
+					)
+
 PARSER		=		$(addprefix $(PARSER_DIR), \
 						file.c \
 						map.c \
@@ -24,6 +30,7 @@ PARSER		=		$(addprefix $(PARSER_DIR), \
 SRCS		= 		$(addprefix $(SRC_DIR), \
 						$(PARSER) \
 						$(UTILS) \
+						$(DEBUG) \
 						main.c	\
 					)
 
