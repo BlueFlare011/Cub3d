@@ -1,16 +1,20 @@
-NO ./files/textures/north.txt
-C 200,200,200
+NO      ./files/textures/north.txt
+C      200,200,200
 
-WE ./files/textures/west.txt
+WE      ./files/textures/west.txt
 
-F 200,200,200
+F     200,200,200
 
-SO ./files/textures/south.txt
 
-EA ./files/textures/east.txt
+SO    ./files/textures/south.txt
+
+
+
+EA     ./files/textures/east.txt
 
 111111
 110W01
-111111
+110001
+110011
 110001
 111111

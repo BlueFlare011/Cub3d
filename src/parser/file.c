@@ -73,6 +73,11 @@ void	get_map(t_cube *cube, char *line, int fd)
 
 	super_string = line;
 	line = get_next_line(fd);
+	while (line && *line == '\n')
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
 	while (line && *line != '\n')
 	{
 		aux = ft_strjoin(super_string, line);
@@ -82,10 +87,7 @@ void	get_map(t_cube *cube, char *line, int fd)
 		line = get_next_line(fd);
 	}
 	if (line)
-	{
-		free(line);
-		cube->map = ft_split("", '\n');
-	}
+		error_exit(MAP_SEPARATED, GENERAL_ERR);
 	else
 		cube->map = ft_split(super_string, '\n');
 	if (!cube->map)
