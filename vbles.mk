@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    vbles.mk                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
+#    Updated: 2023/09/16 23:31:39 by rgallego         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 SRC_DIR		=		src/
 
 INC_DIR		=		inc/
@@ -37,14 +49,35 @@ RM		=			-rm -f
 
 CFLAGS	=			-Wall -Werror -Wextra -MD -fsanitize=address -g3
 
-LDFLAGS	=			$(LIBFTNAME)
+LDFLAGS	=			\
+					$(LIBFTNAME) \
+					$(MLXNAME)
 
 NAME	=			cube3D
 
 INC_ALL	=			\
 					$(INC_DIR) \
-					$(LIBFT)$(INC_DIR)
+					$(LIBFT)$(INC_DIR) \
+					$(MLX)
 
 LIBFT	=			libft/
 
 LIBFTNAME	=		$(LIBFT)libft.a
+
+ifeq ($(shell uname), Linux)
+	MLX	= 			mlx_linux/
+
+	MLXNAME	=		mlx_linux/libmlx.a
+
+	FRAMEWORK	=	-lXext -lX11 -lm
+
+else
+	MLX		=		mlx/
+
+	MLXNAME	=		libmlx.dylib
+
+	FRAMEWORK	=	$(addprefix -framework , \
+					OpenGL \
+					AppKit) \
+					-lmlx
+endif
