@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/12 00:14:26 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:48:59 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int	get_color(t_cube *cube, char **data)
 	cube->color[id - 4].red = ft_atoi(rgb[0]);
 	cube->color[id - 4].green = ft_atoi(rgb[1]);
 	cube->color[id - 4].blue = ft_atoi(rgb[2]);
-	if ((cube->color[id - 4].red < 0 || 255 < cube->color[id - 4].red) ||
-		(cube->color[id - 4].green < 0 || 255 < cube->color[id - 4].green) ||
-			(cube->color[id - 4].blue < 0 || 255 < cube->color[id - 4].blue))
+	if ((cube->color[id - 4].red < 0 || 255 < cube->color[id - 4].red)
+		|| (cube->color[id - 4].green < 0 || 255 < cube->color[id - 4].green)
+		|| (cube->color[id - 4].blue < 0 || 255 < cube->color[id - 4].blue))
 		error_exit(NOT_VALID_NUM, SYS_ERR);
 	free_double_pointer(rgb);
 	return (0);

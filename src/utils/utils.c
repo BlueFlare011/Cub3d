@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:18 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/12 00:05:36 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:45:28 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,18 @@ void	create_struct(t_cube *cube)
 {
 	int	i;
 
-	i = 0;
 	cube->color = malloc(sizeof(t_color) * 2);
 	if (!cube->color)
 		error_exit(strerror(errno), SYS_ERR);
 	cube->texture = malloc(sizeof(t_texture) * 4);
 	if (!cube->texture)
 		error_exit(strerror(errno), SYS_ERR);
+	i = 0;
 	while (i < 4)
-		cube->texture[i++].fd_texture = -2;
+	{
+		cube->texture[i].fd_texture = -1;
+		i++;
+	}
 	cube->map = NULL;
 }
 

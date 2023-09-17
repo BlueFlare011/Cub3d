@@ -6,7 +6,7 @@
 #    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
-#    Updated: 2023/09/16 23:31:39 by rgallego         ###   ########.fr        #
+#    Updated: 2023/09/17 17:18:47 by rgallego         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ UTILS		=		$(addprefix $(UTILS_DIR), \
 PARSER		=		$(addprefix $(PARSER_DIR), \
 						file.c \
 						map.c \
-						stack_utils.c \
+						stack.c \
 					)
 
 SRCS		= 		$(addprefix $(SRC_DIR), \
