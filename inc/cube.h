@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/17 17:55:05 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/17 17:58:26 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUBE_H
 # include <math.h>
 # include "mlx.h"
-# include "bfs_stack.h"
+# include "stack.h"
 # include "get_next_line.h"
 # include "errors.h"
 

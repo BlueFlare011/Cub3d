@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/09/16 23:31:01 by rgallego          #+#    #+#              #
+#    Updated: 2023/09/17 17:57:09 by rgallego         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 -include vbles.mk
 
 all: $(NAME)
@@ -9,8 +21,8 @@ $(LIBFTNAME):
 	$(MAKE) -C $(LIBFT)
 
 $(NAME): $(OBJS) $(LDFLAGS)
-	$(CC) $(CFLAGS) $(OBJS) -lmlx -framework OpenGL -framework AppKit $(LIBFTNAME) $(addprefix -l, $(LIB_ALL)) -o $@
-#-lmlx -framework OpenGL -framework AppKit
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFTNAME) $(LDFLAGS) $(FRAMEWORK) -o $@
+
 clean:
 	$(RM) $(OBJS) $(DPNDS)
 	$(MAKE) -C $(LIBFT) fclean

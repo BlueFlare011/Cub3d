@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:12 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/14 12:32:02 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/09/17 23:28:55 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ int	main(int argc, char **argv)
 
 	check_arguments(argc, argv);
 	cube = extract_file_info(argv[1]);
-	if (0)
-		print_cube(cube);
-	debug_map(cube);
+	print_cube(cube);
+	// debug_map(cube);
 	delete_struct(cube);
 	return (0);
 }

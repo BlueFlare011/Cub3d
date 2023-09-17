@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/17 16:49:32 by rgallego          #+#    #+#             */
+/*   Updated: 2023/09/17 23:27:47 by rgallego         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 int	check_chars(t_cube *cube, int num_player)
@@ -31,31 +43,33 @@ int	check_chars(t_cube *cube, int num_player)
 	return (0);
 }
 
-int	untrim_map(char **map, int max_x)
+void	untrim_map(char **map, int max_x)
 {
 	int		i;
 	int		j;
 	char	*aux;
 
 	i = 0;
-	while (map[i])
+	while (map[i] && (!i || aux))
 	{
 		if ((int)ft_strlen(map[i]) < max_x)
 		{
 			aux = malloc(sizeof(char) * (max_x + 2));
-			if (!aux)
-				error_exit(strerror(errno), SYS_ERR);
-			j = ft_strlen(map[i]);
-			strncpy(aux, map[i], j);
-			while (j <= max_x)
-				aux[j++] = ' ';
-			aux[j] = '\0';
-			free(map[i]);
-			map[i] = aux;
+			if (aux)
+			{
+				j = ft_strlen(map[i]);
+				strncpy(aux, map[i], j);
+				while (j <= max_x)
+					aux[j++] = ' ';
+				aux[j] = '\0';
+				free(map[i]);
+				map[i] = aux;
+			}
 		}
 		i++;
 	}
-	return (0);
+	if (!aux)
+		error_exit(strerror(errno), SYS_ERR);
 }
 
 int	check_square(char **map, t_node *square, int max_y, int max_x)
@@ -63,7 +77,7 @@ int	check_square(char **map, t_node *square, int max_y, int max_x)
 	if (square->x == 0 || square->y == 0 || square->y == max_y
 		|| square->x == max_x)
 		return (1);
-	if	(map[square->y + 1][square->x] == ' ' ||
+	if (map[square->y + 1][square->x] == ' ' ||
 		map[square->y - 1][square->x] == ' ' ||
 		map[square->y][square->x + 1] == ' ' ||
 		map[square->y][square->x - 1] == ' ')
@@ -73,17 +87,14 @@ int	check_square(char **map, t_node *square, int max_y, int max_x)
 
 void	floodfill(t_cube *cube)
 {
-	t_stack	*stack;
+	t_node	*stack;
 	t_node	*aux;
 
-	stack = malloc(sizeof(stack));
-	if (!stack)
-		error_exit(strerror(errno), SYS_ERR);
-	create_stack(stack);
-	push(stack, cube->map->char_x, cube->map->char_y);
+	stack = NULL;
+	push(&stack, cube->map->char_x, cube->map->char_y);
 	while (stack)
 	{
-		aux = pop(stack);
+		aux = pop(&stack);
 		if (!aux)
 			break ;
 		if (check_square(cube->map->map, aux, cube->map->max_y, cube->map->max_x))
@@ -92,16 +103,16 @@ void	floodfill(t_cube *cube)
 		if (cube->map->map[aux->y][aux->x] == '0')
 			cube->map->map[aux->y][aux->x] = '2';
 		if (cube->map->map[aux->y + 1][aux->x] == '0')
-			push(stack, aux->y + 1, aux->x);
+			push(&stack, aux->y + 1, aux->x);
 		if (cube->map->map[aux->y - 1][aux->x] == '0')
-			push(stack, aux->y - 1, aux->x);
+			push(&stack, aux->y - 1, aux->x);
 		if (cube->map->map[aux->y][aux->x + 1] == '0')
-			push(stack, aux->y, aux->x + 1);
+			push(&stack, aux->y, aux->x + 1);
 		if (cube->map->map[aux->y][aux->x - 1] == '0')
-			push(stack, aux->y, aux->x - 1);
+			push(&stack, aux->y, aux->x - 1);
 		free(aux);
 	}
-	free(stack);
+	delete_stack(&stack);
 }
 
 void	valid_map(t_cube *cube)

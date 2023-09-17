@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:18 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/14 12:34:19 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/09/17 22:37:55 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	create_struct(t_cube *cube)
 {
 	int	i;
 
-	i = 0;
 	cube->color = malloc(sizeof(t_color) * 2);
 	if (!cube->color)
 		error_exit(strerror(errno), SYS_ERR);
@@ -50,9 +49,13 @@ void	create_struct(t_cube *cube)
 	cube->map = malloc(sizeof(t_map));
 	if (!cube->map)
 		error_exit(strerror(errno), SYS_ERR);
+	i = 0;
 	while (i < 4)
-		cube->texture[i++].fd_texture = -2;
-	cube->map->map = NULL;
+	{
+		cube->texture[i].fd_texture = -1;
+		i++;
+	}
+	// cube->map = NULL;
 }
 
 void	delete_struct(t_cube *cube)
