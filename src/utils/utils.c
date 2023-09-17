@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:18 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/17 22:37:55 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/18 01:09:13 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	create_struct(t_cube *cube)
 		cube->texture[i].fd_texture = -1;
 		i++;
 	}
-	// cube->map = NULL;
+	cube->map->map = NULL;
 }
 
 void	delete_struct(t_cube *cube)

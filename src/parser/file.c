@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/17 22:49:22 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/18 01:06:29 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,11 +117,20 @@ int	analyse_line(t_cube *cube, char *line, int status)
 	return (status);
 }
 
-void	get_attributes(t_cube *cube, int fd)
+t_cube	*extract_file_info(char *file)
 {
+	t_cube	*cube;
 	char	*line;
 	int		limit;
+	int		fd;
 
+	cube = malloc(sizeof(t_cube));
+	if (!cube)
+		error_exit(strerror(errno), SYS_ERR);
+	create_struct(cube);
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		error_exit(strerror(errno), SYS_ERR);
 	limit = 0;
 	line = process_line(fd);
 	while (line && limit < 6)
@@ -132,21 +141,6 @@ void	get_attributes(t_cube *cube, int fd)
 	}
 	get_map(cube, line, fd);
 	valid_map(cube);
-}
-
-t_cube	*extract_file_info(char *file)
-{
-	t_cube	*cube;
-	int		fd;
-
-	cube = malloc(sizeof(t_cube));
-	if (!cube)
-		error_exit(strerror(errno), SYS_ERR);
-	create_struct(cube);
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		error_exit(strerror(errno), SYS_ERR);
-	get_attributes(cube, fd);
 	close(fd);
 	return (cube);
 }

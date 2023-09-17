@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:49:44 by rgallego          #+#    #+#             */
-/*   Updated: 2023/09/17 23:28:02 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/18 00:55:57 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,4 @@ int	is_repeated(t_node *stack, int x, int y)
 	if (aux)
 		return (1);
 	return (0);
-}
-
-void	print_stack(t_node *stack)
-{
-	t_node	*aux;
-
-	aux = stack;
-	while (aux)
-	{
-		printf("Position X: %d / Position Y: %d\n", aux->x, aux->y);
-		aux = aux->next;
-	}
 }
