@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:49:32 by rgallego          #+#    #+#             */
-/*   Updated: 2023/09/17 23:27:47 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/17 23:42:36 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,49 +70,6 @@ void	untrim_map(char **map, int max_x)
 	}
 	if (!aux)
 		error_exit(strerror(errno), SYS_ERR);
-}
-
-int	check_square(char **map, t_node *square, int max_y, int max_x)
-{
-	if (square->x == 0 || square->y == 0 || square->y == max_y
-		|| square->x == max_x)
-		return (1);
-	if (map[square->y + 1][square->x] == ' ' ||
-		map[square->y - 1][square->x] == ' ' ||
-		map[square->y][square->x + 1] == ' ' ||
-		map[square->y][square->x - 1] == ' ')
-		return (1);
-	return (0);
-}
-
-void	floodfill(t_cube *cube)
-{
-	t_node	*stack;
-	t_node	*aux;
-
-	stack = NULL;
-	push(&stack, cube->map->char_x, cube->map->char_y);
-	while (stack)
-	{
-		aux = pop(&stack);
-		if (!aux)
-			break ;
-		if (check_square(cube->map->map, aux, cube->map->max_y, cube->map->max_x))
-			error_exit(MAP_NOT_CLOSED, GENERAL_ERR);
-		//printf("Coor: %d %d\nChar: %c\n", aux->y, aux->x, cube->map[aux->y][aux->x]);
-		if (cube->map->map[aux->y][aux->x] == '0')
-			cube->map->map[aux->y][aux->x] = '2';
-		if (cube->map->map[aux->y + 1][aux->x] == '0')
-			push(&stack, aux->y + 1, aux->x);
-		if (cube->map->map[aux->y - 1][aux->x] == '0')
-			push(&stack, aux->y - 1, aux->x);
-		if (cube->map->map[aux->y][aux->x + 1] == '0')
-			push(&stack, aux->y, aux->x + 1);
-		if (cube->map->map[aux->y][aux->x - 1] == '0')
-			push(&stack, aux->y, aux->x - 1);
-		free(aux);
-	}
-	delete_stack(&stack);
 }
 
 void	valid_map(t_cube *cube)

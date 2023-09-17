@@ -6,7 +6,7 @@
 #    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
-#    Updated: 2023/09/17 17:18:47 by rgallego         ###   ########.fr        #
+#    Updated: 2023/09/17 23:48:34 by rgallego         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ DEBUG		=		$(addprefix $(DEBUG_DIR), \
 PARSER		=		$(addprefix $(PARSER_DIR), \
 						file.c \
 						map.c \
+						floodfill.c \
 						stack.c \
 					)
 

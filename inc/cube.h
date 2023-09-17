@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/17 17:58:26 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/17 23:48:05 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_cube
 /************** PARSER ***************/
 t_cube	*extract_file_info(char *file);
 void	valid_map(t_cube *map);
+void	floodfill(t_cube *cube);
 
 /************** DEBUG ****************/
 void	debug_map(t_cube *cube);
