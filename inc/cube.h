@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/17 23:48:05 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:53:55 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ typedef struct s_map
 	char	**map;
 	int		max_x;
 	int		max_y;
-	int		char_x;
-	int		char_y;
+	int		player_x;
+	int		player_y;
 }t_map;
 
 typedef struct s_cube

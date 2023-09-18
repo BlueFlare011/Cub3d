@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floodfill.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 23:42:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/09/18 00:54:39 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:58:00 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	floodfill(t_cube *cube)
 	t_node	*aux;
 
 	stack = NULL;
-	push(&stack, cube->map->char_x, cube->map->char_y);
+	push(&stack, cube->map->player_x, cube->map->player_x);
 	aux = stack;
 	while (stack && aux)
 	{

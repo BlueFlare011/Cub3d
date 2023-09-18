@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:49:32 by rgallego          #+#    #+#             */
-/*   Updated: 2023/09/18 01:32:21 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:57:31 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	check_chars(t_cube *cube, int num_player, int i, int j)
 			if (ft_strchr("NESW", cube->map->map[i][j]))
 			{
 				num_player++;
-				cube->map->char_x = j;
-				cube->map->char_y = i;
+				cube->map->player_x = j;
+				cube->map->player_y = i;
 			}
 			if (ft_strchr("NESW10 ", cube->map->map[i][j]))
 				j++;
@@ -72,9 +72,9 @@ void	untrim_map(char **map, int max_x)
 
 void	valid_map(t_cube *cube)
 {
-	cube->map->char_x = 0;
-	cube->map->char_y = 0;
+	cube->map->player_x = 0;
+	cube->map->player_y = 0;
 	check_chars(cube, 0, 0, 0);
-	untrim_map(cube->map->map, cube->map->char_x);
+	untrim_map(cube->map->map, cube->map->max_x);
 	floodfill(cube);
 }
