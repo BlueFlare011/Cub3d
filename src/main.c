@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:12 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/17 23:28:55 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/20 00:05:30 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	main(int argc, char **argv)
 
 	check_arguments(argc, argv);
 	cube = extract_file_info(argv[1]);
-	print_cube(cube);
-	// debug_map(cube);
+	//print_cube(cube);
+	debug_map(cube);
 	delete_struct(cube);
 	return (0);
 }

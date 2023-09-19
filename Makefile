@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
+#    By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:31:01 by rgallego          #+#    #+#              #
-#    Updated: 2023/09/17 17:57:09 by rgallego         ###   ########.fr        #
+#    Updated: 2023/09/20 00:04:36 by blueflare01      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ $(LIBFTNAME):
 	$(MAKE) -C $(LIBFT)
 
 $(NAME): $(OBJS) $(LDFLAGS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFTNAME) $(LDFLAGS) $(FRAMEWORK) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(MLXNAME) $(FRAMEWORK) $(LIBFTNAME) $(LDFLAGS) $(FRAMEWORK) -o $@
 
 clean:
 	$(RM) $(OBJS) $(DPNDS)
