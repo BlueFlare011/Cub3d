@@ -1,5 +1,23 @@
 #include "cube.h"
 
+void	paint_player(void *mlx, void *win, int x, int y)
+{
+	int	i;
+	int	j;
+
+	i = y + 20;
+	while (i < y + 30)
+	{
+		j = x + 20;
+		while (j < x + 30)
+		{
+			mlx_pixel_put(mlx, win, j, i, 0x00FF00);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	paint_window(t_cube *cube, void *mlx, void *win)
 {
 	int	i;
@@ -8,8 +26,8 @@ void	paint_window(t_cube *cube, void *mlx, void *win)
 
 	length = 50;
 	i = 0;
-	void	*floor = mlx_xpm_file_to_image(mlx, "/home/blueflare011/Programacion/Cub3d/files/textures/white_square.xpm", &length, &length);
-	void	*wall = mlx_xpm_file_to_image(mlx, "/home/blueflare011/Programacion/Cub3d/files/textures/black_square.xpm", &length, &length);
+	void	*floor = mlx_xpm_file_to_image(mlx, "files/textures/white_square.xpm", &length, &length);
+	void	*wall = mlx_xpm_file_to_image(mlx, "files/textures/black_square.xpm", &length, &length);
 	while (i <= cube->map->max_y)
 	{
 		j = 0;
@@ -17,8 +35,13 @@ void	paint_window(t_cube *cube, void *mlx, void *win)
 		{
 			if (cube->map->map[i][j] == '1')
 				mlx_put_image_to_window(mlx, win, wall, j * 50, i * 50);
-			if (cube->map->map[i][j] == '2' || ft_strchr("NSWE", cube->map->map[i][j]))
+			if (cube->map->map[i][j] == '2')
 				mlx_put_image_to_window(mlx, win, floor, j * 50, i * 50);
+			if (ft_strchr("NSWE", cube->map->map[i][j]))
+			{
+				mlx_put_image_to_window(mlx, win, floor, j * 50, i * 50);
+				paint_player(mlx, win, j * 50, i * 50);
+			}
 			j++;
 		}
 		i++;

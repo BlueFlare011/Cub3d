@@ -6,7 +6,7 @@
 /*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 23:42:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/09/18 17:58:00 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/09/20 15:30:54 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,22 @@ int	check_square(char **map, t_node *square)
 
 void	add_nearest(t_node **stack, char **map, int x, int y)
 {
-	if (ft_strchr("0 ", map[y + 1][x - 1]))
-		push(stack, y + 1, x - 1);
 	if (ft_strchr("0 ", map[y + 1][x]))
 		push(stack, y + 1, x);
-	if (ft_strchr("0 ", map[y + 1][x + 1]))
-		push(stack, y + 1, x + 1);
 	if (ft_strchr("0 ", map[y][x + 1]))
 		push(stack, y, x + 1);
-	if (ft_strchr("0 ", map[y - 1][x + 1]))
-		push(stack, y - 1, x + 1);
 	if (ft_strchr("0 ", map[y - 1][x]))
 		push(stack, y - 1, x);
-	if (ft_strchr("0 ", map[y - 1][x - 1]))
-		push(stack, y - 1, x - 1);
 	if (ft_strchr("0 ", map[y][x - 1]))
 		push(stack, y, x - 1);
+	if (ft_strchr("0 ", map[y + 1][x - 1]))
+		push(stack, y + 1, x - 1);
+	if (ft_strchr("0 ", map[y + 1][x + 1]))
+		push(stack, y + 1, x + 1);
+	if (ft_strchr("0 ", map[y - 1][x + 1]))
+		push(stack, y - 1, x + 1);
+	if (ft_strchr("0 ", map[y - 1][x - 1]))
+		push(stack, y - 1, x - 1);
 }
 
 void	floodfill(t_cube *cube)
@@ -48,7 +48,7 @@ void	floodfill(t_cube *cube)
 	t_node	*aux;
 
 	stack = NULL;
-	push(&stack, cube->map->player_x, cube->map->player_x);
+	push(&stack, cube->map->player_y, cube->map->player_x);
 	aux = stack;
 	while (stack && aux)
 	{

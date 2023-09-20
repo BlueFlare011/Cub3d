@@ -6,7 +6,7 @@
 /*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:49:32 by rgallego          #+#    #+#             */
-/*   Updated: 2023/09/18 17:57:31 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/09/20 15:04:21 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ void	untrim_map(char **map, int max_x)
 	i = 0;
 	while (map[i] && (!i || aux))
 	{
-		if ((int)ft_strlen(map[i]) < max_x)
+		if ((int)ft_strlen(map[i]) <= max_x)
 		{
 			aux = malloc(sizeof(char) * (max_x + 2));
 			if (aux)
 			{
 				j = ft_strlen(map[i]);
-				strncpy(aux, map[i], j);
+				strcpy(aux, map[i]);
 				while (j <= max_x)
 					aux[j++] = ' ';
 				aux[j] = '\0';
