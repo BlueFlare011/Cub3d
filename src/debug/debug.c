@@ -105,24 +105,24 @@ void	paint_window(t_cube *cube, t_debug *info)
 
 int	key_control(int keycode, t_cube *cube)
 {
-	if (keycode == 53)
+	if (keycode == KEY_ESC)
 		exit(1);
-	if (keycode == 13)	//Up
+	if (keycode == KEY_W)
 	{
 		if (cube->map->map[(cube->debug->player_y - 2) / 50][cube->debug->player_x / 50] != '1')
 			cube->debug->player_y -= 2;
 	}
-	if (keycode == 1)	//Down
+	else if (keycode == KEY_S)
 	{
 		if (cube->map->map[(cube->debug->player_y + 2) / 50][cube->debug->player_x / 50] != '1')
 			cube->debug->player_y += 2;
 	}
-	if (keycode == 0)	//Left
+	else if (keycode == KEY_A)
 	{
 		if (cube->map->map[cube->debug->player_y / 50][(cube->debug->player_x - 2) / 50] != '1')
 			cube->debug->player_x -= 2;
 	}
-	if (keycode == 2)	//Right
+	else if (keycode == KEY_D)
 	{
 		if (cube->map->map[cube->debug->player_y / 50][(cube->debug->player_x + 2) / 50] != '1')
 			cube->debug->player_x += 2;
@@ -142,6 +142,6 @@ void	debug_map(t_cube *cube)
 	info->window = mlx_new_window(info->mlx, (cube->map->max_x + 1) * 50, (cube->map->max_y + 1) * 50, "Debuguiando");
 	paint_window(cube, info);
 	paint_lines(cube, info);
-	mlx_hook(info->window, 2, 1L<<0, key_control, cube);
+	mlx_hook(info->window, 2, MASK, key_control, cube);
 	mlx_loop(info->mlx);
 }

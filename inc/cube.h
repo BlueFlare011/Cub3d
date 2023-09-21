@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/21 11:45:23 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/09/21 21:59:33 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "stack.h"
 # include "get_next_line.h"
 # include "errors.h"
+# include "keys.h"
 
 enum
 {
@@ -49,7 +50,7 @@ typedef struct s_map
 	int		max_y;
 	int		player_x;
 	int		player_y;
-}t_map;
+	}t_map;
 
 typedef struct s_debug
 {
@@ -60,7 +61,7 @@ typedef struct s_debug
 	int		player_x;
 	int		player_y;
 	int		size;
-}t_debug;
+}	t_debug;
 
 typedef struct s_cube
 {

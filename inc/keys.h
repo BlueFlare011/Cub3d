@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 17:39:36 by rgallego          #+#    #+#             */
-/*   Updated: 2023/09/16 23:47:29 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/21 21:59:18 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@
 /* **************************** KEY CODES MACOS ***************************** */
 // # define MASK 0
 
+// # define KEY_A 0
+// # define KEY_S 1
+// # define KEY_D 2
 // # define KEY_Z 6
 // # define KEY_X 7
+// # define KEY_W 13
 // # define KEY_E 14
 // # define KEY_R 15
 // # define KEY_O 31
@@ -30,13 +34,17 @@
 // # define KEY_LEFT 123
 // # define KEY_RIGHT 124
 // # define KEY_DOWN 125
-// # define KEY_UP 126#
+// # define KEY_UP 126
 
 /* *************************** KEY CODES WINDOWS **************************** */
 # define MASK 1L << 0
 
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
 # define KEY_Z 122
 # define KEY_X 120
+# define KEY_W 119
 # define KEY_E 101
 # define KEY_R 114
 # define KEY_O 111
