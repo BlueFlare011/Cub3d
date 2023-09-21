@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:18 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/18 01:09:13 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/21 11:50:26 by socana-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ void	create_struct(t_cube *cube)
 		error_exit(strerror(errno), SYS_ERR);
 	cube->map = malloc(sizeof(t_map));
 	if (!cube->map)
+		error_exit(strerror(errno), SYS_ERR);
+	cube->debug = malloc(sizeof(t_debug));
+	if (!cube->debug)
 		error_exit(strerror(errno), SYS_ERR);
 	i = 0;
 	while (i < 4)

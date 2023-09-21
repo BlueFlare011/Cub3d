@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/18 17:53:55 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/09/21 11:45:23 by socana-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,23 @@ typedef struct s_map
 	int		player_y;
 }t_map;
 
+typedef struct s_debug
+{
+	void	*mlx;
+	void	*window;
+	void	*floor;
+	void	*wall;
+	int		player_x;
+	int		player_y;
+	int		size;
+}t_debug;
+
 typedef struct s_cube
 {
 	t_map		*map;
 	t_color		*color;
 	t_texture	*texture;
+	t_debug		*debug;
 }	t_cube;
 
 /************** PARSER ***************/

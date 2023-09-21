@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    vbles.mk                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
+#    By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
-#    Updated: 2023/09/17 23:48:34 by rgallego         ###   ########.fr        #
+#    Updated: 2023/09/21 11:15:00 by socana-b         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,7 @@ ifeq ($(shell uname), Linux)
 else
 	MLX		=		mlx/
 
-	MLXNAME	=		libmlx.dylib
+#	//MLXNAME	=		libmlx.dylib
 
 	FRAMEWORK	=	$(addprefix -framework , \
 					OpenGL \
