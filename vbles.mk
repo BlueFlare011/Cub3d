@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    vbles.mk                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+         #
+#    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
-#    Updated: 2023/09/21 11:15:00 by socana-b         ###   ########.fr        #
+#    Updated: 2023/09/26 11:07:39 by rgallego         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ UTILS		=		$(addprefix $(UTILS_DIR), \
 
 DEBUG		=		$(addprefix $(DEBUG_DIR), \
 						debug.c \
+						mlx_management.c \
+						raycasting.c \
 					)
 
 PARSER		=		$(addprefix $(PARSER_DIR), \

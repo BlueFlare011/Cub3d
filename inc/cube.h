@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/21 21:59:33 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/26 11:06:21 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,33 @@ typedef struct s_map
 	int		player_y;
 	}t_map;
 
-typedef struct s_debug
+typedef struct s_img
+{
+	void	*img;
+	void	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_img;
+
+typedef struct s_mlx
 {
 	void	*mlx;
-	void	*window;
+	void	*win;
+	t_img	*img;
 	void	*floor;
 	void	*wall;
 	int		player_x;
 	int		player_y;
 	int		size;
-}	t_debug;
+}	t_mlx;
 
 typedef struct s_cube
 {
 	t_map		*map;
 	t_color		*color;
 	t_texture	*texture;
-	t_debug		*debug;
+	t_mlx		*mlx;
 }	t_cube;
 
 /************** PARSER ***************/
@@ -78,6 +88,10 @@ void	floodfill(t_cube *cube);
 
 /************** DEBUG ****************/
 void	debug_map(t_cube *cube);
+
+/*********** MLX_MNGMENT **************/
+void	ft_mlx_init(t_cube *cube);
+void	my_pixel_put(t_img img, int x, int y, int colour);
 
 /************** UTILS ****************/
 void	create_struct(t_cube *cube);
