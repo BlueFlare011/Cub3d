@@ -3,16 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:49:32 by rgallego          #+#    #+#             */
-/*   Updated: 2023/09/20 15:04:21 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/09/26 22:02:11 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	check_chars(t_cube *cube, int num_player, int i, int j)
+static void	settle_player(t_cube cube, int *num_player, int i, int j)
+{
+	(*num_player)++;
+	cube.map->player_x = j;
+	cube.map->player_y = i;
+	if (cube.map->map[i][j] == 'N')
+	{
+		cube.map->dir_x = N_X;
+		cube.map->dir_y = N_Y;
+	}
+	else if (cube.map->map[i][j] == 'E')
+	{
+		cube.map->dir_x = E_X;
+		cube.map->dir_y = E_Y;
+	}
+	else if (cube.map->map[i][j] == 'S')
+	{
+		cube.map->dir_x = S_X;
+		cube.map->dir_y = S_Y;
+	}
+	else if (cube.map->map[i][j] == 'W')
+	{
+		cube.map->dir_x = W_X;
+		cube.map->dir_y = W_Y;
+	}
+}
+
+static void	check_chars(t_cube *cube, int num_player, int i, int j)
 {
 	while (cube->map->map[i] && (!i || !cube->map->map[i - 1][j]))
 	{
@@ -21,11 +48,7 @@ void	check_chars(t_cube *cube, int num_player, int i, int j)
 			&& ft_strchr("NESW10 ", cube->map->map[i][j]) && num_player <= 1)
 		{
 			if (ft_strchr("NESW", cube->map->map[i][j]))
-			{
-				num_player++;
-				cube->map->player_x = j;
-				cube->map->player_y = i;
-			}
+				settle_player(*cube, &num_player, i, j);
 			if (ft_strchr("NESW10 ", cube->map->map[i][j]))
 				j++;
 		}

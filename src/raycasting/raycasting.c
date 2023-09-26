@@ -1,46 +1,53 @@
 #include "cube.h"
 
-
-int	key_control(int keycode, t_cube *cube)
+/**
+ * Function which sets delta for the 2 axis, after a few demonstrations
+ * the formula is delta_i = 1 / ray_dir_i. REMINDER: keep in mind the case when
+ * ray_dir_i = 0, delta_i = INF.
+*/
+static void	set_delta(t_raycast *raycast)
 {
-	if (keycode == KEY_ESC)
-		exit(1);
-	if (keycode == KEY_W)
-	{
-		if (cube->map->map[(cube->mlx->player_y - 2) / 50][cube->mlx->player_x / 50] != '1')
-			cube->mlx->player_y -= 2;
-	}
-	else if (keycode == KEY_S)
-	{
-		if (cube->map->map[(cube->mlx->player_y + 2) / 50][cube->mlx->player_x / 50] != '1')
-			cube->mlx->player_y += 2;
-	}
-	else if (keycode == KEY_A)
-	{
-		if (cube->map->map[cube->mlx->player_y / 50][(cube->mlx->player_x - 2) / 50] != '1')
-			cube->mlx->player_x -= 2;
-	}
-	else if (keycode == KEY_D)
-	{
-		if (cube->map->map[cube->mlx->player_y / 50][(cube->mlx->player_x + 2) / 50] != '1')
-			cube->mlx->player_x += 2;
-	}
-	return (0);
+	if (raycast->ray_dir_x)
+		raycast->delta_x = 1 / raycast->ray_dir_x;
+	else
+		raycast->delta_x = __DBL_MAX__;
+	if (raycast->ray_dir_y)
+		raycast->delta_y = 1 / raycast->ray_dir_y;
+	else
+		raycast->delta_y = __DBL_MAX__;
 }
 
-void	debug_map(t_cube *cube)
+static void	set_step_and_side(t_raycast *raycast)
 {
-	cube->mlx->player_x = (cube->map->player_x * 50) + 25;
-	cube->mlx->player_y = (cube->map->player_y * 50) + 25;
-	
-	cube->mlx->mlx = mlx_init();
-	cube->mlx->win = mlx_new_window(cube->mlx->mlx,
-		(cube->map->max_x + 1) * 50, (cube->map->max_y + 1) * 50, "cub3d");
-	cube->mlx->img = mlx_new_image(cube->mlx->mlx, (cube->map->max_x + 1) * 50,
-		(cube->map->max_y + 1) * 50);
-	cube->mlx->img->addr = mlx_get_data_addr(cube->mlx->img->img,
-		&cube->mlx->img->bpp, &cube->mlx->img->line_len,
-		&cube->mlx->img->endian);
-	mlx_hook(cube->mlx->win, ON_KEYDOWN, MASK, key_control, cube);
-	mlx_loop(cube->mlx->mlx);
+	raycast->step_x = 1;
+	raycast->step_y = 1;
+	if (raycast->ray_dir_x < 0)
+		raycast->step_x = -1;
+	if (raycast->ray_dir_y < 0)
+		raycast->step_y = -1;
+}
+
+/**
+ * - Function which throws n rays, where n is equal to the width of the window.
+ * - For each ray, camera is calculated, which controls the direction of the
+ *   plain vector. Camera values will go from -1 to 1.
+ * - Calculate the ray dir vector which is the addition of the dir of the
+ *   the player (the center of their view) and the plane vector deviated by
+ *   the camera value.
+*/
+void	raycasting(t_cube *cube)
+{
+	int			i;
+	t_raycast	raycast;
+
+	i = 0;
+	while (i < WIN_X)
+	{
+		raycast.camera = (2 * i / WIN_X) - 1;
+		raycast.ray_dir_x = cube->map->dir_x + (PLANE_X * raycast.camera);
+		raycast.ray_dir_y = cube->map->dir_y + (PLANE_Y * raycast.camera);
+		set_delta(&raycast);
+		set_step_and_side(&raycast);
+		i++;
+	}
 }
