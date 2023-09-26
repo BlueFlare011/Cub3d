@@ -6,7 +6,7 @@
 #    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
-#    Updated: 2023/09/26 11:07:39 by rgallego         ###   ########.fr        #
+#    Updated: 2023/09/26 11:20:58 by rgallego         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ INC_DIR		=		inc/
 
 PARSER_DIR	=		parser/
 
-DEBUG_DIR	=		debug/
+RAYCASTING_DIR	=	raycasting/
 
 UTILS_DIR	=		utils/
 
@@ -29,8 +29,7 @@ UTILS		=		$(addprefix $(UTILS_DIR), \
 						get_next_line_utils.c \
 					)
 
-DEBUG		=		$(addprefix $(DEBUG_DIR), \
-						debug.c \
+RAYCASTING	=		$(addprefix $(RAYCASTING_DIR), \
 						mlx_management.c \
 						raycasting.c \
 					)
@@ -45,7 +44,7 @@ PARSER		=		$(addprefix $(PARSER_DIR), \
 SRCS		= 		$(addprefix $(SRC_DIR), \
 						$(PARSER) \
 						$(UTILS) \
-						$(DEBUG) \
+						$(RAYCASTING) \
 						main.c	\
 					)
 
@@ -63,7 +62,7 @@ LDFLAGS	=			\
 					$(LIBFTNAME) \
 					$(MLXNAME)
 
-NAME	=			cube3D
+NAME	=			cub3d
 
 INC_ALL	=			\
 					$(INC_DIR) \
@@ -84,7 +83,7 @@ ifeq ($(shell uname), Linux)
 else
 	MLX		=		mlx/
 
-#	//MLXNAME	=		libmlx.dylib
+	MLXNAME	=		libmlx.dylib
 
 	FRAMEWORK	=	$(addprefix -framework , \
 					OpenGL \
