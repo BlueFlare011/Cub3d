@@ -17,7 +17,15 @@ static void	set_delta(t_raycast *raycast)
 		raycast->delta_y = __DBL_MAX__;
 }
 
-static void	set_step_and_side(t_raycast *raycast)
+/**
+ * Function which calculates the step. It is 1 cell step if the component is
+ * positive or negative if it is negative. To calculate the side distance is
+ * needed to calculate the lower distance from the point to one of the sides
+ * multiplied by the delta of the component. It can be easily obtained by:
+ *      abs((i - (i % CUBE_SIZE)) - (i % CUBE_SIZE)) * delta_i ->
+ *   -> abs(i - (2 * (i % CUBE_SIZE))) * delta_i
+*/
+static void	set_step_and_side(t_raycast *raycast, int x, int y)
 {
 	raycast->step_x = 1;
 	raycast->step_y = 1;
@@ -25,15 +33,47 @@ static void	set_step_and_side(t_raycast *raycast)
 		raycast->step_x = -1;
 	if (raycast->ray_dir_y < 0)
 		raycast->step_y = -1;
+	raycast->side_dist_x = abs(x - (2 * (x % CUBE_SIZE))) * raycast->delta_x;
+	raycast->side_dist_y = abs(y - (2 * (y % CUBE_SIZE))) * raycast->delta_y;
 }
 
 /**
- * - Function which throws n rays, where n is equal to the width of the window.
- * - For each ray, camera is calculated, which controls the direction of the
- *   plain vector. Camera values will go from -1 to 1.
- * - Calculate the ray dir vector which is the addition of the dir of the
- *   the player (the center of their view) and the plane vector deviated by
- *   the camera value.
+ * Function which searchs for the first collision, either on the X or Y axis.
+ * Both sides start on the first cell collided by side dist and if it is not a
+ * wall it continues to the next cell and so on until a collision is found on 
+ * one of the sides.
+*/
+static void	collider(t_raycast *raycast, t_cube cube)
+{
+	int	cell_x;
+	int	cell_y;
+
+	// TO CHECK CAREFULY, PLEASE!!!
+	cell_x = (int)(cube.map->player_x + raycast->side_dist_x) / CUBE_SIZE;
+	cell_y = (int)(cube.map->player_y + raycast->side_dist_y) / CUBE_SIZE;
+	while(cube.map->map[cell_x][cell_y] != '1')
+	{
+		if (raycast->side_dist_x < raycast->side_dist_y)
+		{
+			raycast->side_dist_x += CUBE_SIZE;
+			cell_x += raycast->step_x;
+			raycast->collided_side = X;
+		}
+		else
+		{
+			raycast->side_dist_y += CUBE_SIZE;
+			cell_y += raycast->step_y;
+			raycast->collided_side = Y;
+		}
+	}
+}
+
+/**
+ * Function which throws n rays, where n is equal to the width of the window.
+ * For each ray, camera is calculated, which controls the direction of the
+ * plain vector. Camera values will go from -1 to 1. Calculate the ray dir
+ * vector which is the addition of the dir of the the player (the center of
+ * their view) and the plane vector deviated by the camera value.
 */
 void	raycasting(t_cube *cube)
 {
@@ -47,7 +87,8 @@ void	raycasting(t_cube *cube)
 		raycast.ray_dir_x = cube->map->dir_x + (PLANE_X * raycast.camera);
 		raycast.ray_dir_y = cube->map->dir_y + (PLANE_Y * raycast.camera);
 		set_delta(&raycast);
-		set_step_and_side(&raycast);
+		set_step_and_side(&raycast, cube->map->player_x, cube->map->player_y);
+		collider(&raycast, *cube);
 		i++;
 	}
 }

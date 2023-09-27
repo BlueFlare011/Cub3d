@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/26 22:35:46 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/09/27 17:47:26 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define MVMNT_SPEED 2
 # define X 0
 # define Y 1
-# define PLANE_X 0
+# define PLANE_X 0.0
 # define PLANE_Y 0.66
 /* ***************** DIR VECTORS***************** */
 # define N_X 0
@@ -59,6 +59,7 @@ typedef struct s_raycast
 	int		step_y;
 	double	side_dist_x;
 	double	side_dist_y;
+	int		collided_side;
 }	t_raycast;
 
 typedef struct s_texture

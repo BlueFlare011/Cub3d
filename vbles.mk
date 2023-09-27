@@ -6,7 +6,7 @@
 #    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
-#    Updated: 2023/09/26 11:20:58 by rgallego         ###   ########.fr        #
+#    Updated: 2023/09/26 11:35:53 by rgallego         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ OBJS	=			$(SRCS:.c=.o)
 
 DPNDS	=			$(SRCS:.c=.d)
 
-CC		=			gcc
+CC		=			cc
 
 RM		=			-rm -f
 
