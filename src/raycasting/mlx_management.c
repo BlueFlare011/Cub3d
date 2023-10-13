@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:03:07 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/13 18:32:37 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/13 19:44:27 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,13 @@ void	paint_ray(t_cube cube, int x, int start, int end)
 	j = 0;
 	while (j < WIN_Y)
 	{
-		if (j < start) // pintar suelo
-			my_pixel_put(*(cube.mlx->img), x, j, BLACK);
-		if (j < end) // pintar pared
+		if (j < end) // pintar cielo
+			my_pixel_put(*(cube.mlx->img), x, j, WHITE);
+		else if (j < start) // pintar pared
 			my_pixel_put(*(cube.mlx->img), x, j, GREEN);
 		else // pintar cielo
-			my_pixel_put(*(cube.mlx->img), x, j, WHITE);
+			my_pixel_put(*(cube.mlx->img), x, j, BLACK);
 		j++;
 	}
+
 }

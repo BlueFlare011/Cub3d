@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:12 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/13 16:06:26 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:31:56 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	main(int argc, char **argv)
 	cube->mlx->player_y = (cube->map->player_y * CUBE_SIZE) + (CUBE_SIZE / 2);
 	ft_mlx_init(cube);
 	raycasting(cube);
+	mlx_put_image_to_window(cube->mlx->mlx, cube->mlx->win, cube->mlx->img->img, 0, 0);
 	mlx_hook(cube->mlx->win, ON_KEYDOWN, MASK, key_control, cube);
 	mlx_loop(cube->mlx->mlx);
 	delete_struct(cube);
