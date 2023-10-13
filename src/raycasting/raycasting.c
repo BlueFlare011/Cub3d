@@ -52,19 +52,19 @@ static void	collider(t_raycast *raycast, t_cube cube)
 	int	cell_x;
 	int	cell_y;
 
-	cell_x = (int)(cube.map->player_x + raycast->side_dist_x) / CUBE_SIZE;
-	cell_y = (int)(cube.map->player_y + raycast->side_dist_y) / CUBE_SIZE;
+	cell_x = (int)cube.map->player_x;
+	cell_y = (int)cube.map->player_y;
 	while(cube.map->map[cell_y][cell_x] != '1')
 	{
 		if (raycast->side_dist_x < raycast->side_dist_y)
 		{
-			raycast->side_dist_x += CUBE_SIZE;
+			raycast->side_dist_x += raycast->delta_x;
 			cell_x += raycast->step_x;
 			raycast->collided_side = X;
 		}
 		else
 		{
-			raycast->side_dist_y += CUBE_SIZE;
+			raycast->side_dist_y += raycast->delta_y;
 			cell_y += raycast->step_y;
 			raycast->collided_side = Y;
 		}

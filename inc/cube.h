@@ -6,7 +6,7 @@
 /*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/13 15:44:38 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/10/13 17:20:56 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@
 # define BLACK 0x00000000
 /* ***************** DIR VECTORS***************** */
 # define N_X 0
-# define N_Y 1
+# define N_Y -1
 # define E_X 1
 # define E_Y 0
 # define S_X 0
-# define S_Y -1
+# define S_Y 1
 # define W_X -1
 # define W_Y 0
 

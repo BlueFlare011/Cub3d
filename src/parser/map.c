@@ -6,7 +6,7 @@
 /*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:49:32 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/13 16:13:30 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/10/13 16:45:27 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ static void	check_chars(t_cube *cube, int num_player, int i, int j)
 		error_exit(INVALID_CHAR, GENERAL_ERR);
 	cube->map->max_y = i - 1;
 }
-
+/*
 void	untrim_map(char **map, int max_x)
 {
 	int		i;
 	int		j;
-	char	*aux;
+	char	*aux = NULL;
 
 	i = 0;
 	while (map[i] && (!i || aux))
@@ -92,13 +92,12 @@ void	untrim_map(char **map, int max_x)
 	if (!aux)
 		error_exit(strerror(errno), SYS_ERR);
 }
-
+*/
 void	valid_map(t_cube *cube)
 {
 	cube->map->player_x = 0;
 	cube->map->player_y = 0;
 	check_chars(cube, 0, 0, 0);
-	ft_putendl_fd("Hola", STDOUT_FILENO);
-	untrim_map(cube->map->map, cube->map->max_x);
+	//untrim_map(cube->map->map, cube->map->max_x);
 	floodfill(cube);
 }
