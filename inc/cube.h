@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/27 17:47:26 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:30:26 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 # define Y 1
 # define PLANE_X 0.0
 # define PLANE_Y 0.66
+
+# define WHITE 0x00FFFFFF
+# define GREEN 0x0000FF00
+# define BLACK 0x00000000
 /* ***************** DIR VECTORS***************** */
 # define N_X 0
 # define N_Y 1
@@ -131,6 +135,7 @@ void	move_player(t_cube cube, int axis, int mvment_ratio);
 void	ft_mlx_init(t_cube *cube);
 void	my_pixel_put(t_img img, int x, int y, int colour);
 void	key_control(int keycode, t_cube *cube);
+void	paint_ray(t_cube cube, int x, int start, int end);
 
 /************** UTILS ****************/
 void	create_struct(t_cube *cube);

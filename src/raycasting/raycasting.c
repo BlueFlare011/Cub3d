@@ -21,9 +21,7 @@ static void	set_delta(t_raycast *raycast)
  * Function which calculates the step. It is 1 cell step if the component is
  * positive or negative if it is negative. To calculate the side distance is
  * needed to calculate the lower distance from the point to one of the sides
- * multiplied by the delta of the component. It can be easily obtained by:
- *      abs((i - (i % CUBE_SIZE)) - (i % CUBE_SIZE)) * delta_i ->
- *   -> abs(i - (2 * (i % CUBE_SIZE))) * delta_i
+ * multiplied by the delta of the component.
 */
 static void	set_step_and_side(t_raycast *raycast, int x, int y)
 {
@@ -33,8 +31,14 @@ static void	set_step_and_side(t_raycast *raycast, int x, int y)
 		raycast->step_x = -1;
 	if (raycast->ray_dir_y < 0)
 		raycast->step_y = -1;
-	raycast->side_dist_x = abs(x - (2 * (x % CUBE_SIZE))) * raycast->delta_x;
-	raycast->side_dist_y = abs(y - (2 * (y % CUBE_SIZE))) * raycast->delta_y;
+	if (raycast->ray_dir_x < 0)
+		raycast->side_dist_x = (x - (x % CUBE_SIZE)) * raycast->delta_x;
+	else
+		raycast->side_dist_x = ((x % CUBE_SIZE) + CUBE_SIZE - x) * raycast->delta_x;
+	if (raycast->ray_dir_y < 0)
+		raycast->side_dist_y = (y - (y % CUBE_SIZE)) * raycast->delta_y;
+	else
+		raycast->side_dist_y = ((y % CUBE_SIZE) + CUBE_SIZE - y) * raycast->delta_y;
 }
 
 /**
@@ -48,7 +52,6 @@ static void	collider(t_raycast *raycast, t_cube cube)
 	int	cell_x;
 	int	cell_y;
 
-	// TO CHECK CAREFULY, PLEASE!!!
 	cell_x = (int)(cube.map->player_x + raycast->side_dist_x) / CUBE_SIZE;
 	cell_y = (int)(cube.map->player_y + raycast->side_dist_y) / CUBE_SIZE;
 	while(cube.map->map[cell_x][cell_y] != '1')
@@ -66,6 +69,27 @@ static void	collider(t_raycast *raycast, t_cube cube)
 			raycast->collided_side = Y;
 		}
 	}
+}
+
+static void	set_and_print_ray(t_raycast raycast, t_cube cube, int x)
+{
+	double	dist;
+	int		height;
+	int		start;
+	int		end;
+
+	if (raycast.collided_side == X)
+		dist = raycast.side_dist_x - raycast.delta_x;
+	else
+		dist = raycast.side_dist_y - raycast.delta_y;
+	height = (int)(WIN_Y / dist);
+	start = (-height + WIN_Y) / 2;
+	if (start < 0)
+		start = 0;
+	end = (height + WIN_Y) / 2;
+	if (end > WIN_Y)
+		end = WIN_Y - 1;
+	paint_ray(cube, x, start, end);
 }
 
 /**
@@ -89,6 +113,7 @@ void	raycasting(t_cube *cube)
 		set_delta(&raycast);
 		set_step_and_side(&raycast, cube->map->player_x, cube->map->player_y);
 		collider(&raycast, *cube);
+		print_ray(raycast, *cube, i);
 		i++;
 	}
 }
