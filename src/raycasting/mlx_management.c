@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_management.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:03:07 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/13 17:28:45 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/10/13 18:32:37 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_mlx_init(t_cube *cube)
 {
 	cube->mlx->mlx = mlx_init();
 	cube->mlx->win = mlx_new_window(cube->mlx->mlx, WIN_X, WIN_Y, "cub3d");
-	cube->mlx->img = mlx_new_image(cube->mlx->mlx, WIN_X, WIN_Y);
+	cube->mlx->img->img = mlx_new_image(cube->mlx->mlx, WIN_X, WIN_Y);
 	cube->mlx->img->addr = mlx_get_data_addr(cube->mlx->img->img,
 		&cube->mlx->img->bpp, &cube->mlx->img->line_len,
 		&cube->mlx->img->endian);
