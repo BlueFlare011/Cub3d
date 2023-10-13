@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_mngment.c                                      :+:      :+:    :+:   */
+/*   mlx_management.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:03:07 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/13 15:30:51 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:45:38 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,19 @@ void	my_pixel_put(t_img img, int x, int y, int colour)
 	}
 }
 
-void	key_control(int keycode, t_cube *cube)
+int	key_control(int keycode, t_cube *cube)
 {
 	if (keycode == KEY_ESC)
 		exit(1);
 	if (keycode == KEY_W)
-		return (move_player(*cube, Y, -MVMNT_SPEED));
+		move_player(*cube, Y, -MVMNT_SPEED);
 	if (keycode == KEY_S)
-		return (move_player(*cube, Y, MVMNT_SPEED));
+		move_player(*cube, Y, MVMNT_SPEED);
 	if (keycode == KEY_A)
-		return (move_player(*cube, X, -MVMNT_SPEED));
+		move_player(*cube, X, -MVMNT_SPEED);
 	if (keycode == KEY_D)
-		return (move_player(*cube, X, MVMNT_SPEED));
+		move_player(*cube, X, MVMNT_SPEED);
+	return (0);
 }
 
 void	paint_ray(t_cube cube, int x, int start, int end)

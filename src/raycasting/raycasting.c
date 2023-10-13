@@ -54,7 +54,7 @@ static void	collider(t_raycast *raycast, t_cube cube)
 
 	cell_x = (int)(cube.map->player_x + raycast->side_dist_x) / CUBE_SIZE;
 	cell_y = (int)(cube.map->player_y + raycast->side_dist_y) / CUBE_SIZE;
-	while(cube.map->map[cell_x][cell_y] != '1')
+	while(cube.map->map[cell_y][cell_x] != '1')
 	{
 		if (raycast->side_dist_x < raycast->side_dist_y)
 		{
@@ -71,7 +71,7 @@ static void	collider(t_raycast *raycast, t_cube cube)
 	}
 }
 
-static void	set_and_print_ray(t_raycast raycast, t_cube cube, int x)
+static void	set_and_paint_ray(t_raycast raycast, t_cube cube, int x)
 {
 	double	dist;
 	int		height;
@@ -113,7 +113,7 @@ void	raycasting(t_cube *cube)
 		set_delta(&raycast);
 		set_step_and_side(&raycast, cube->map->player_x, cube->map->player_y);
 		collider(&raycast, *cube);
-		print_ray(raycast, *cube, i);
+		set_and_paint_ray(raycast, *cube, i);
 		i++;
 	}
 }

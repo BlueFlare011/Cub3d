@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    vbles.mk                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
+#    By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
-#    Updated: 2023/09/26 11:35:53 by rgallego         ###   ########.fr        #
+#    Updated: 2023/10/13 15:48:05 by blueflare01      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ UTILS		=		$(addprefix $(UTILS_DIR), \
 
 RAYCASTING	=		$(addprefix $(RAYCASTING_DIR), \
 						mlx_management.c \
+						utils.c \
 						raycasting.c \
 					)
 

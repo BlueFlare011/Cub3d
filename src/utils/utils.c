@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:18 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/21 11:50:26 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:03:17 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,11 @@ void	create_struct(t_cube *cube)
 	cube->map = malloc(sizeof(t_map));
 	if (!cube->map)
 		error_exit(strerror(errno), SYS_ERR);
-	cube->debug = malloc(sizeof(t_debug));
-	if (!cube->debug)
+	cube->mlx = malloc(sizeof(t_mlx));
+	if (!cube->mlx)
+		error_exit(strerror(errno), SYS_ERR);
+	cube->mlx->img = malloc(sizeof(t_img));
+	if (!cube->mlx->img)
 		error_exit(strerror(errno), SYS_ERR);
 	i = 0;
 	while (i < 4)

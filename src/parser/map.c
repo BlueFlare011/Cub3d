@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:49:32 by rgallego          #+#    #+#             */
-/*   Updated: 2023/09/26 22:02:11 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/13 16:13:30 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	valid_map(t_cube *cube)
 	cube->map->player_x = 0;
 	cube->map->player_y = 0;
 	check_chars(cube, 0, 0, 0);
+	ft_putendl_fd("Hola", STDOUT_FILENO);
 	untrim_map(cube->map->map, cube->map->max_x);
 	floodfill(cube);
 }
