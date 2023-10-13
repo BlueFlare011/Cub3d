@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/13 19:45:37 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/13 23:33:11 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define WIN_X 1080
 # define WIN_Y 720
 # define CUBE_SIZE 64
-# define MVMNT_SPEED 2
+# define MVMNT_SPEED 1
 # define X 0
 # define Y 1
 # define PLANE_X 0.0
@@ -85,8 +85,8 @@ typedef struct s_map
 	char	**map;
 	int		max_x;
 	int		max_y;
-	int		player_x;
-	int		player_y;
+	double	player_x;
+	double	player_y;
 	double	dir_x;
 	double	dir_y;
 }	t_map;
@@ -107,8 +107,6 @@ typedef struct s_mlx
 	t_img	*img;
 	void	*floor;
 	void	*wall;
-	int		player_x;
-	int		player_y;
 	int		size;
 }	t_mlx;
 

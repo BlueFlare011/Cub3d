@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/13 16:06:37 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/10/13 23:29:55 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ t_cube	*extract_file_info(char *file)
 		line = process_line(fd);
 	}
 	get_map(cube, line, fd);
-	valid_map(cube);
 	close(fd);
+	valid_map(cube);
 	return (cube);
 }

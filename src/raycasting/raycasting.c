@@ -32,13 +32,13 @@ static void	set_step_and_side(t_raycast *raycast, int x, int y)
 	if (raycast->ray_dir_y < 0)
 		raycast->step_y = -1;
 	if (raycast->ray_dir_x < 0)
-		raycast->side_dist_x = (x - (x % CUBE_SIZE)) * raycast->delta_x;
+		raycast->side_dist_x = (x - (int)x) * raycast->delta_x;
 	else
-		raycast->side_dist_x = ((x % CUBE_SIZE) + CUBE_SIZE - x) * raycast->delta_x;
+		raycast->side_dist_x = ((int)x + 1 - x) * raycast->delta_x;
 	if (raycast->ray_dir_y < 0)
-		raycast->side_dist_y = (y - (y % CUBE_SIZE)) * raycast->delta_y;
+		raycast->side_dist_y = (y - (int)y) * raycast->delta_y;
 	else
-		raycast->side_dist_y = ((y % CUBE_SIZE) + CUBE_SIZE - y) * raycast->delta_y;
+		raycast->side_dist_y = ((int)y + 1 - y) * raycast->delta_y;
 }
 
 /**
@@ -83,6 +83,7 @@ static void	set_and_paint_ray(t_raycast raycast, t_cube cube, int x)
 	else
 		dist = raycast.side_dist_y - raycast.delta_y;
 	height = (int)(WIN_Y / dist);
+	printf("dis = %f, height = %d\n", dist, height);
 	start = (-height + WIN_Y) / 2;
 	if (start < 0)
 		start = 0;
@@ -116,4 +117,5 @@ void	raycasting(t_cube *cube)
 		set_and_paint_ray(raycast, *cube, i);
 		i++;
 	}
+	mlx_put_image_to_window(cube->mlx->mlx, cube->mlx->win, cube->mlx->img->img, 0, 0);
 }

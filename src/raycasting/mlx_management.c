@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:03:07 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/13 19:44:27 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/14 00:39:06 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	key_control(int keycode, t_cube *cube)
 		move_player(*cube, X, -MVMNT_SPEED);
 	if (keycode == KEY_D)
 		move_player(*cube, X, MVMNT_SPEED);
+	// printf("player: X = %f, Y = %f\n", cube->map->player_x, cube->map->player_y);
+	raycasting(cube);
 	return (0);
 }
 
@@ -53,11 +55,12 @@ void	paint_ray(t_cube cube, int x, int start, int end)
 	int j;
 
 	j = 0;
+	printf("start = %d, end = %d\n", start, end);
 	while (j < WIN_Y)
 	{
 		if (j < end) // pintar cielo
 			my_pixel_put(*(cube.mlx->img), x, j, WHITE);
-		else if (j < start) // pintar pared
+		else if (j < start || start < 0 || end < 0) // pintar pared
 			my_pixel_put(*(cube.mlx->img), x, j, GREEN);
 		else // pintar cielo
 			my_pixel_put(*(cube.mlx->img), x, j, BLACK);
