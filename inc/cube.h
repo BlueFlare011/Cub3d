@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/15 18:21:04 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/15 18:42:08 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@
 # define MVMNT_SPEED 0.125
 # define X 0
 # define Y 1
-# define PLANE_X 0.0
-# define PLANE_Y 0.66
+# define FOV 0.66
 
 # define WHITE 0x00FFFFFF
 # define GREEN 0x0000FF00

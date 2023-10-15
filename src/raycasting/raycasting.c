@@ -108,8 +108,10 @@ void	raycasting(t_cube *cube)
 	while (i < WIN_X)
 	{
 		raycast.camera = (2 * i / (double)WIN_X) - 1;
-		raycast.ray_dir_x = cube->map->dir_x + (PLANE_Y * raycast.camera);
-		raycast.ray_dir_y = cube->map->dir_y + (PLANE_X * raycast.camera);
+		raycast.ray_dir_x = cube->map->dir_x
+			+ (FOV * cube->map->dir_y * raycast.camera);
+		raycast.ray_dir_y = cube->map->dir_y
+			+ (FOV * cube->map->dir_x * raycast.camera);
 		set_delta(&raycast);
 		set_step_and_side(&raycast, cube->map->player_x, cube->map->player_y);
 		collider(&raycast, *cube);
