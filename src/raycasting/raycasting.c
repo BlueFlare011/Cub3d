@@ -109,7 +109,7 @@ void	raycasting(t_cube *cube)
 	{
 		raycast.camera = (2 * i / (double)WIN_X) - 1;
 		raycast.ray_dir_x = cube->map->dir_x
-			+ (FOV * cube->map->dir_y * raycast.camera);
+			+ (FOV * -cube->map->dir_y * raycast.camera);
 		raycast.ray_dir_y = cube->map->dir_y
 			+ (FOV * cube->map->dir_x * raycast.camera);
 		set_delta(&raycast);
