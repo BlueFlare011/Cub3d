@@ -14,17 +14,17 @@
 
 void	move_player(t_cube cube, int axis, int mvment_ratio)
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 
 	x = cube.map->player_x;
 	y = cube.map->player_y;
 	if (axis == X)
-		x += mvment_ratio;
+		x += (double)mvment_ratio / (double)CUBE_SIZE;
 	else
-		y += mvment_ratio;
-	if (axis == X && cube.map->map[y][x] != '1')
+		y += (double)mvment_ratio / (double)CUBE_SIZE;
+	if (axis == X && cube.map->map[(int)y][(int)x] != '1')
 		cube.map->player_x = x;
-	else if (axis == Y && cube.map->map[y][x] != '1')
+	else if (axis == Y && cube.map->map[(int)y][(int)x] != '1')
 		cube.map->player_y = y;
 }

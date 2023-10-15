@@ -7,12 +7,12 @@
 */
 static void	set_delta(t_raycast *raycast)
 {
-	if (raycast->ray_dir_x)
-		raycast->delta_x = 1 / raycast->ray_dir_x;
+	if (raycast->ray_dir_x != 0.0)
+		raycast->delta_x = fabs(1.0 / raycast->ray_dir_x);
 	else
 		raycast->delta_x = __DBL_MAX__;
-	if (raycast->ray_dir_y)
-		raycast->delta_y = 1 / raycast->ray_dir_y;
+	if (raycast-> ray_dir_y != 0.0)
+		raycast->delta_y = fabs(1.0 / raycast->ray_dir_y);
 	else
 		raycast->delta_y = __DBL_MAX__;
 }
@@ -23,7 +23,7 @@ static void	set_delta(t_raycast *raycast)
  * needed to calculate the lower distance from the point to one of the sides
  * multiplied by the delta of the component.
 */
-static void	set_step_and_side(t_raycast *raycast, int x, int y)
+static void	set_step_and_side(t_raycast *raycast, double x, double y)
 {
 	raycast->step_x = 1;
 	raycast->step_y = 1;
@@ -34,11 +34,11 @@ static void	set_step_and_side(t_raycast *raycast, int x, int y)
 	if (raycast->ray_dir_x < 0)
 		raycast->side_dist_x = (x - (int)x) * raycast->delta_x;
 	else
-		raycast->side_dist_x = ((int)x + 1 - x) * raycast->delta_x;
+		raycast->side_dist_x = ((int)x + 1.0 - x) * raycast->delta_x;
 	if (raycast->ray_dir_y < 0)
 		raycast->side_dist_y = (y - (int)y) * raycast->delta_y;
 	else
-		raycast->side_dist_y = ((int)y + 1 - y) * raycast->delta_y;
+		raycast->side_dist_y = ((int)y + 1.0 - y) * raycast->delta_y;
 }
 
 /**
@@ -83,13 +83,13 @@ static void	set_and_paint_ray(t_raycast raycast, t_cube cube, int x)
 	else
 		dist = raycast.side_dist_y - raycast.delta_y;
 	height = (int)(WIN_Y / dist);
-	printf("dis = %f, height = %d\n", dist, height);
-	start = (-height + WIN_Y) / 2;
-	if (start < 0)
-		start = 0;
-	end = (height + WIN_Y) / 2;
-	if (end > WIN_Y)
-		end = WIN_Y - 1;
+//	printf("dis = %f, height = %d\n", dist, height);
+	end = -height / 2 + WIN_Y / 2;
+	if (end < 0)
+		end = 0;
+	start = height / 2 + WIN_Y / 2;
+	if (start > WIN_Y)
+		start = WIN_Y - 1;
 	paint_ray(cube, x, start, end);
 }
 
@@ -108,9 +108,9 @@ void	raycasting(t_cube *cube)
 	i = 0;
 	while (i < WIN_X)
 	{
-		raycast.camera = (2 * i / WIN_X) - 1;
-		raycast.ray_dir_x = cube->map->dir_x + (PLANE_X * raycast.camera);
-		raycast.ray_dir_y = cube->map->dir_y + (PLANE_Y * raycast.camera);
+		raycast.camera = (2 * i / (double)WIN_X) - 1;
+		raycast.ray_dir_x = cube->map->dir_x + (PLANE_Y * raycast.camera);
+		raycast.ray_dir_y = cube->map->dir_y + (PLANE_X * raycast.camera);
 		set_delta(&raycast);
 		set_step_and_side(&raycast, cube->map->player_x, cube->map->player_y);
 		collider(&raycast, *cube);

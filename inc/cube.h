@@ -23,7 +23,7 @@
 # define WIN_X 1080
 # define WIN_Y 720
 # define CUBE_SIZE 64
-# define MVMNT_SPEED 1
+# define MVMNT_SPEED 8
 # define X 0
 # define Y 1
 # define PLANE_X 0.0
@@ -33,14 +33,14 @@
 # define GREEN 0x0000FF00
 # define BLACK 0x00000000
 /* ***************** DIR VECTORS***************** */
-# define N_X 0
-# define N_Y -1
-# define E_X 1
-# define E_Y 0
-# define S_X 0
-# define S_Y 1
-# define W_X -1
-# define W_Y 0
+# define N_X 0.0
+# define N_Y -1.0
+# define E_X 1.0
+# define E_Y 0.0
+# define S_X 0.0
+# define S_Y 1.0
+# define W_X -1.0
+# define W_Y 0.0
 
 enum
 {

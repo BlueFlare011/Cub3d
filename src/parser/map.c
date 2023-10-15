@@ -15,8 +15,8 @@
 static void	settle_player(t_cube cube, int *num_player, int i, int j)
 {
 	(*num_player)++;
-	cube.map->player_x = j;
-	cube.map->player_y = i;
+	cube.map->player_x = (double)j + 0.5;
+	cube.map->player_y = (double)i + 0.5;
 	if (cube.map->map[i][j] == 'N')
 	{
 		cube.map->dir_x = N_X;

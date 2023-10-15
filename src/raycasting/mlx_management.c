@@ -55,7 +55,7 @@ void	paint_ray(t_cube cube, int x, int start, int end)
 	int j;
 
 	j = 0;
-	printf("start = %d, end = %d\n", start, end);
+//	printf("start = %d, end = %d\n", start, end);
 	while (j < WIN_Y)
 	{
 		if (j < end) // pintar cielo
