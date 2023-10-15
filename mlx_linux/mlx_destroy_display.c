@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/05 17:34:28 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/11 23:59:24 by rgallego         ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube.h"
+#include "mlx_int.h"
 
-void	error_exit(char *message, int exit_code)
+int	mlx_destroy_display(t_xvar *xvar)
 {
-	int	error;
-
-	ft_putendl_fd("Error", STDERR_FILENO);
-	ft_putendl_fd(message, STDERR_FILENO);
-	error = exit_code;
-	if (error == SYS_ERR)
-		error = errno;
-	exit(error);
+	XCloseDisplay(xvar->display);
 }

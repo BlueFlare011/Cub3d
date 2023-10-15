@@ -3,48 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:12 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/05 17:34:13 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/10/13 23:30:03 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cube.h>
+#include "cube.h"
 
-int	check_arguments(int num, char **args)
+void	check_arguments(int num, char **args)
 {
 	char	*extension;
 
 	if (num != 2)
-		return (error_int(ERROR_NUM_ARGS, 0));
+		return (error_exit(ERROR_NUM_ARGS, GENERAL_ERR));
 	extension = ft_strrchr(args[1], '.');
 	if (!extension)
-		return (error_int(NO_EXTENSION, 0));
+		return (error_exit(NO_EXTENSION, GENERAL_ERR));
 	if (ft_strncmp(extension, ".cub", 4))
-		return (error_int(NO_VALID_EXTENSION, 0));
-	return(1);
+		return (error_exit(NO_VALID_EXTENSION, GENERAL_ERR));
 }
-
-// int	check(void)
-// {
-	// char	**matrix;
-	// char *str = "Prueba  uno y    2  ";
-	// 
-	// matrix = ft_split(str, ',');
-	// printf("%s\n", *matrix);
-	// pito(matrix);
-	// return(0);
-// }
 
 int	main(int argc, char **argv)
 {
-	t_info	*info;
+	t_cube	*cube;
 
-	if (!check_arguments(argc, argv))
-		return (1);
-	info = extract_file_info(argv[1]);
-	print_info(info);
-	delete_struct(info);
+	check_arguments(argc, argv);
+	cube = extract_file_info(argv[1]);
+	ft_mlx_init(cube);
+	raycasting(cube);
+	mlx_hook(cube->mlx->win, ON_KEYDOWN, MASK, key_control, cube);
+	mlx_loop(cube->mlx->mlx);
+	delete_struct(cube);
 	return (0);
 }

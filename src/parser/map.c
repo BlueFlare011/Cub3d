@@ -1,138 +1,103 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/17 16:49:32 by rgallego          #+#    #+#             */
+/*   Updated: 2023/10/13 16:45:27 by blueflare01      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
-int	check_chars(char **map, int *max_x, int *max_y, int aux)
+static void	settle_player(t_cube cube, int *num_player, int i, int j)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
+	(*num_player)++;
+	cube.map->player_x = (double)j + 0.5;
+	cube.map->player_y = (double)i + 0.5;
+	if (cube.map->map[i][j] == 'N')
 	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
-				|| map[i][j] == 'W')
-				aux++;
-			else if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != ' ')
-				return (1);
-			if (aux > 1)
-				return (1);
-			j++;
-		}
-		if (j > *max_x)
-			*max_x = j - 1;
-		i++;
+		cube.map->dir_x = N_X;
+		cube.map->dir_y = N_Y;
 	}
-	*max_y = i - 1;
-	return (0);
+	else if (cube.map->map[i][j] == 'E')
+	{
+		cube.map->dir_x = E_X;
+		cube.map->dir_y = E_Y;
+	}
+	else if (cube.map->map[i][j] == 'S')
+	{
+		cube.map->dir_x = S_X;
+		cube.map->dir_y = S_Y;
+	}
+	else if (cube.map->map[i][j] == 'W')
+	{
+		cube.map->dir_x = W_X;
+		cube.map->dir_y = W_Y;
+	}
 }
 
-int	untrim_map(char **map, int max_x)
+static void	check_chars(t_cube *cube, int num_player, int i, int j)
+{
+	while (cube->map->map[i] && (!i || !cube->map->map[i - 1][j]))
+	{
+		j = 0;
+		while (cube->map->map[i][j]
+			&& ft_strchr("NESW10 ", cube->map->map[i][j]) && num_player <= 1)
+		{
+			if (ft_strchr("NESW", cube->map->map[i][j]))
+				settle_player(*cube, &num_player, i, j);
+			if (ft_strchr("NESW10 ", cube->map->map[i][j]))
+				j++;
+		}
+		if (!cube->map->map[i][j] && j > cube->map->max_x)
+			cube->map->max_x = j - 1;
+		if (!cube->map->map[i][j])
+			i++;
+	}
+	if (num_player != 1)
+		error_exit(TOO_MUCH_PLAYERS, GENERAL_ERR);
+	else if (cube->map->map[i])
+		error_exit(INVALID_CHAR, GENERAL_ERR);
+	cube->map->max_y = i - 1;
+}
+/*
+void	untrim_map(char **map, int max_x)
 {
 	int		i;
 	int		j;
-	char	*aux;
+	char	*aux = NULL;
 
 	i = 0;
-	while (map[i])
+	while (map[i] && (!i || aux))
 	{
-		if ((int)ft_strlen(map[i]) < max_x)
+		if ((int)ft_strlen(map[i]) <= max_x)
 		{
 			aux = malloc(sizeof(char) * (max_x + 2));
-			if (!aux)
-				return (1);
-			strncpy(aux, map[i], ft_strlen(map[i]));
-			j = ft_strlen(map[i]);
-			while (j <= max_x)
-				aux[j++] = ' ';
-			aux[j] = '\0';
-			free(map[i]);
-			map[i] = aux;
+			if (aux)
+			{
+				j = ft_strlen(map[i]);
+				strcpy(aux, map[i]);
+				while (j <= max_x)
+					aux[j++] = ' ';
+				aux[j] = '\0';
+				free(map[i]);
+				map[i] = aux;
+			}
 		}
 		i++;
 	}
-	return (0);
+	if (!aux)
+		error_exit(strerror(errno), SYS_ERR);
 }
-
-void locate_start(t_info *info, t_stack *stack)
+*/
+void	valid_map(t_cube *cube)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (info->map[i])
-	{
-		j = 0;
-		while (info->map[i][j])
-		{
-			if (info->map[i][j] == 'N' || info->map[i][j] == 'S' ||
-				info->map[i][j] == 'E' || info->map[i][j] == 'W')
-				break ;
-			j++;
-		}
-		if (info->map[i][j])
-			break ;
-		i++;
-	}
-	push(stack, i, j);
-}
-
-int	check_square(char **map, t_node *square, int max_y, int max_x)
-{
-	if (square->x == 0 || square->y == 0 || square->y == max_y
-		|| square->x == max_x)
-		return (1);
-	if	(map[square->y + 1][square->x] == ' ' ||
-		map[square->y - 1][square->x] == ' ' ||
-		map[square->y][square->x + 1] == ' ' ||
-		map[square->y][square->x - 1] == ' ')
-		return (1);
-	return (0);
-}
-
-void	floodfill(t_info *info, int max_x, int max_y)
-{
-	t_stack	*stack;
-	t_node	*aux;
-
-	stack = malloc(sizeof(stack));
-	if (!stack)
-		error_exit(strerror(errno), info);
-	create_stack(stack);
-	locate_start(info, stack);
-	while (stack)
-	{
-		aux = pop(stack);
-		if (!aux)
-			break ;
-		if (check_square(info->map, aux, max_y, max_x))
-			error_exit(MAP_NOT_CLOSED, info);
-		//printf("Coor: %d %d\nChar: %c\n", aux->y, aux->x, info->map[aux->y][aux->x]);
-		if (info->map[aux->y][aux->x] == '0')
-			info->map[aux->y][aux->x] = '2';
-		if (info->map[aux->y + 1][aux->x] == '0')
-			push(stack, aux->y + 1, aux->x);
-		if (info->map[aux->y - 1][aux->x] == '0')
-			push(stack, aux->y - 1, aux->x);
-		if (info->map[aux->y][aux->x + 1] == '0')
-			push(stack, aux->y, aux->x + 1);
-		if (info->map[aux->y][aux->x - 1] == '0')
-			push(stack, aux->y, aux->x - 1);
-		free(aux);
-	}
-	free(stack);
-}
-
-void	valid_map(t_info *info)
-{
-	int	max_x;
-	int	max_y;
-
-	max_x = 0;
-	if (check_chars(info->map, &max_x, &max_y, 0))
-		exit(1);
-	if (untrim_map(info->map, max_x))
-		exit(1);
-	floodfill(info, max_x, max_y);	
+	cube->map->player_x = 0;
+	cube->map->player_y = 0;
+	check_chars(cube, 0, 0, 0);
+	//untrim_map(cube->map->map, cube->map->max_x);
+	floodfill(cube);
 }

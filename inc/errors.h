@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:45 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/05 17:36:08 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/09/12 00:02:50 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,13 @@
 # define ERRORS_H
 
 # include <stdio.h>
+# include <string.h>
 # include <errno.h>
 # include "libft.h"
+
+/********************** ERROR CODES ****************************/
+# define GENERAL_ERR	1
+# define SYS_ERR	-1
 
 /******************** FILENAME *************************/
 # define ERROR_NUM_ARGS	"Wrong number of arguments"
@@ -29,7 +34,13 @@
 # define NOT_VALID_NUM	"The number must be between 0 and 255"
 
 /********************** MAP ****************************/
+# define TOO_MUCH_PLAYERS	"The map must contain only one player"
+# define INVALID_CHAR	"The map can't contain other char than '1', '0' or ' '"
 # define MAP_SEPARATED	"The map can't contain empty lines"
 # define MAP_NOT_CLOSED	"The map is not closed"
+
+
+/*************** ERROR ****************/
+void	error_exit(char *message, int exit_code);
 
 #endif
