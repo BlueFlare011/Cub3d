@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/15 18:42:08 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/15 19:31:35 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define WIN_X 1080
 # define WIN_Y 720
-# define MVMNT_SPEED 0.125
+# define SPEED 0.125
 # define X 0
 # define Y 1
 # define FOV 0.66
@@ -125,7 +125,7 @@ void	floodfill(t_cube *cube);
 void	raycasting(t_cube *cube);
 
 /************** RAYCASTING_UTILS ****************/
-void	move_player(t_cube cube, int axis, double mvment_ratio);
+void	move(t_cube cube, double move_x, double move_y);
 
 /*********** MLX_MNGMENT **************/
 void	ft_mlx_init(t_cube *cube);

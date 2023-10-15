@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:03:07 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/14 00:39:06 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/15 19:40:57 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@ int	key_control(int keycode, t_cube *cube)
 	if (keycode == KEY_ESC)
 		exit(1);
 	if (keycode == KEY_W)
-		move_player(*cube, Y, -MVMNT_SPEED);
+		move(*cube, cube->map->dir_x * SPEED, cube->map->dir_y * SPEED);
 	if (keycode == KEY_S)
-		move_player(*cube, Y, MVMNT_SPEED);
+		move(*cube, -cube->map->dir_x * SPEED, -cube->map->dir_y * SPEED);
 	if (keycode == KEY_A)
-		move_player(*cube, X, -MVMNT_SPEED);
+		move(*cube, -cube->map->dir_y * SPEED, -cube->map->dir_x * SPEED);
 	if (keycode == KEY_D)
-		move_player(*cube, X, MVMNT_SPEED);
-	// printf("player: X = %f, Y = %f\n", cube->map->player_x, cube->map->player_y);
+		move(*cube, cube->map->dir_y * SPEED, cube->map->dir_x * SPEED);
 	raycasting(cube);
 	return (0);
 }
