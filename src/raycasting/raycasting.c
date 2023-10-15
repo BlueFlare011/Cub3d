@@ -11,7 +11,7 @@ static void	set_delta(t_raycast *raycast)
 		raycast->delta_x = fabs(1.0 / raycast->ray_dir_x);
 	else
 		raycast->delta_x = __DBL_MAX__;
-	if (raycast-> ray_dir_y != 0.0)
+	if (raycast->ray_dir_y != 0.0)
 		raycast->delta_y = fabs(1.0 / raycast->ray_dir_y);
 	else
 		raycast->delta_y = __DBL_MAX__;
@@ -83,11 +83,10 @@ static void	set_and_paint_ray(t_raycast raycast, t_cube cube, int x)
 	else
 		dist = raycast.side_dist_y - raycast.delta_y;
 	height = (int)(WIN_Y / dist);
-//	printf("dis = %f, height = %d\n", dist, height);
-	end = -height / 2 + WIN_Y / 2;
+	end = (-height + WIN_Y) / 2;
 	if (end < 0)
 		end = 0;
-	start = height / 2 + WIN_Y / 2;
+	start = (height + WIN_Y) / 2;
 	if (start > WIN_Y)
 		start = WIN_Y - 1;
 	paint_ray(cube, x, start, end);
