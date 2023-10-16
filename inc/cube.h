@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/16 02:11:09 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/16 21:16:32 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,18 @@
 # define W_Y 0.0
 # define ALPHA (M_PI / 8)
 
-enum
+enum e_direction
 {
 	NORTH = 0,
 	SOUTH = 1,
 	EAST = 2,
 	WEST = 3,
-	FLOOR = 4,
-	CEILING = 5,
+};
+
+enum e_color
+{
+	FLOOR = 0,
+	SKY = 1,
 };
 
 typedef struct s_raycast
@@ -77,6 +81,7 @@ typedef struct s_color
 	int	red;
 	int	green;
 	int	blue;
+	int	true_color;
 }	t_color;
 
 typedef struct s_map
@@ -133,7 +138,7 @@ void	rotation(t_cube cube, double alpha);
 void	ft_mlx_init(t_cube *cube);
 void	my_pixel_put(t_img img, int x, int y, int colour);
 int		key_control(int keycode, t_cube *cube);
-void	paint_ray(t_cube cube, int x, int start, int end);
+void	paint_ray(t_cube cube, t_raycast raycast, int x, int start, int end);
 
 /************** UTILS ****************/
 void	create_struct(t_cube *cube);

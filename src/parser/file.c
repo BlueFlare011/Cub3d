@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/13 23:29:55 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/16 21:20:35 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,18 @@ int	get_color(t_cube *cube, char **data)
 	if (!rgb)
 		error_exit(strerror(errno), SYS_ERR);
 	if (!ft_strncmp(data[0], "C", 2))
-		id = CEILING;
+		id = SKY;
 	else if (!ft_strncmp(data[0], "F", 2))
 		id = FLOOR;
 	if (!is_num(rgb))
 		error_exit(NO_NUMBER, SYS_ERR);
-	cube->color[id - 4].id = id;
-	cube->color[id - 4].red = ft_atoi(rgb[0]);
-	cube->color[id - 4].green = ft_atoi(rgb[1]);
-	cube->color[id - 4].blue = ft_atoi(rgb[2]);
-	if ((cube->color[id - 4].red < 0 || 255 < cube->color[id - 4].red)
-		|| (cube->color[id - 4].green < 0 || 255 < cube->color[id - 4].green)
-		|| (cube->color[id - 4].blue < 0 || 255 < cube->color[id - 4].blue))
+	cube->color[id].id = id;
+	cube->color[id].red = ft_atoi(rgb[0]);
+	cube->color[id].green = ft_atoi(rgb[1]);
+	cube->color[id].blue = ft_atoi(rgb[2]);
+	if ((cube->color[id].red < 0 || 255 < cube->color[id].red)
+		|| (cube->color[id].green < 0 || 255 < cube->color[id].green)
+		|| (cube->color[id].blue < 0 || 255 < cube->color[id].blue))
 		error_exit(NOT_VALID_NUM, SYS_ERR);
 	free_double_pointer(rgb);
 	return (0);
@@ -114,6 +114,10 @@ int	analyse_line(t_cube *cube, char *line, int status)
 	else
 		error_exit(INVALID_LINE, GENERAL_ERR);
 	free_double_pointer(data);
+	cube->color[FLOOR].true_color = cube->color[FLOOR].red * pow(2, 16)
+		+ cube->color[FLOOR].green * pow(2, 8) + cube->color[FLOOR].blue;
+	cube->color[SKY].true_color = cube->color[SKY].red * pow(2, 16)
+		+ cube->color[SKY].green * pow(2, 8) + cube->color[SKY].blue;
 	return (status);
 }
 

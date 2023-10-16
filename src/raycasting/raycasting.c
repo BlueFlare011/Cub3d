@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:10:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/16 02:10:52 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:25:17 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static void	set_and_paint_ray(t_raycast raycast, t_cube cube, int x)
 	start = (height + WIN_Y) / 2;
 	if (start > WIN_Y)
 		start = WIN_Y - 1;
-	paint_ray(cube, x, start, end);
+	paint_ray(cube, raycast, x, start, end);
 }
 
 /**

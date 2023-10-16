@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_management.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:03:07 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/16 01:23:52 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/16 21:23:04 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	key_control(int keycode, t_cube *cube)
 	return (0);
 }
 
-void	paint_ray(t_cube cube, int x, int start, int end)
+void	paint_ray(t_cube cube, t_raycast raycast, int x, int start, int end) // El raycast esta ahi solo para diferenciar las paredes, luego se quita :)
 {
 	int j;
 
@@ -62,11 +62,15 @@ void	paint_ray(t_cube cube, int x, int start, int end)
 	while (j < WIN_Y)
 	{
 		if (j < end) // pintar cielo
-			my_pixel_put(*(cube.mlx->img), x, j, WHITE);
-		else if (j < start || start < 0 || end < 0) // pintar pared
-			my_pixel_put(*(cube.mlx->img), x, j, GREEN);
+			my_pixel_put(*(cube.mlx->img), x, j, cube.color[SKY].true_color);
+		else if (j < start || start < 0 || end < 0){ // pintar pared
+			if (raycast.collided_side == X)
+				my_pixel_put(*(cube.mlx->img), x, j, GREEN/2);
+			else
+				my_pixel_put(*(cube.mlx->img), x, j, GREEN);
+		}
 		else // pintar cielo
-			my_pixel_put(*(cube.mlx->img), x, j, BLACK);
+			my_pixel_put(*(cube.mlx->img), x, j, cube.color[FLOOR].true_color);
 		j++;
 	}
 
