@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/15 19:56:56 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/16 02:11:09 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@
 # define S_Y 1.0
 # define W_X -1.0
 # define W_Y 0.0
-# define ALPHA 1
-# define LEFT 1
-# define RIGHT -1
+# define ALPHA (M_PI / 8)
 
 enum
 {
@@ -129,7 +127,7 @@ void	raycasting(t_cube *cube);
 
 /************** RAYCASTING_UTILS ****************/
 void	move(t_cube cube, double move_x, double move_y);
-void	rotation(t_cube cube, int direction);
+void	rotation(t_cube cube, double alpha);
 
 /*********** MLX_MNGMENT **************/
 void	ft_mlx_init(t_cube *cube);

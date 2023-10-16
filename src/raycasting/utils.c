@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:13:25 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/15 19:56:41 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/16 02:08:20 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ void	move(t_cube cube, double move_x, double move_y)
 	cube.map->player_y = y;
 }
 
-void	rotation(t_cube cube, int direction)
+void	rotation(t_cube cube, double alpha)
 {
-	cube.map->dir_x = direction * (cube.map->dir_x * cos(ALPHA) - cube.map->dir_x * sin(ALPHA));
-	cube.map->dir_y = direction * (cube.map->dir_y * sin(ALPHA) + cube.map->dir_y * cos(ALPHA));
+	double	aux;
+
+	aux = cube.map->dir_x;
+	cube.map->dir_x = cube.map->dir_x * cos(alpha) - cube.map->dir_y * sin(alpha);
+	cube.map->dir_y = aux * sin(alpha) + cube.map->dir_y * cos(alpha);
 }

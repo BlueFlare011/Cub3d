@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:03:07 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/16 01:21:19 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/16 01:23:52 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ int	key_control(int keycode, t_cube *cube)
 		move(*cube, cube->map->dir_y * SPEED, -cube->map->dir_x * SPEED);
 	else if (keycode == KEY_D)
 		move(*cube, -cube->map->dir_y * SPEED, cube->map->dir_x * SPEED);
-	// else if (keycode == KEY_LEFT)
-	// 	rotation(*cube, LEFT);
-	// else if (keycode == KEY_RIGHT)
-	// 	rotation(*cube, RIGHT);
+	else if (keycode == KEY_LEFT)
+		rotation(*cube, -ALPHA);
+	else if (keycode == KEY_RIGHT)
+		rotation(*cube, ALPHA);
 	raycasting(cube);
 	return (0);
 }
