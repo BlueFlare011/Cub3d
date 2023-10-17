@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:10:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/16 18:25:17 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/10/17 22:04:58 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,11 @@ static void	set_and_paint_ray(t_raycast raycast, t_cube cube, int x)
 		dist = raycast.side_dist_x - raycast.delta_x;
 	else
 		dist = raycast.side_dist_y - raycast.delta_y;
+	// if (fabs((raycast.ray_dir_x / raycast.ray_dir_y) - 1/4.0) < 0.001)
+	// {
+	// 	printf("RAY_DIR = (%f, %f)\n", raycast.ray_dir_x, raycast.ray_dir_y);
+	// 	printf("DIST = %f\n", dist);
+	// }
 	height = (int)(WIN_Y / dist);
 	end = (-height + WIN_Y) / 2;
 	if (end < 0)
