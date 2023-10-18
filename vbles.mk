@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    vbles.mk                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+         #
+#    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
-#    Updated: 2023/10/13 16:33:20 by blueflare01      ###   ########.fr        #
+#    Updated: 2023/10/18 17:34:36 by rgallego         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ PARSER		=		$(addprefix $(PARSER_DIR), \
 						map.c \
 						floodfill.c \
 						stack.c \
+						textures.c \
 					)
 
 SRCS		= 		$(addprefix $(SRC_DIR), \

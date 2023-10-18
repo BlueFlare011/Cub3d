@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_management.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:03:07 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/16 21:23:04 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/10/19 00:04:18 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ void	my_pixel_put(t_img img, int x, int y, int colour)
 int	key_control(int keycode, t_cube *cube)
 {
 	if (keycode == KEY_ESC)
-		exit(1);
+	{
+		mlx_destroy_window(cube->mlx->mlx, cube->mlx->win);
+		exit(0);
+	}
 	if (keycode == KEY_W)
 		move(*cube, cube->map->dir_x * SPEED, cube->map->dir_y * SPEED);
 	else if (keycode == KEY_S)
@@ -62,15 +65,16 @@ void	paint_ray(t_cube cube, t_raycast raycast, int x, int start, int end) // El 
 	while (j < WIN_Y)
 	{
 		if (j < end) // pintar cielo
-			my_pixel_put(*(cube.mlx->img), x, j, cube.color[SKY].true_color);
-		else if (j < start || start < 0 || end < 0){ // pintar pared
+			my_pixel_put(*(cube.mlx->img), x, j, cube.colour[SKY]);
+		else if (j < start || start < 0 || end < 0)
+		{ // pintar pared
 			if (raycast.collided_side == X)
-				my_pixel_put(*(cube.mlx->img), x, j, GREEN/2);
+				my_pixel_put(*(cube.mlx->img), x, j, COLOR / 2);
 			else
-				my_pixel_put(*(cube.mlx->img), x, j, GREEN);
+				my_pixel_put(*(cube.mlx->img), x, j, COLOR);
 		}
 		else // pintar cielo
-			my_pixel_put(*(cube.mlx->img), x, j, cube.color[FLOOR].true_color);
+			my_pixel_put(*(cube.mlx->img), x, j, cube.colour[FLOOR]);
 		j++;
 	}
 

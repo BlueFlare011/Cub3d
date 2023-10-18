@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/16 21:16:32 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/10/18 23:06:39 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,12 @@
 # define X 0
 # define Y 1
 # define FOV 0.66
+# define RED 0
+# define GREEN 1
+# define BLUE 2
 
 # define WHITE 0x00FFFFFF
-# define GREEN 0x0000FF00
+# define COLOR 0x0000FF00
 # define BLACK 0x00000000
 /* ***************** DIR VECTORS***************** */
 # define N_X 0.0
@@ -71,18 +74,10 @@ typedef struct s_raycast
 
 typedef struct s_texture
 {
-	int	id;
-	int	fd_texture;
+	int	width;
+	int	height;
+	char **img;
 }	t_texture;
-
-typedef struct s_color
-{
-	int	id;
-	int	red;
-	int	green;
-	int	blue;
-	int	true_color;
-}	t_color;
 
 typedef struct s_map
 {
@@ -117,9 +112,9 @@ typedef struct s_mlx
 typedef struct s_cube
 {
 	t_map		*map;
-	t_color		*color;
-	t_texture	*texture;
 	t_mlx		*mlx;
+	int			colour[2];
+	t_texture	texture[4];
 }	t_cube;
 
 /************** PARSER ***************/
@@ -148,5 +143,8 @@ int		is_num(char **rgb);
 char	*process_line(int fd);
 void	print_cube(t_cube *cube);
 void	delete_struct(t_cube *cube);
+
+int		check_and_get_colour(int t, int r, int g, int b);
+void	read_texture(t_cube cube, char *file_name, t_texture *texture);
 
 #endif

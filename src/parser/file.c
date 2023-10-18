@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/16 21:20:35 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/10/19 00:03:41 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,16 @@ int	get_texture(t_cube *cube, char **data)
 	aux = ft_strtrim(data[1], "\n");
 	if (!aux)
 		error_exit(strerror(errno), SYS_ERR);
-	cube->texture[id].id = id;
-	cube->texture[id].fd_texture = open(aux, O_RDONLY);
-	if (cube->texture[id].fd_texture < 0)
-		error_exit(strerror(errno), SYS_ERR);
+	read_texture(*cube, aux, &cube->texture[id]);
 	free(aux);
 	return (0);
 }
 
 int	get_color(t_cube *cube, char **data)
 {
-	char	**rgb;
-	int		id;
+	char			**rgb;
+	unsigned int	id;
 
-	id = 0;
 	if (ft_strncmp(data[0], "C", 2) && ft_strncmp(data[0], "F", 2))
 		return (1);
 	rgb = ft_split(data[1], ',');
@@ -55,13 +51,9 @@ int	get_color(t_cube *cube, char **data)
 		id = FLOOR;
 	if (!is_num(rgb))
 		error_exit(NO_NUMBER, SYS_ERR);
-	cube->color[id].id = id;
-	cube->color[id].red = ft_atoi(rgb[0]);
-	cube->color[id].green = ft_atoi(rgb[1]);
-	cube->color[id].blue = ft_atoi(rgb[2]);
-	if ((cube->color[id].red < 0 || 255 < cube->color[id].red)
-		|| (cube->color[id].green < 0 || 255 < cube->color[id].green)
-		|| (cube->color[id].blue < 0 || 255 < cube->color[id].blue))
+	cube->colour[id] = check_and_get_colour(0, ft_atoi(rgb[RED]),
+		ft_atoi(rgb[GREEN]), ft_atoi(rgb[BLUE]));
+	if (cube->colour[id] < 0)
 		error_exit(NOT_VALID_NUM, SYS_ERR);
 	free_double_pointer(rgb);
 	return (0);
@@ -114,10 +106,6 @@ int	analyse_line(t_cube *cube, char *line, int status)
 	else
 		error_exit(INVALID_LINE, GENERAL_ERR);
 	free_double_pointer(data);
-	cube->color[FLOOR].true_color = cube->color[FLOOR].red * pow(2, 16)
-		+ cube->color[FLOOR].green * pow(2, 8) + cube->color[FLOOR].blue;
-	cube->color[SKY].true_color = cube->color[SKY].red * pow(2, 16)
-		+ cube->color[SKY].green * pow(2, 8) + cube->color[SKY].blue;
 	return (status);
 }
 
@@ -132,6 +120,7 @@ t_cube	*extract_file_info(char *file)
 	if (!cube)
 		error_exit(strerror(errno), SYS_ERR);
 	create_struct(cube);
+	ft_mlx_init(cube);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		error_exit(strerror(errno), SYS_ERR);

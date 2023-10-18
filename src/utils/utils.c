@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:18 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/16 02:11:35 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/18 23:15:10 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,6 @@ void	free_double_pointer(char **matrix)
 
 void	create_struct(t_cube *cube)
 {
-	int	i;
-
-	cube->color = malloc(sizeof(t_color) * 2);
-	if (!cube->color)
-		error_exit(strerror(errno), SYS_ERR);
-	cube->texture = malloc(sizeof(t_texture) * 4);
-	if (!cube->texture)
-		error_exit(strerror(errno), SYS_ERR);
 	cube->map = malloc(sizeof(t_map));
 	if (!cube->map)
 		error_exit(strerror(errno), SYS_ERR);
@@ -55,12 +47,6 @@ void	create_struct(t_cube *cube)
 	cube->mlx->img = malloc(sizeof(t_img));
 	if (!cube->mlx->img)
 		error_exit(strerror(errno), SYS_ERR);
-	i = 0;
-	while (i < 4)
-	{
-		cube->texture[i].fd_texture = -1;
-		i++;
-	}
 	cube->map->map = NULL;
 }
 
@@ -74,18 +60,11 @@ void	delete_struct(t_cube *cube)
 		free_double_pointer(cube->map->map);
 		free(cube->map);
 	}
-	if (cube->texture)
+	while (i < 4)
 	{
-		while (i < 4)
-		{
-			if (cube->texture[i].fd_texture > 0)
-				close(cube->texture[i].fd_texture);
-			i++;
-		}
-		free(cube->texture);
+		free_double_pointer(cube->texture[i].img);
+		i++;
 	}
-	if (cube->color)
-		free(cube->color);
 	if (cube)
 		free(cube);
 }
@@ -130,20 +109,4 @@ char	*process_line(int fd)
 		error_exit(strerror(errno), SYS_ERR);
 	free(line);
 	return (result);
-}
-
-void	print_cube(t_cube *cube)
-{
-	int	it;
-
-	it = 0;
-	for (int i = 0; i < 4; i++)
-		printf("%d - %d\n", cube->texture[i].id, cube->texture[i].fd_texture);
-	for (int i = 0; i < 2; i++)
-		printf("%d - (%d,%d,%d)\n", cube->color[i].id, cube->color[i].red, cube->color[i].green, cube->color[i].blue);
-	while (cube->map->map && cube->map->map[it])
-	{
-		printf("%s\n", cube->map->map[it]);
-		it++;
-	}
 }
