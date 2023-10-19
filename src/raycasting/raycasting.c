@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:10:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/17 22:04:58 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/19 20:11:02 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,21 +85,20 @@ static void	collider(t_raycast *raycast, t_cube cube)
 
 static void	set_and_paint_ray(t_raycast raycast, t_cube cube, int x)
 {
-	double	dist;
 	int		height;
 	int		start;
 	int		end;
 
 	if (raycast.collided_side == X)
-		dist = raycast.side_dist_x - raycast.delta_x;
+		raycast.dist = raycast.side_dist_x - raycast.delta_x;
 	else
-		dist = raycast.side_dist_y - raycast.delta_y;
+		raycast.dist = raycast.side_dist_y - raycast.delta_y;
 	// if (fabs((raycast.ray_dir_x / raycast.ray_dir_y) - 1/4.0) < 0.001)
 	// {
 	// 	printf("RAY_DIR = (%f, %f)\n", raycast.ray_dir_x, raycast.ray_dir_y);
 	// 	printf("DIST = %f\n", dist);
 	// }
-	height = (int)(WIN_Y / dist);
+	height = (int)(WIN_Y / raycast.dist);
 	end = (-height + WIN_Y) / 2;
 	if (end < 0)
 		end = 0;

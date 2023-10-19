@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/19 19:42:43 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/19 20:10:46 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_raycast
 	double	side_dist_x;
 	double	side_dist_y;
 	int		collided_side;
+	double	dist;
 }	t_raycast;
 
 typedef struct s_texture
