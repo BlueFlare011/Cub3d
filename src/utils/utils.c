@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:18 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/18 23:15:10 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:52:24 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	create_struct(t_cube *cube)
 	if (!cube->mlx->img)
 		error_exit(strerror(errno), SYS_ERR);
 	cube->map->map = NULL;
+	(void)set_keys(cube);
 }
 
 void	delete_struct(t_cube *cube)

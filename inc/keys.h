@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 17:39:36 by rgallego          #+#    #+#             */
-/*   Updated: 2023/09/21 21:59:18 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:24:44 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define KEYS_H
 
 # define ON_KEYDOWN 2
+# define ON_KEYRELEASE 3
 
 /* **************************** KEY CODES MACOS ***************************** */
 // # define MASK 0

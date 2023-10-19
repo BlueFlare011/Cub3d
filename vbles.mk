@@ -6,7 +6,7 @@
 #    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
-#    Updated: 2023/10/18 17:34:36 by rgallego         ###   ########.fr        #
+#    Updated: 2023/10/19 18:49:01 by rgallego         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ RAYCASTING	=		$(addprefix $(RAYCASTING_DIR), \
 					)
 
 PARSER		=		$(addprefix $(PARSER_DIR), \
+						utils.c \
 						file.c \
 						map.c \
 						floodfill.c \

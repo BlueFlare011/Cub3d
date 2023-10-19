@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/18 23:06:39 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:51:54 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,18 +109,30 @@ typedef struct s_mlx
 	int		size;
 }	t_mlx;
 
+typedef struct s_keys
+{
+	int	a;
+	int	w;
+	int	s;
+	int	d;
+	int	left;
+	int	right;
+}	t_keys;
+
 typedef struct s_cube
 {
 	t_map		*map;
 	t_mlx		*mlx;
 	int			colour[2];
 	t_texture	texture[4];
+	t_keys		keys;
 }	t_cube;
 
 /************** PARSER ***************/
 t_cube	*extract_file_info(char *file);
 void	valid_map(t_cube *map);
 void	floodfill(t_cube *cube);
+int		set_keys(t_cube *cube);
 
 /************** DEBUG ****************/
 void	raycasting(t_cube *cube);
@@ -132,7 +144,9 @@ void	rotation(t_cube cube, double alpha);
 /*********** MLX_MNGMENT **************/
 void	ft_mlx_init(t_cube *cube);
 void	my_pixel_put(t_img img, int x, int y, int colour);
-int		key_control(int keycode, t_cube *cube);
+int		key_down(int keycode, t_cube *cube);
+int		key_release(int keycode, t_cube *cube);
+int		event_management(t_cube *cube);
 void	paint_ray(t_cube cube, t_raycast raycast, int x, int start, int end);
 
 /************** UTILS ****************/
@@ -141,7 +155,7 @@ void	free_double_pointer(char **matrix);
 int		len_double_pointer(char **matrix);
 int		is_num(char **rgb);
 char	*process_line(int fd);
-void	print_cube(t_cube *cube);
+// void	print_cube(t_cube *cube);
 void	delete_struct(t_cube *cube);
 
 int		check_and_get_colour(int t, int r, int g, int b);

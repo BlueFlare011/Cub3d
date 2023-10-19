@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/19 00:03:41 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:23:00 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	get_color(t_cube *cube, char **data)
 	rgb = ft_split(data[1], ',');
 	if (!rgb)
 		error_exit(strerror(errno), SYS_ERR);
+	id = 0;
 	if (!ft_strncmp(data[0], "C", 2))
 		id = SKY;
 	else if (!ft_strncmp(data[0], "F", 2))

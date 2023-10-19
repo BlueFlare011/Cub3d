@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:03:07 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/19 11:35:12 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:50:27 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,78 @@ void	my_pixel_put(t_img img, int x, int y, int colour)
 	}
 }
 
-int	key_control(int keycode, t_cube *cube)
+int	key_down(int keycode, t_cube *cube)
 {
 	if (keycode == KEY_ESC)
 	{
 		mlx_destroy_window(cube->mlx->mlx, cube->mlx->win);
 		exit(0);
 	}
-	if (keycode == KEY_W)
-		move(*cube, cube->map->dir_x * SPEED, cube->map->dir_y * SPEED);
-	if (keycode == KEY_S)
-		move(*cube, -cube->map->dir_x * SPEED, -cube->map->dir_y * SPEED);
 	if (keycode == KEY_A)
-		move(*cube, cube->map->dir_y * SPEED, -cube->map->dir_x * SPEED);
+		cube->keys.a = 1;
+	if (keycode == KEY_W)
+		cube->keys.w = 1;
+	if (keycode == KEY_S)
+		cube->keys.s = 1;
 	if (keycode == KEY_D)
-		move(*cube, -cube->map->dir_y * SPEED, cube->map->dir_x * SPEED);
+		cube->keys.d = 1;
 	if (keycode == KEY_LEFT)
-		rotation(*cube, -ALPHA);
+		cube->keys.left = 1;
 	if (keycode == KEY_RIGHT)
-		rotation(*cube, ALPHA);
-	raycasting(cube);
+		cube->keys.right = 1;
 	return (0);
+}
+
+int	key_release(int keycode, t_cube *cube)
+{
+	if (keycode == KEY_A)
+		cube->keys.a = 0;
+	if (keycode == KEY_W)
+		cube->keys.w = 0;
+	if (keycode == KEY_S)
+		cube->keys.s = 0;
+	if (keycode == KEY_D)
+		cube->keys.d = 0;
+	if (keycode == KEY_LEFT)
+		cube->keys.left = 0;
+	if (keycode == KEY_RIGHT)
+		cube->keys.right = 0;
+	return (0);
+}
+
+void	set_x_y(double *x, double *y, double x_value, double y_value)
+{
+	*x += x_value;
+	*y += y_value;
+}
+
+int	event_management(t_cube *cube)
+{
+	double	x;
+	double	y;
+	double	alpha;
+
+	x = 0.0;
+	y = 0.0;
+	alpha = 0.0;
+	if (cube->keys.a)
+		set_x_y(&x, &y, cube->map->dir_y * SPEED, -cube->map->dir_x * SPEED);
+	if (cube->keys.w)
+		set_x_y(&x, &y, cube->map->dir_x * SPEED, cube->map->dir_y * SPEED);
+	if (cube->keys.s)
+		set_x_y(&x, &y, -cube->map->dir_x * SPEED, -cube->map->dir_y * SPEED);
+	if (cube->keys.d)
+		set_x_y(&x, &y, -cube->map->dir_y * SPEED, cube->map->dir_x * SPEED);
+	if (cube->keys.left)
+		alpha += -ALPHA;
+	if (cube->keys.right)
+		alpha += ALPHA ;
+	if (cube->keys.left && cube->keys.right)
+		rotation(*cube, alpha);
+	if (cube->keys.a || cube->keys.w || cube->keys.s || cube->keys.d)
+		move(*cube, x, y);
+	raycasting(cube);
+	return (set_keys(cube));
 }
 
 void	paint_ray(t_cube cube, t_raycast raycast, int x, int start, int end) // El raycast esta ahi solo para diferenciar las paredes, luego se quita :)
