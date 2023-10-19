@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/19 18:23:00 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/19 22:04:43 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_texture(t_cube *cube, char **data)
 	aux = ft_strtrim(data[1], "\n");
 	if (!aux)
 		error_exit(strerror(errno), SYS_ERR);
-	read_texture(*cube, aux, &cube->texture[id]);
+	read_texture(*cube, aux, &(cube->texture[id]));
 	free(aux);
 	return (0);
 }

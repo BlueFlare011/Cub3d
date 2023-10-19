@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/19 20:10:46 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/19 22:03:23 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define S_Y 1.0
 # define W_X -1.0
 # define W_Y 0.0
-# define ALPHA (M_PI / 16)
+# define ALPHA (M_PI / 64)
 
 enum e_direction
 {
@@ -77,7 +77,7 @@ typedef struct s_texture
 {
 	int	width;
 	int	height;
-	char **img;
+	int **img;
 }	t_texture;
 
 typedef struct s_map

@@ -1,5 +1,5 @@
 /* XPM */
-static char * C:\Users\santi\Pictures\cub3d\black_square_xpm[] = {
+static char * C:\Users\santi\Pictures\cub3d\north[] = {
 "50 50 1 1",
 " 	c #00FF00",
 "                                                  ",

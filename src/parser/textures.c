@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:59:01 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/19 00:14:19 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/19 22:05:01 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	read_texture(t_cube cube, char *file_name, t_texture *texture)
 	i = 0;
 	while (i < (texture->height * texture->width * 4))
 	{
-		if (!img.endian)
+		if (img.endian)
 			texture->img[(i / 4) / texture->height][(i / 4) % texture->height] =
 				get_colour(addr[i + 3], addr[i + 2], addr[i + 1], addr[i]);
 		else

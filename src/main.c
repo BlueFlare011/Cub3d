@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:12 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/19 18:33:20 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/19 21:49:37 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	main(int argc, char **argv)
 	check_arguments(argc, argv);
 	cube = extract_file_info(argv[1]);
 	raycasting(cube);
-	mlx_hook(cube->mlx->win, ON_KEYDOWN, MASK, key_down, cube);
-	mlx_hook(cube->mlx->win, ON_KEYRELEASE, MASK, key_release, cube);
+	mlx_hook(cube->mlx->win, ON_KEYDOWN, PRESS_MASK, key_down, cube);
+	mlx_hook(cube->mlx->win, ON_KEYRELEASE, RELEASE_MASK, key_release, cube);
 	mlx_loop_hook(cube->mlx->mlx, event_management, cube);
 	mlx_loop(cube->mlx->mlx);
 	delete_struct(cube);

@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:18 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/19 18:52:24 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/19 22:02:48 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,19 @@ void	create_struct(t_cube *cube)
 
 void	delete_struct(t_cube *cube)
 {
-	int	i;
+	// int	i;
 
-	i = 0;
+	// i = 0;
 	if (cube->map)
 	{
 		free_double_pointer(cube->map->map);
 		free(cube->map);
 	}
-	while (i < 4)
-	{
-		free_double_pointer(cube->texture[i].img);
-		i++;
-	}
+	// while (i < 4)
+	// {
+	// 	free_double_pointer(cube->texture[i].img);
+	// 	i++;
+	// }
 	if (cube)
 		free(cube);
 }
