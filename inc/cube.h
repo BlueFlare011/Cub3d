@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/19 18:51:54 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/19 19:42:43 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define WIN_X 1080
 # define WIN_Y 720
-# define SPEED 0.125
+# define SPEED 0.01
 # define X 0
 # define Y 1
 # define FOV 0.66
@@ -42,7 +42,7 @@
 # define S_Y 1.0
 # define W_X -1.0
 # define W_Y 0.0
-# define ALPHA (M_PI / 8)
+# define ALPHA (M_PI / 16)
 
 enum e_direction
 {

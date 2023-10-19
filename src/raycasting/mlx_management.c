@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:03:07 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/19 18:50:27 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/19 19:51:03 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,31 +80,25 @@ void	set_x_y(double *x, double *y, double x_value, double y_value)
 
 int	event_management(t_cube *cube)
 {
-	double	x;
-	double	y;
-	double	alpha;
+	double	speed;
 
-	x = 0.0;
-	y = 0.0;
-	alpha = 0.0;
+	speed = SPEED;
+	if ((cube->keys.a || cube->keys.d) && (cube->keys.w || cube->keys.s))
+		speed = sqrt(2 * (pow(SPEED, 2)));
 	if (cube->keys.a)
-		set_x_y(&x, &y, cube->map->dir_y * SPEED, -cube->map->dir_x * SPEED);
+		move(*cube, cube->map->dir_y * speed, -cube->map->dir_x * speed);
 	if (cube->keys.w)
-		set_x_y(&x, &y, cube->map->dir_x * SPEED, cube->map->dir_y * SPEED);
+		move(*cube, cube->map->dir_x * speed, cube->map->dir_y * speed);
 	if (cube->keys.s)
-		set_x_y(&x, &y, -cube->map->dir_x * SPEED, -cube->map->dir_y * SPEED);
+		move(*cube, -cube->map->dir_x * speed, -cube->map->dir_y * speed);
 	if (cube->keys.d)
-		set_x_y(&x, &y, -cube->map->dir_y * SPEED, cube->map->dir_x * SPEED);
+		move(*cube, -cube->map->dir_y * speed, cube->map->dir_x * speed);
 	if (cube->keys.left)
-		alpha += -ALPHA;
+		rotation(*cube, -ALPHA);
 	if (cube->keys.right)
-		alpha += ALPHA ;
-	if (cube->keys.left && cube->keys.right)
-		rotation(*cube, alpha);
-	if (cube->keys.a || cube->keys.w || cube->keys.s || cube->keys.d)
-		move(*cube, x, y);
+		rotation(*cube, ALPHA);
 	raycasting(cube);
-	return (set_keys(cube));
+	return (0);
 }
 
 void	paint_ray(t_cube cube, t_raycast raycast, int x, int start, int end) // El raycast esta ahi solo para diferenciar las paredes, luego se quita :)
@@ -128,5 +122,4 @@ void	paint_ray(t_cube cube, t_raycast raycast, int x, int start, int end) // El 
 			my_pixel_put(*(cube.mlx->img), x, j, cube.colour[FLOOR]);
 		j++;
 	}
-
 }

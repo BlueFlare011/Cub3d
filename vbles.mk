@@ -6,7 +6,7 @@
 #    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
-#    Updated: 2023/10/19 18:49:01 by rgallego         ###   ########.fr        #
+#    Updated: 2023/10/19 19:35:01 by rgallego         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,9 +84,9 @@ ifeq ($(shell uname), Linux)
 	FRAMEWORK	=	-lXext -lX11 -lm
 
 else
-	MLX		=		mlx/
+	MLX		=		mlx_mac/
 
-	MLXNAME	=		libmlx.dylib
+	MLXNAME	=		libmlx.a
 
 	FRAMEWORK	=	$(addprefix -framework , \
 					OpenGL \
