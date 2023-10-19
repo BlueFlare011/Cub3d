@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:03:07 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/19 21:28:38 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/20 00:32:04 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,11 @@ int	event_management(t_cube *cube)
 
 int	chose_texture(t_raycast raycast)
 {
-	if (raycast.collided_side == X && raycast.ray_dir_y < 0)
+	if (raycast.collided_side == X && raycast.ray_dir_x < 0)
 		return (NORTH);
-	if (raycast.collided_side == Y && raycast.ray_dir_x > 0)
+	if (raycast.collided_side == Y && raycast.ray_dir_y > 0)
 		return (EAST);
-	if (raycast.collided_side == X && raycast.ray_dir_y > 0)
+	if (raycast.collided_side == X && raycast.ray_dir_x > 0)
 		return (SOUTH);
 	return (WEST);
 }
@@ -150,7 +150,7 @@ void	paint_ray(t_cube cube, t_raycast raycast, int x, int start, int end) // El 
 	while (j < WIN_Y)
 	{
 		if (j < end) // pintar cielo
-			my_pixel_put(*(cube.mlx->img), x, j, cube.colour[SKY]);
+			my_pixel_put(*(cube.mlx->img), x, j, cube.colour[FLOOR]);
 		else if (j <= start || start < 0 || end < 0) // pintar pared
 		{
 			// fprintf(stderr, "TEXTURE X = %d, TEXTURE Y = %d, j = %d\n", texture_x, (int)texture_pos, j);
@@ -160,7 +160,7 @@ void	paint_ray(t_cube cube, t_raycast raycast, int x, int start, int end) // El 
 				texture_pos += step;
 		}
 		else // pintar cielo
-			my_pixel_put(*(cube.mlx->img), x, j, cube.colour[FLOOR]);
+			my_pixel_put(*(cube.mlx->img), x, j, cube.colour[SKY]);
 		j++;
 	}
 }

@@ -3,8 +3,8 @@ SO ./files/textures/south.txt
 WE ./files/textures/west.txt
 EA ./files/textures/east.txt
 
-F 255,255,255
-C 255,255,255
+F 46,219,0
+C 42,9,219
 
 111111111111111
 100100000001011
