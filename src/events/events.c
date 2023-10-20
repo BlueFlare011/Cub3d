@@ -6,25 +6,28 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:13:25 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 00:38:19 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 01:01:31 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
 
+#include <stdio.h>
+
 static void	move(t_cube cube, double move_x, double move_y)
 {
 	double	x;
 	double	y;
-	double	aux;
+	// double	aux;
 
-	aux = cube.map->player_x;
+	// aux = cube.map->player_x;
 	x = cube.map->player_x + move_x;
 	y = cube.map->player_y + move_y;
-	if (cube.map->map[(int)cube.map->player_y][(int)x] != '1')
-		cube.map->player_x = x;
-	if (cube.map->map[(int)y][(int)aux] != '1')
-		cube.map->player_y = y;
+	printf("move_x = %f, move_y = %f\n", move_x, move_y);
+	if (cube.map->map[(int)y][(int)x] == '1')
+		return ;
+	cube.map->player_x = x;
+	cube.map->player_y = y;
 }
 
 static void	rotation(t_cube cube, double alpha)
