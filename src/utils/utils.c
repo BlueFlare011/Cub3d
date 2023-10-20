@@ -6,11 +6,11 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:18 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/19 22:02:48 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 00:28:39 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube.h"
+#include "utils.h"
 
 int	len_double_pointer(char **matrix)
 {
@@ -110,4 +110,15 @@ char	*process_line(int fd)
 		error_exit(strerror(errno), SYS_ERR);
 	free(line);
 	return (result);
+}
+
+int	set_keys(t_cube *cube)
+{
+	cube->keys.a = 0;
+	cube->keys.w = 0;
+	cube->keys.s = 0;
+	cube->keys.d = 0;
+	cube->keys.left = 0;
+	cube->keys.right = 0;
+	return (0);
 }

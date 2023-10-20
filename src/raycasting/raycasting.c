@@ -6,11 +6,11 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:10:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/20 16:42:03 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/20 23:23:33 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube.h"
+#include "raycasting.h"
 
 /**
  * Function which sets delta for the 2 axis, after a few demonstrations

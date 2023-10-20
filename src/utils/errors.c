@@ -6,11 +6,11 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:28 by socana-b          #+#    #+#             */
-/*   Updated: 2023/09/11 23:59:24 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 00:21:43 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube.h"
+#include "utils.h"
 
 void	error_exit(char *message, int exit_code)
 {

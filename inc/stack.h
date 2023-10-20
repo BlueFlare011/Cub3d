@@ -2,7 +2,6 @@
 # define BFS_STACK_H
 
 #include <stdlib.h>
-#include <stdio.h>
 #include "errors.h"
 
 typedef struct s_node

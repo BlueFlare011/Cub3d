@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+         #
+#    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:31:01 by rgallego          #+#    #+#              #
-#    Updated: 2023/09/20 00:04:36 by blueflare01      ###   ########.fr        #
+#    Updated: 2023/10/20 22:02:55 by rgallego         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,20 @@ all: $(NAME)
 $(LIBFTNAME):
 	$(MAKE) -C $(LIBFT)
 
+$(GNLNAME):
+	$(MAKE) -C $(GNL)
+
+$(MLXNAME):
+	$(MAKE) -C $(MLX)
+
 $(NAME): $(OBJS) $(LDFLAGS)
-	$(CC) $(CFLAGS) $(OBJS) $(MLXNAME) $(FRAMEWORK) $(LIBFTNAME) $(LDFLAGS) $(FRAMEWORK) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) $(FRAMEWORK) -o $@
 
 clean:
 	$(RM) $(OBJS) $(DPNDS)
-	$(MAKE) -C $(LIBFT) fclean
+	$(MAKE) -C $(LIBFT) fclean 
+	$(MAKE) -C $(GNL) fclean
+	$(MAKE) -C $(MLX) clean
 
 fclean: clean
 	$(RM) $(NAME)
