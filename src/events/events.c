@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:13:25 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/20 22:39:31 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 00:38:19 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "events.h"
+#include "events.h"
 
 static void	move(t_cube cube, double move_x, double move_y)
 {
@@ -32,7 +32,8 @@ static void	rotation(t_cube cube, double alpha)
 	double	aux;
 
 	aux = cube.map->dir_x;
-	cube.map->dir_x = cube.map->dir_x * cos(alpha) - cube.map->dir_y * sin(alpha);
+	cube.map->dir_x = cube.map->dir_x * cos(alpha)
+		- cube.map->dir_y * sin(alpha);
 	cube.map->dir_y = aux * sin(alpha) + cube.map->dir_y * cos(alpha);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:49:32 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/20 23:51:42 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 00:42:15 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,41 +63,11 @@ static void	check_chars(t_cube *cube, int num_player, int i, int j)
 		error_exit(INVALID_CHAR, GENERAL_ERR);
 	cube->map->max_y = i - 1;
 }
-/*
-void	untrim_map(char **map, int max_x)
-{
-	int		i;
-	int		j;
-	char	*aux = NULL;
 
-	i = 0;
-	while (map[i] && (!i || aux))
-	{
-		if ((int)ft_strlen(map[i]) <= max_x)
-		{
-			aux = malloc(sizeof(char) * (max_x + 2));
-			if (aux)
-			{
-				j = ft_strlen(map[i]);
-				strcpy(aux, map[i]);
-				while (j <= max_x)
-					aux[j++] = ' ';
-				aux[j] = '\0';
-				free(map[i]);
-				map[i] = aux;
-			}
-		}
-		i++;
-	}
-	if (!aux)
-		error_exit(strerror(errno), SYS_ERR);
-}
-*/
 void	valid_map(t_cube *cube)
 {
 	cube->map->player_x = 0;
 	cube->map->player_y = 0;
 	check_chars(cube, 0, 0, 0);
-	//untrim_map(cube->map->map, cube->map->max_x);
 	floodfill(cube);
 }

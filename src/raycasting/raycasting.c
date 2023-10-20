@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:10:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/20 23:23:33 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 00:39:33 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	collider(t_raycast *raycast, t_cube cube)
 
 	cell_x = (int)cube.map->player_x;
 	cell_y = (int)cube.map->player_y;
-	while(cube.map->map[cell_y][cell_x] != '1')
+	while (cube.map->map[cell_y][cell_x] != '1')
 	{
 		if (raycast->side_dist_x < raycast->side_dist_y)
 		{
@@ -93,11 +93,6 @@ static void	set_and_paint_ray(t_raycast raycast, t_cube cube, int x)
 		raycast.dist = raycast.side_dist_x - raycast.delta_x;
 	else
 		raycast.dist = raycast.side_dist_y - raycast.delta_y;
-	// if (fabs((raycast.ray_dir_x / raycast.ray_dir_y) - 1/4.0) < 0.001)
-	// {
-	// 	printf("RAY_DIR = (%f, %f)\n", raycast.ray_dir_x, raycast.ray_dir_y);
-	// 	printf("DIST = %f\n", dist);
-	// }
 	height = (int)(WIN_Y / raycast.dist);
 	end = -height / 2 + WIN_Y / 2;
 	if (end < 0)
@@ -134,5 +129,6 @@ void	raycasting(t_cube *cube)
 		set_and_paint_ray(raycast, *cube, i);
 		i++;
 	}
-	mlx_put_image_to_window(cube->mlx->mlx, cube->mlx->win, cube->mlx->img->img, 0, 0);
+	mlx_put_image_to_window(cube->mlx->mlx, cube->mlx->win,
+		cube->mlx->img->img, 0, 0);
 }

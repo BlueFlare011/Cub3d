@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:59:01 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 00:04:36 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 00:44:56 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	read_texture(t_cube cube, char *file_name, t_texture *texture)
 	int		i;
 
 	img.img = mlx_xpm_file_to_image(cube.mlx->mlx, file_name,
-		&texture->width, &texture->height);
+			&texture->width, &texture->height);
 	addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endian);
 	texture->img = malloc(sizeof(int *) * texture->height);
 	i = 0;
@@ -45,11 +45,11 @@ void	read_texture(t_cube cube, char *file_name, t_texture *texture)
 	while (i < (texture->height * texture->width * 4))
 	{
 		if (!img.endian)
-			texture->img[(i / 4) / texture->width][(i / 4) % texture->width] =
-				get_colour(addr[i + 3], addr[i + 2], addr[i + 1], addr[i]);
+			texture->img[(i / 4) / texture->width][(i / 4) % texture->width] \
+				= get_colour(addr[i + 3], addr[i + 2], addr[i + 1], addr[i]);
 		else
-			texture->img[(i / 4) / texture->width][(i / 4) % texture->width] =
-				get_colour(addr[i], addr[i + 1], addr[i + 2], addr[i + 3]);
+			texture->img[(i / 4) / texture->width][(i / 4) % texture->width] \
+				= get_colour(addr[i], addr[i + 1], addr[i + 2], addr[i + 3]);
 		i += 4;
 	}
 	mlx_destroy_image(cube.mlx->mlx, img.img);
