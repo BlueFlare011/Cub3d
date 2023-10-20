@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:10:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/19 20:11:02 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/20 16:42:03 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,11 @@ static void	set_and_paint_ray(t_raycast raycast, t_cube cube, int x)
 	// 	printf("DIST = %f\n", dist);
 	// }
 	height = (int)(WIN_Y / raycast.dist);
-	end = (-height + WIN_Y) / 2;
+	end = -height / 2 + WIN_Y / 2;
 	if (end < 0)
 		end = 0;
-	start = (height + WIN_Y) / 2;
-	if (start > WIN_Y)
+	start = height / 2 + WIN_Y / 2;
+	if (start >= WIN_Y)
 		start = WIN_Y - 1;
 	paint_ray(cube, raycast, x, start, end);
 }

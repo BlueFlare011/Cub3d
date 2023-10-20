@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/19 22:03:23 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/20 16:46:38 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define WIN_X 1080
 # define WIN_Y 720
-# define SPEED 0.01
+# define SPEED 0.05
 # define X 0
 # define Y 1
 # define FOV 0.66
