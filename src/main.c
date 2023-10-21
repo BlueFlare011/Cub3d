@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:12 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/21 14:50:44 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:29:03 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int argc, char **argv)
 {
 	t_cube	cube;
 
+	init_cube(&cube);
 	check_arguments(argc, argv);
 	extract_file_info(&cube, argv[1]);
 	raycasting(&cube);

@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:18 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/21 14:58:05 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:33:38 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,21 @@ void	free_double_pointer(char **matrix)
 		free(matrix);
 }
 
-void	create_struct(t_cube *cube)
+void	init_cube(t_cube *cube)
 {
-	// cube->map = malloc(sizeof(t_map));
-	// if (!cube->map)
-	// 	error_exit(strerror(errno), SYS_ERR);
-	// cube->mlx = malloc(sizeof(t_mlx));
-	// if (!cube->mlx)
-	// 	error_exit(strerror(errno), SYS_ERR);
-	// cube->mlx->img = malloc(sizeof(t_img));
-	// if (!cube->mlx->img)
-	// 	error_exit(strerror(errno), SYS_ERR);
-	// cube->map->map = NULL;
+	int	i;
+
+	cube->map.map = NULL;
+	cube->mlx.mlx = NULL;
+	cube->mlx.win = NULL;
+	cube->mlx.img.img = NULL;
+	cube->mlx.img.addr = NULL;
+	i = 0;
+	while (i < 4)
+	{
+		cube->texture[i].img = NULL;
+		i++;
+	}
 	(void)set_keys(cube);
 }
 

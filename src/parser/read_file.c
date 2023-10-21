@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/21 15:08:34 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:34:16 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ void	extract_file_info(t_cube *cube, char *file)
 	int		limit;
 	int		fd;
 
-	create_struct(cube);
 	ft_mlx_init(cube);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)

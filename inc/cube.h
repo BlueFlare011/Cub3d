@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/21 14:41:45 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:32:35 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,6 @@ enum e_color
 	FLOOR = 0,
 	SKY = 1,
 };
-
-typedef struct s_raycast
-{
-	double	camera;
-	int		start;
-	int		end;
-	int		height;
-	double	ray_dir_x;
-	double	ray_dir_y;
-	double	delta_x;
-	double	delta_y;
-	int		step_x;
-	int		step_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	int		collided_side;
-	double	dist;
-}	t_raycast;
-
-typedef struct s_texture
-{
-	int	width;
-	int	height;
-	int **img;
-}	t_texture;
 
 typedef struct s_map
 {
@@ -77,10 +52,33 @@ typedef struct s_mlx
 	void	*mlx;
 	void	*win;
 	t_img	img;
-	void	*floor;
-	void	*wall;
 	int		size;
 }	t_mlx;
+
+typedef struct s_raycast
+{
+	double	camera;
+	int		start;
+	int		end;
+	int		height;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	delta_x;
+	double	delta_y;
+	int		step_x;
+	int		step_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	int		collided_side;
+	double	dist;
+}	t_raycast;
+
+typedef struct s_texture
+{
+	int	width;
+	int	height;
+	int **img;
+}	t_texture;
 
 typedef struct s_keys
 {
