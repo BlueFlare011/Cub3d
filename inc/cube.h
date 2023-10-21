@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/21 00:14:28 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 13:48:55 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ enum e_color
 typedef struct s_raycast
 {
 	double	camera;
+	int		start;
+	int		end;
+	int		height;
 	double	ray_dir_x;
 	double	ray_dir_y;
 	double	delta_x;

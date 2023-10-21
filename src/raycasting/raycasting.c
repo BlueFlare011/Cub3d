@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:10:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 00:39:33 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 13:49:16 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 */
 static void	set_delta(t_raycast *raycast)
 {
-	if (raycast->ray_dir_x != 0.0)
-		raycast->delta_x = fabs(1.0 / raycast->ray_dir_x);
-	else
+	if (raycast->ray_dir_x == 0.0)
 		raycast->delta_x = __DBL_MAX__;
-	if (raycast->ray_dir_y != 0.0)
-		raycast->delta_y = fabs(1.0 / raycast->ray_dir_y);
 	else
+		raycast->delta_x = fabs(1.0 / raycast->ray_dir_x);
+	if (raycast->ray_dir_y == 0.0)
 		raycast->delta_y = __DBL_MAX__;
+	else
+		raycast->delta_y = fabs(1.0 / raycast->ray_dir_y);
 }
 
 /**
@@ -82,24 +82,28 @@ static void	collider(t_raycast *raycast, t_cube cube)
 		}
 	}
 }
-
+#include <stdio.h>
 static void	set_and_paint_ray(t_raycast raycast, t_cube cube, int x)
 {
-	int		height;
 	int		start;
 	int		end;
-
+	
 	if (raycast.collided_side == X)
 		raycast.dist = raycast.side_dist_x - raycast.delta_x;
 	else
 		raycast.dist = raycast.side_dist_y - raycast.delta_y;
-	height = (int)(WIN_Y / raycast.dist);
-	end = -height / 2 + WIN_Y / 2;
+	if (fabs(raycast.dist - 0.0) < EPSILON)
+		raycast.dist = SPEED / 2;
+	raycast.height = (int)(WIN_Y / raycast.dist);
+	// printf("HEIGHT = %d\n", raycast.height);
+	end = -raycast.height / 2 + WIN_Y / 2;
 	if (end < 0)
 		end = 0;
-	start = height / 2 + WIN_Y / 2;
+	start = raycast.height / 2 + WIN_Y / 2;
 	if (start >= WIN_Y)
 		start = WIN_Y - 1;
+	// printf("player_x = %f, player_y = %f\n", cube.map->player_x, cube.map->player_y);
+	// printf("star=%d, end=%d\n", start, end);
 	paint_ray(cube, raycast, x, start, end);
 }
 

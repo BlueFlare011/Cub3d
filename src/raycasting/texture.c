@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_management.c                                   :+:      :+:    :+:   */
+/*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:03:07 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/20 23:44:22 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 13:15:57 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,10 @@ void	paint_ray(t_cube cube, t_raycast raycast, int x, int start, int end) // El 
 	double	texture_pos;
 
 	j = 0;
-	int lineheight = (int)(WIN_Y / raycast.dist);
 	id = chose_texture(raycast);
 	texture_x = get_texture_x(cube, raycast, id);
-	step = 1.0 * cube.texture[id].height / lineheight;
-	texture_pos = (end - WIN_Y / 2 + lineheight / 2) * step;
+	step = 1.0 * cube.texture[id].height / raycast.height;
+	texture_pos = (end - WIN_Y / 2 + raycast.height / 2) * step;
 	// printf("start = %d, lineheight = %d, texture_pos = %f, step = %f, H/2 = %d, lineheight/2 = %d\n", end, lineheight, texture_pos, step, WIN_Y / 2, ((int)(WIN_Y / raycast.dist)) / 2);
 	// printf("PARENTHESIS = %d\n", (end - WIN_Y / 2 + lineheight / 2));
 	// printf("TEXTURE POS = %f, HEIGHT = %d, res = %d, perpWallDist = %f\n", texture_pos, cube.texture[id].height, (start - WIN_Y / 2 + ((int)(WIN_Y / raycast.dist)) / 2), raycast.dist);
@@ -64,7 +63,7 @@ void	paint_ray(t_cube cube, t_raycast raycast, int x, int start, int end) // El 
 	{
 		if (j < end) // pintar cielo
 			my_pixel_put(*(cube.mlx->img), x, j, cube.colour[FLOOR]);
-		else if (j <= start || start < 0 || end < 0) // pintar pared
+		else if (j <= start) // pintar pared
 		{
 			// fprintf(stderr, "TEXTURE X = %d, TEXTURE Y = %d, j = %d\n", texture_x, (int)texture_pos, j);
 			// my_pixel_put(*(cube.mlx->img), x, j, COLOR);
