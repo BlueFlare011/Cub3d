@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:18 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/21 15:33:38 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:02:58 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@ int	len_double_pointer(char **matrix)
 	return (i);
 }
 
-void	free_double_pointer(char **matrix)
+void	free_double_pointer(char ***matrix)
 {
 	int	i;
 
 	i = 0;
-	while (matrix && matrix[i])
+	while (*matrix && (*matrix)[i])
 	{
-		free(matrix[i]);
+		free((*matrix)[i]);
 		i++;
 	}
-	if (matrix)
-		free(matrix);
+	if (*matrix)
+		free(*matrix);
+	*matrix = NULL;
 }
 
 void	init_cube(t_cube *cube)
@@ -51,27 +52,13 @@ void	init_cube(t_cube *cube)
 		cube->texture[i].img = NULL;
 		i++;
 	}
-	(void)set_keys(cube);
+	cube->keys.a = 0;
+	cube->keys.w = 0;
+	cube->keys.s = 0;
+	cube->keys.d = 0;
+	cube->keys.left = 0;
+	cube->keys.right = 0;
 }
-
-// void	delete_struct(t_cube *cube)
-// {
-// 	// int	i;
-
-// 	// i = 0;
-// 	if (cube->map)
-// 	{
-// 		free_double_pointer(cube->map->map);
-// 		free(cube->map);
-// 	}
-// 	// while (i < 4)
-// 	// {
-// 	// 	free_double_pointer(cube->texture[i].img);
-// 	// 	i++;
-// 	// }
-// 	if (cube)
-// 		free(cube);
-// }
 
 int	is_num(char **rgb)
 {
@@ -92,7 +79,7 @@ int	is_num(char **rgb)
 	return (!rgb[i]);
 }
 
-char	*process_line(int fd)
+char	*process_line(t_cube *cube, int fd)
 {
 	char			*line;
 	char			*result;
@@ -109,19 +96,11 @@ char	*process_line(int fd)
 		i++;
 	}
 	result = ft_strtrim(line, "\n");
-	if (!result)
-		error_exit(strerror(errno), SYS_ERR);
 	free(line);
+	if (!result)
+	{
+		close(fd);
+		error_exit(strerror(errno), SYS_ERR, cube);
+	}
 	return (result);
-}
-
-int	set_keys(t_cube *cube)
-{
-	cube->keys.a = 0;
-	cube->keys.w = 0;
-	cube->keys.s = 0;
-	cube->keys.d = 0;
-	cube->keys.left = 0;
-	cube->keys.right = 0;
-	return (0);
 }

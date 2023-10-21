@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 22:39:55 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 13:53:11 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:04:34 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include "mlx.h"
 # include "cube.h"
+# include "utils.h"
 # include "raycasting.h"
 # include "keys.h"
 

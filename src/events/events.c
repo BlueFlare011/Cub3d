@@ -6,13 +6,11 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:13:25 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 15:16:10 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:13:54 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "events.h"
-
-#include <stdio.h>
 
 static void	move(t_cube *cube, double move_x, double move_y)
 {
@@ -48,7 +46,7 @@ int	key_down(int keycode, t_cube *cube)
 {
 	if (keycode == KEY_ESC)
 	{
-		mlx_destroy_window(cube->mlx.mlx, cube->mlx.win);
+		free_cube(cube);
 		exit(0);
 	}
 	if (keycode == KEY_A)

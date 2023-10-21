@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:49:32 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 15:14:23 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:03:14 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ static void	check_chars(t_cube *cube, int num_player, int i, int j)
 			i++;
 	}
 	if (num_player != 1)
-		error_exit(TOO_MUCH_PLAYERS, GENERAL_ERR);
+		error_exit(TOO_MUCH_PLAYERS, GENERAL_ERR, cube);
 	else if (cube->map.map[i])
-		error_exit(INVALID_CHAR, GENERAL_ERR);
+		error_exit(INVALID_CHAR, GENERAL_ERR, cube);
 	cube->map.max_y = i - 1;
 }
 

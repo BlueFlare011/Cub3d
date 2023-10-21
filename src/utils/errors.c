@@ -6,13 +6,13 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:28 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/21 00:21:43 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:14:30 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void	error_exit(char *message, int exit_code)
+void	error_exit(char *message, int exit_code, t_cube *cube)
 {
 	int	error;
 
@@ -21,5 +21,32 @@ void	error_exit(char *message, int exit_code)
 	error = exit_code;
 	if (error == SYS_ERR)
 		error = errno;
+	free_cube(cube);
 	exit(error);
+}
+
+void	free_cube(t_cube *cube)
+{
+	int	i;
+	int	j;
+
+	if (cube->map.map)
+		free_double_pointer(&cube->map.map);
+	i = 0;
+	while (i < 4)
+	{
+		if (cube->texture[i].img)
+		{
+			j = 0;
+			while (j < cube->texture[i].height)
+			{
+				free(cube->texture[i].img[j]);
+				j++;
+			}
+			free(cube->texture[i].img);
+		}
+		i++;
+	}
+	if (cube->mlx.mlx)
+		mlx_destroy_window(cube->mlx.mlx, cube->mlx.win);
 }

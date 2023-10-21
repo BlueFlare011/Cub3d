@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:49:44 by rgallego          #+#    #+#             */
-/*   Updated: 2023/09/20 15:28:45 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/10/21 18:05:23 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
-
-t_node	*create_node(void)
-{
-	t_node	*node;
-
-	node = malloc(sizeof(t_node));
-	if (!node)
-		error_exit(strerror(errno), SYS_ERR);
-	return (node);
-}
 
 void	push(t_node **stack, int y, int x)
 {
@@ -30,7 +20,7 @@ void	push(t_node **stack, int y, int x)
 		return ;
 	node = malloc(sizeof(t_node));
 	if (!node)
-		error_exit(strerror(errno), GENERAL_ERR);
+		error_exit(strerror(errno), GENERAL_ERR, NULL);
 	node->x = x;
 	node->y = y;
 	node->next = *stack;

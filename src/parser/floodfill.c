@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 23:42:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 15:15:01 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:03:24 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	floodfill(t_cube *cube)
 		if (aux)
 		{
 			if (check_square(cube->map.map, aux))
-				error_exit(MAP_NOT_CLOSED, GENERAL_ERR);
+				error_exit(MAP_NOT_CLOSED, GENERAL_ERR, cube);
 			if (ft_strchr("0 ", cube->map.map[aux->y][aux->x]))
 				cube->map.map[aux->y][aux->x] = '2';
 			add_nearest(&stack, cube->map.map, aux->x, aux->y);

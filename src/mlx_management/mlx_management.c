@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:03:07 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 14:44:22 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 17:50:40 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	ft_mlx_init(t_cube *cube)
 	cube->mlx.mlx = mlx_init();
 	cube->mlx.win = mlx_new_window(cube->mlx.mlx, WIN_X, WIN_Y, "cub3d");
 	cube->mlx.img.img = mlx_new_image(cube->mlx.mlx, WIN_X, WIN_Y);
+	if (!cube->mlx.img.img)
+	{
+		mlx_destroy_window(cube->mlx.mlx, cube->mlx.win);
+		error_exit(IMAGE_ERROR, GENERAL_ERR, cube);
+	}
 	cube->mlx.img.addr = mlx_get_data_addr(cube->mlx.img.img,
 			&cube->mlx.img.bpp, &cube->mlx.img.line_len,
 			&cube->mlx.img.endian);

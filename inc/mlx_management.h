@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 23:36:12 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 00:15:08 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 17:49:17 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "mlx.h"
 # include "cube.h"
+# include "errors.h"
 
 # define WIN_X 1080
 # define WIN_Y 720
