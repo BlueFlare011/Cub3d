@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:13:25 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 14:38:46 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:16:10 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,41 @@
 
 #include <stdio.h>
 
-static void	move(t_cube cube, double move_x, double move_y)
+static void	move(t_cube *cube, double move_x, double move_y)
 {
 	double	x;
 	double	y;
 
-	x = cube.map->player_x + move_x;
-	y = cube.map->player_y + move_y;
-	if (cube.map->map[(int)y][(int)x] != '1')
+	x = cube->map.player_x + move_x;
+	y = cube->map.player_y + move_y;
+	if (cube->map.map[(int)y][(int)x] != '1')
 	{
-		cube.map->player_x = x;
-		cube.map->player_y = y;
+		cube->map.player_x = x;
+		cube->map.player_y = y;
 	}
 	else if ((fabs(move_x) > fabs(move_y))
-		&& cube.map->map[(int)cube.map->player_y][(int)x] != '1')
-		cube.map->player_x = x;
+		&& cube->map.map[(int)cube->map.player_y][(int)x] != '1')
+		cube->map.player_x = x;
 	else if ((fabs(move_x) < fabs(move_y)) 
-		&& cube.map->map[(int)y][(int)cube.map->player_x] != '1')
-		cube.map->player_y = y;
+		&& cube->map.map[(int)y][(int)cube->map.player_x] != '1')
+		cube->map.player_y = y;
 }
 
-static void	rotation(t_cube cube, double alpha)
+static void	rotation(t_cube *cube, double alpha)
 {
 	double	aux;
 
-	aux = cube.map->dir_x;
-	cube.map->dir_x = cube.map->dir_x * cos(alpha)
-		- cube.map->dir_y * sin(alpha);
-	cube.map->dir_y = aux * sin(alpha) + cube.map->dir_y * cos(alpha);
+	aux = cube->map.dir_x;
+	cube->map.dir_x = cube->map.dir_x * cos(alpha)
+		- cube->map.dir_y * sin(alpha);
+	cube->map.dir_y = aux * sin(alpha) + cube->map.dir_y * cos(alpha);
 }
 
 int	key_down(int keycode, t_cube *cube)
 {
 	if (keycode == KEY_ESC)
 	{
-		mlx_destroy_window(cube->mlx->mlx, cube->mlx->win);
+		mlx_destroy_window(cube->mlx.mlx, cube->mlx.win);
 		exit(0);
 	}
 	if (keycode == KEY_A)
@@ -91,17 +91,17 @@ int	event_management(t_cube *cube)
 	if ((cube->keys.a || cube->keys.d) && (cube->keys.w || cube->keys.s))
 		speed = sqrt(2 * (pow(SPEED, 2)));
 	if (cube->keys.a)
-		move(*cube, cube->map->dir_y * speed, -cube->map->dir_x * speed);
+		move(cube, cube->map.dir_y * speed, -cube->map.dir_x * speed);
 	if (cube->keys.w)
-		move(*cube, cube->map->dir_x * speed, cube->map->dir_y * speed);
+		move(cube, cube->map.dir_x * speed, cube->map.dir_y * speed);
 	if (cube->keys.s)
-		move(*cube, -cube->map->dir_x * speed, -cube->map->dir_y * speed);
+		move(cube, -cube->map.dir_x * speed, -cube->map.dir_y * speed);
 	if (cube->keys.d)
-		move(*cube, -cube->map->dir_y * speed, cube->map->dir_x * speed);
+		move(cube, -cube->map.dir_y * speed, cube->map.dir_x * speed);
 	if (cube->keys.left)
-		rotation(*cube, -ALPHA);
+		rotation(cube, -ALPHA);
 	if (cube->keys.right)
-		rotation(*cube, ALPHA);
+		rotation(cube, ALPHA);
 	raycasting(cube);
 	return (0);
 }

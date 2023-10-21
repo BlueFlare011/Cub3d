@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/21 00:42:53 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:08:34 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ void	get_map(t_cube *cube, char *line, int fd)
 	if (line)
 		error_exit(MAP_SEPARATED, GENERAL_ERR);
 	else
-		cube->map->map = ft_split(super_string, '\n');
-	if (!cube->map->map)
+		cube->map.map = ft_split(super_string, '\n');
+	if (!cube->map.map)
 		error_exit(strerror(errno), SYS_ERR);
 	free(super_string);
 }
@@ -110,16 +110,12 @@ int	analyse_line(t_cube *cube, char *line, int status)
 	return (status);
 }
 
-t_cube	*extract_file_info(char *file)
+void	extract_file_info(t_cube *cube, char *file)
 {
-	t_cube	*cube;
 	char	*line;
 	int		limit;
 	int		fd;
 
-	cube = malloc(sizeof(t_cube));
-	if (!cube)
-		error_exit(strerror(errno), SYS_ERR);
 	create_struct(cube);
 	ft_mlx_init(cube);
 	fd = open(file, O_RDONLY);
@@ -136,5 +132,4 @@ t_cube	*extract_file_info(char *file)
 	get_map(cube, line, fd);
 	close(fd);
 	valid_map(cube);
-	return (cube);
 }

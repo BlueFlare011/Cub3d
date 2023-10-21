@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:18 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/21 00:28:39 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 14:58:05 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,37 +38,37 @@ void	free_double_pointer(char **matrix)
 
 void	create_struct(t_cube *cube)
 {
-	cube->map = malloc(sizeof(t_map));
-	if (!cube->map)
-		error_exit(strerror(errno), SYS_ERR);
-	cube->mlx = malloc(sizeof(t_mlx));
-	if (!cube->mlx)
-		error_exit(strerror(errno), SYS_ERR);
-	cube->mlx->img = malloc(sizeof(t_img));
-	if (!cube->mlx->img)
-		error_exit(strerror(errno), SYS_ERR);
-	cube->map->map = NULL;
+	// cube->map = malloc(sizeof(t_map));
+	// if (!cube->map)
+	// 	error_exit(strerror(errno), SYS_ERR);
+	// cube->mlx = malloc(sizeof(t_mlx));
+	// if (!cube->mlx)
+	// 	error_exit(strerror(errno), SYS_ERR);
+	// cube->mlx->img = malloc(sizeof(t_img));
+	// if (!cube->mlx->img)
+	// 	error_exit(strerror(errno), SYS_ERR);
+	// cube->map->map = NULL;
 	(void)set_keys(cube);
 }
 
-void	delete_struct(t_cube *cube)
-{
-	// int	i;
+// void	delete_struct(t_cube *cube)
+// {
+// 	// int	i;
 
-	// i = 0;
-	if (cube->map)
-	{
-		free_double_pointer(cube->map->map);
-		free(cube->map);
-	}
-	// while (i < 4)
-	// {
-	// 	free_double_pointer(cube->texture[i].img);
-	// 	i++;
-	// }
-	if (cube)
-		free(cube);
-}
+// 	// i = 0;
+// 	if (cube->map)
+// 	{
+// 		free_double_pointer(cube->map->map);
+// 		free(cube->map);
+// 	}
+// 	// while (i < 4)
+// 	// {
+// 	// 	free_double_pointer(cube->texture[i].img);
+// 	// 	i++;
+// 	// }
+// 	if (cube)
+// 		free(cube);
+// }
 
 int	is_num(char **rgb)
 {

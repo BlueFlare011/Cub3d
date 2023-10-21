@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/21 13:48:55 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 14:41:45 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
-	t_img	*img;
+	t_img	img;
 	void	*floor;
 	void	*wall;
 	int		size;
@@ -94,8 +94,9 @@ typedef struct s_keys
 
 typedef struct s_cube
 {
-	t_map		*map;
-	t_mlx		*mlx;
+	t_map		map;
+	t_mlx		mlx;
+	t_raycast	raycast;
 	int			colour[2];
 	t_texture	texture[4];
 	t_keys		keys;

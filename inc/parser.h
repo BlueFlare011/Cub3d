@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 23:48:57 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 00:29:37 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 14:47:31 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define W_X -1.0
 # define W_Y 0.0
 
-t_cube	*extract_file_info(char *file);
+void	extract_file_info(t_cube *cube, char *file);
 void	valid_map(t_cube *map);
 void	floodfill(t_cube *cube);
 void	read_texture(t_cube cube, char *file_name, t_texture *texture);

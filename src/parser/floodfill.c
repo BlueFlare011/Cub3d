@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 23:42:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/20 23:51:38 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 15:15:01 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,18 @@ void	floodfill(t_cube *cube)
 	t_node	*aux;
 
 	stack = NULL;
-	push(&stack, cube->map->player_y, cube->map->player_x);
+	push(&stack, cube->map.player_y, cube->map.player_x);
 	aux = stack;
 	while (stack && aux)
 	{
 		aux = pop(&stack);
 		if (aux)
 		{
-			if (check_square(cube->map->map, aux))
+			if (check_square(cube->map.map, aux))
 				error_exit(MAP_NOT_CLOSED, GENERAL_ERR);
-			if (ft_strchr("0 ", cube->map->map[aux->y][aux->x]))
-				cube->map->map[aux->y][aux->x] = '2';
-			add_nearest(&stack, cube->map->map, aux->x, aux->y);
+			if (ft_strchr("0 ", cube->map.map[aux->y][aux->x]))
+				cube->map.map[aux->y][aux->x] = '2';
+			add_nearest(&stack, cube->map.map, aux->x, aux->y);
 			free(aux);
 		}
 	}

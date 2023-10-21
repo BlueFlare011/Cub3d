@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 23:23:56 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 13:50:44 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 14:56:42 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@
 
 void	raycasting(t_cube *cube);
 int		check_and_get_colour(int t, int r, int g, int b);
-void	paint_ray(t_cube cube, t_raycast raycast, int x, int start, int end);
+void	paint_ray(t_cube cube, t_raycast raycast, int x);
 
 #endif
