@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:10:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 13:49:16 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/21 14:02:38 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,15 +95,12 @@ static void	set_and_paint_ray(t_raycast raycast, t_cube cube, int x)
 	if (fabs(raycast.dist - 0.0) < EPSILON)
 		raycast.dist = SPEED / 2;
 	raycast.height = (int)(WIN_Y / raycast.dist);
-	// printf("HEIGHT = %d\n", raycast.height);
 	end = -raycast.height / 2 + WIN_Y / 2;
 	if (end < 0)
 		end = 0;
 	start = raycast.height / 2 + WIN_Y / 2;
 	if (start >= WIN_Y)
 		start = WIN_Y - 1;
-	// printf("player_x = %f, player_y = %f\n", cube.map->player_x, cube.map->player_y);
-	// printf("star=%d, end=%d\n", start, end);
 	paint_ray(cube, raycast, x, start, end);
 }
 
