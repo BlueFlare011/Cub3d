@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:12 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/21 16:26:47 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/22 14:57:19 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,6 @@
 #include "raycasting.h"
 #include "stack.h"
 #include "utils.h"
-
-void	check_arguments(int num, char **args)
-{
-	char	*extension;
-
-	if (num != 2)
-		return (error_exit(ERROR_NUM_ARGS, GENERAL_ERR, NULL));
-	extension = ft_strrchr(args[1], '.');
-	if (!extension)
-		return (error_exit(NO_EXTENSION, GENERAL_ERR, NULL));
-	if (ft_strncmp(extension, ".cub", 4))
-		return (error_exit(NO_VALID_EXTENSION, GENERAL_ERR, NULL));
-}
 
 int	main(int argc, char **argv)
 {

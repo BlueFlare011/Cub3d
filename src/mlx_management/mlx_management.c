@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:03:07 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 17:50:40 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/22 15:16:09 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,15 @@ void	my_pixel_put(t_img img, int x, int y, int colour)
 		dst = img.addr + y * img.line_len + x * (img.bpp / 8);
 		*(unsigned int *)dst = colour;
 	}
+}
+
+char	*mlx_get_texture(t_cube cube, t_img *img, t_texture *texture,
+	char *file_name)
+{
+	img->img = mlx_xpm_file_to_image(cube.mlx.mlx, file_name,
+			&texture->width, &texture->height);
+	if (!img->img)
+		return (NULL);
+	return (mlx_get_data_addr(img->img, &img->bpp, &img->line_len,
+		&img->endian));
 }

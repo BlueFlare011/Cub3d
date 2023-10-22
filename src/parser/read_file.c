@@ -6,34 +6,11 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/21 18:06:23 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/22 17:02:18 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-int	get_texture(t_cube *cube, char **data)
-{
-	char	*aux;
-	int		id;
-
-	if (!ft_strncmp(data[0], "NO", 3))
-		id = NORTH;
-	else if (!ft_strncmp(data[0], "SO", 3))
-		id = SOUTH;
-	else if (!ft_strncmp(data[0], "EA", 3))
-		id = EAST;
-	else if (!ft_strncmp(data[0], "WE", 3))
-		id = WEST;
-	else
-		return (1);
-	aux = ft_strtrim(data[1], "\n");
-	if (!aux)
-		error_exit(strerror(errno), SYS_ERR, cube);
-	read_texture(*cube, aux, &(cube->texture[id]));
-	free(aux);
-	return (0);
-}
 
 int	get_color(t_cube *cube, char **data)
 {
@@ -60,7 +37,7 @@ int	get_color(t_cube *cube, char **data)
 	return (0);
 }
 
-void	get_map(t_cube *cube, char *line, int fd)
+static void	get_map(t_cube *cube, char *line, int fd)
 {
 	char	*super_string;
 	char	*aux;
@@ -104,7 +81,7 @@ static int	analyse_line(t_cube *cube, char *line, int status, int fd)
 		free_double_pointer(&data);
 		error_exit(TO_MUCH_INFO, GENERAL_ERR, cube);
 	}
-	if (!get_texture(cube, data) || !get_color(cube, data))
+	if (!get_texture(cube, data, fd) || !get_color(cube, data))
 		status++;
 	else
 	{
@@ -122,11 +99,11 @@ void	extract_file_info(t_cube *cube, char *file)
 	int		limit;
 	int		fd;
 
-	ft_mlx_init(cube);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		error_exit(strerror(errno), SYS_ERR, NULL);
 	limit = 0;
+	ft_mlx_init(cube);
 	line = process_line(cube, fd);
 	while (line && limit < 6)
 	{
@@ -137,4 +114,17 @@ void	extract_file_info(t_cube *cube, char *file)
 	get_map(cube, line, fd);
 	close(fd);
 	valid_map(cube);
+}
+
+void	check_arguments(int num, char **args)
+{
+	char	*extension;
+
+	if (num != 2)
+		return (error_exit(ERROR_NUM_ARGS, GENERAL_ERR, NULL));
+	extension = ft_strrchr(args[1], '.');
+	if (!extension)
+		return (error_exit(NO_EXTENSION, GENERAL_ERR, NULL));
+	if (ft_strncmp(extension, ".cub", 4))
+		return (error_exit(NO_VALID_EXTENSION, GENERAL_ERR, NULL));
 }

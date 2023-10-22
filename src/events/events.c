@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:13:25 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/22 14:55:32 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/22 14:56:51 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	move(t_cube *cube, double move_x, double move_y)
 	else if ((fabs(move_x) > fabs(move_y))
 		&& cube->map.map[(int)cube->map.player_y][(int)x] != '1')
 		cube->map.player_x = x;
-	else if ((fabs(move_x) < fabs(move_y)) 
+	else if ((fabs(move_x) < fabs(move_y))
 		&& cube->map.map[(int)y][(int)cube->map.player_x] != '1')
 		cube->map.player_y = y;
 }
