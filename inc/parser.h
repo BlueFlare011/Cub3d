@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 23:48:57 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 14:47:31 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/22 14:50:50 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,4 @@ void	floodfill(t_cube *cube);
 void	read_texture(t_cube cube, char *file_name, t_texture *texture);
 int		check_and_get_colour(int t, int r, int g, int b);
 
-# endif
+#endif

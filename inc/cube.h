@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/21 15:32:35 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/22 14:51:05 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct s_texture
 {
 	int	width;
 	int	height;
-	int **img;
+	int	**img;
 }	t_texture;
 
 typedef struct s_keys
