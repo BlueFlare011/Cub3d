@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 23:23:56 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 14:56:42 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/24 23:31:44 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 # define EPSILON 0.0000000001
 
 void	raycasting(t_cube *cube);
-int		check_and_get_colour(int t, int r, int g, int b);
-void	paint_ray(t_cube cube, t_raycast raycast, int x);
+void	paint_ray(t_cube cube, int x);
 
 #endif

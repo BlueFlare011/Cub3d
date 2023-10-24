@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:10:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 14:57:01 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/24 23:42:58 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,23 +82,23 @@ static void	collider(t_raycast *raycast, t_cube cube)
 		}
 	}
 }
-#include <stdio.h>
-static void	set_and_paint_ray(t_raycast *raycast, t_cube cube, int x)
+
+static void	set_and_paint_ray(t_cube *cube, int x)
 {	
-	if (raycast->collided_side == X)
-		raycast->dist = raycast->side_dist_x - raycast->delta_x;
+	if (cube->raycast.collided_side == X)
+		cube->raycast.dist = cube->raycast.side_dist_x - cube->raycast.delta_x;
 	else
-		raycast->dist = raycast->side_dist_y - raycast->delta_y;
-	if (fabs(raycast->dist - 0.0) < EPSILON)
-		raycast->dist = SPEED / 2;
-	raycast->height = (int)(WIN_Y / raycast->dist);
-	raycast->end = -raycast->height / 2 + WIN_Y / 2;
-	if (raycast->end < 0)
-		raycast->end = 0;
-	raycast->start = raycast->height / 2 + WIN_Y / 2;
-	if (raycast->start >= WIN_Y)
-		raycast->start = WIN_Y - 1;
-	paint_ray(cube, *raycast, x);
+		cube->raycast.dist = cube->raycast.side_dist_y - cube->raycast.delta_y;
+	if (fabs(cube->raycast.dist - 0.0) < EPSILON)
+		cube->raycast.dist = SPEED / 2;
+	cube->raycast.height = (int)(WIN_Y / cube->raycast.dist);
+	cube->raycast.start = -cube->raycast.height / 2 + WIN_Y / 2;
+	if (cube->raycast.start < 0)
+		cube->raycast.start = 0;
+	cube->raycast.end = cube->raycast.height / 2 + WIN_Y / 2;
+	if (cube->raycast.end >= WIN_Y)
+		cube->raycast.end = WIN_Y - 1;
+	paint_ray(*cube, x);
 }
 
 /**
@@ -121,9 +121,10 @@ void	raycasting(t_cube *cube)
 		cube->raycast.ray_dir_y = cube->map.dir_y
 			+ (FOV * cube->map.dir_x * cube->raycast.camera);
 		set_delta(&cube->raycast);
-		set_step_and_side(&cube->raycast, cube->map.player_x, cube->map.player_y);
+		set_step_and_side(&cube->raycast, cube->map.player_x,
+			cube->map.player_y);
 		collider(&cube->raycast, *cube);
-		set_and_paint_ray(&cube->raycast, *cube, i);
+		set_and_paint_ray(cube, i);
 		i++;
 	}
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win,

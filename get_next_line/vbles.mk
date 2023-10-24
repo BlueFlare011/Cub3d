@@ -8,19 +8,9 @@ SRCS	=			\
 					get_next_line_utils.c \
 					)
 
-SRCSBONUS	=		\
-					$(addprefix $(SRC_DIR), \
-					get_next_line_bonus.c \
-					get_next_line_utils_bonus.c \
-					)
-
 OBJS	=			$(SRCS:.c=.o)
 
-OBJSBONUS	=		$(SRCSBONUS:.c=.o)
-
 DPNDS	=			$(SRCS:.c=.d)
-
-DPNDSBONUS	=		$(SRCSBONUS:.c=.d)
 
 CC		=			gcc
 

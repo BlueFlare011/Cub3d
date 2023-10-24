@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:03:07 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 14:57:34 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/24 23:48:33 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,26 @@ int	chose_texture(t_raycast raycast)
 	return (WEST);
 }
 
-int get_texture_x(t_cube cube, t_raycast raycast, int id)
+static int	get_texture_x(t_cube cube, int id)
 {
 	int		texture_x;
 	double	collision_pos;
-	
-	if (raycast.collided_side == X)
-		collision_pos = cube.map.player_y + raycast.dist * raycast.ray_dir_y;
+
+	if (cube.raycast.collided_side == X)
+		collision_pos = cube.map.player_y
+			+ (cube.raycast.dist * cube.raycast.ray_dir_y);
 	else
-		collision_pos = cube.map.player_x + raycast.dist * raycast.ray_dir_x;
+		collision_pos = cube.map.player_x
+			+ (cube.raycast.dist * cube.raycast.ray_dir_x);
 	collision_pos -= floor(collision_pos);
 	texture_x = (int)(collision_pos * (double)cube.texture[id].width);
-	if ((raycast.collided_side == X && raycast.ray_dir_x < 0)
-		|| (raycast.collided_side == Y && raycast.ray_dir_y > 0))
+	if ((cube.raycast.collided_side == X && cube.raycast.ray_dir_x < 0)
+		|| (cube.raycast.collided_side == Y && cube.raycast.ray_dir_y > 0))
 		return (cube.texture[id].width - texture_x - 1);
 	return (texture_x);
 }
 
-void	paint_ray(t_cube cube, t_raycast raycast, int x) // El raycast esta ahi solo para diferenciar las paredes, luego se quita :)
+void	paint_ray(t_cube cube, int x)
 {
 	int		j;
 	int		id;
@@ -49,30 +51,20 @@ void	paint_ray(t_cube cube, t_raycast raycast, int x) // El raycast esta ahi sol
 	double	texture_pos;
 
 	j = 0;
-	id = chose_texture(raycast);
-	texture_x = get_texture_x(cube, raycast, id);
-	step = 1.0 * cube.texture[id].height / raycast.height;
-	texture_pos = (raycast.end - WIN_Y / 2 + raycast.height / 2) * step;
-	// printf("start = %d, lineheight = %d, texture_pos = %f, step = %f, H/2 = %d, lineheight/2 = %d\n", end, lineheight, texture_pos, step, WIN_Y / 2, ((int)(WIN_Y / raycast.dist)) / 2);
-	// printf("PARENTHESIS = %d\n", (end - WIN_Y / 2 + lineheight / 2));
-	// printf("TEXTURE POS = %f, HEIGHT = %d, res = %d, perpWallDist = %f\n", texture_pos, cube.texture[id].height, (start - WIN_Y / 2 + ((int)(WIN_Y / raycast.dist)) / 2), raycast.dist);
-	if ((int)(texture_pos) >= cube.texture[id].height)
-		texture_pos = cube.texture[id].height - 1;
-	// printf("TEXTURE POS = %f\n", texture_pos);
-	while (j < WIN_Y)
+	id = chose_texture(cube.raycast);
+	texture_x = get_texture_x(cube, id);
+	step = 1.0 * cube.texture[id].height / cube.raycast.height;
+	texture_pos = (cube.raycast.start - WIN_Y / 2 + cube.raycast.height / 2)
+		* step;
+	while (j < cube.raycast.start)
+		my_pixel_put(cube.mlx.img, x, j++, cube.colour[SKY]);
+	while (j <= cube.raycast.end)
 	{
-		if (j < raycast.end) // pintar cielo
-			my_pixel_put(cube.mlx.img, x, j, cube.colour[FLOOR]);
-		else if (j <= raycast.start) // pintar pared
-		{
-			// fprintf(stderr, "TEXTURE X = %d, TEXTURE Y = %d, j = %d\n", texture_x, (int)texture_pos, j);
-			// my_pixel_put(*(cube.mlx->img), x, j, COLOR);
-			my_pixel_put(cube.mlx.img, x, j, cube.texture[id].img[(int)texture_pos][texture_x]);
-			if ((int)(texture_pos + step) < cube.texture[id].height)
-				texture_pos += step;
-		}
-		else // pintar cielo
-			my_pixel_put(cube.mlx.img, x, j, cube.colour[SKY]);
-		j++;
+		my_pixel_put(cube.mlx.img, x, j++,
+			cube.texture[id].img[(int)texture_pos][texture_x]);
+		if ((int)(texture_pos + step) < cube.texture[id].height)
+			texture_pos += step;
 	}
+	while (j < WIN_Y)
+		my_pixel_put(cube.mlx.img, x, j++, cube.colour[FLOOR]);
 }

@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:12 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/22 14:57:19 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/24 23:17:19 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int	main(int argc, char **argv)
 	mlx_hook(cube.mlx.win, ON_KEYRELEASE, RELEASE_MASK, key_release, &cube);
 	mlx_loop_hook(cube.mlx.mlx, event_management, &cube);
 	mlx_loop(cube.mlx.mlx);
-	// delete_struct(cube);
+	free_cube(&cube);
 	return (0);
 }

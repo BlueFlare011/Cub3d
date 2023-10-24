@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:03:07 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/22 15:16:09 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/24 23:15:45 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,5 @@ char	*mlx_get_texture(t_cube cube, t_img *img, t_texture *texture,
 	if (!img->img)
 		return (NULL);
 	return (mlx_get_data_addr(img->img, &img->bpp, &img->line_len,
-		&img->endian));
+			&img->endian));
 }
