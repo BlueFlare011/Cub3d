@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 23:48:57 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/22 17:01:54 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/23 00:13:06 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define W_Y 0.0
 
 void	extract_file_info(t_cube *cube, char *file);
-void	valid_map(t_cube *map);
+void	get_map(t_cube *cube, char *line, int fd);
 void	floodfill(t_cube *cube);
 int		get_texture(t_cube *cube, char **data, int fd);
 void	check_arguments(int num, char **args);
