@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:49:32 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/24 18:03:19 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/24 23:10:40 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,40 +64,6 @@ static void	check_chars(t_cube *cube, int num_player, int i, int j)
 	cube->map.max_y = i - 1;
 }
 
-// void	get_map(t_cube *cube, char *line, int fd)
-// {
-// 	char	*super_string;
-// 	char	*aux;
-
-// 	aux = line;
-// 	line = get_next_line(fd);
-// 	while (line && *line == '\n')
-// 	{
-// 		free(line);
-// 		line = get_next_line(fd);
-// 	}
-// 	if (line)
-// 		super_string = ft_strjoin(aux, line);
-// 	while (line && super_string && *line != '\n')
-// 	{
-// 		free(line);
-// 		free(aux);
-// 		aux = super_string;
-// 		line = get_next_line(fd);
-// 		if (line)
-// 			super_string = ft_strjoin(aux, line);
-// 	}
-// 	if (super_string)
-// 		cube->map.map = ft_split(super_string, '\n');
-// 	if (line)
-// 		error_exit(MAP_SEPARATED, GENERAL_ERR, cube);
-// 	close(fd);
-// 	if (super_string)
-// 		free(super_string);
-// 	if (!cube->map.map || !super_string)
-// 		error_exit(strerror(errno), SYS_ERR, cube);
-// }
-
 static char	*read_true_line(int fd)
 {
 	char	*line;
@@ -111,29 +77,43 @@ static char	*read_true_line(int fd)
 	return (line);
 }
 
+static void	read_map(t_cube *cube, char **super_string, char *line, int fd)
+{
+	char	*aux;
+
+	aux = line;
+	while (line && *line != '\n' && aux)
+	{
+		aux = ft_strjoin(*super_string, line);
+		if (aux)
+		{
+			free(line);
+			free(*super_string);
+			*super_string = aux;
+			line = get_next_line(fd);
+		}
+	}
+	if (line)
+	{
+		free(line);
+		error_exit(MAP_SEPARATED, GENERAL_ERR, cube);
+	}
+	if (!aux)
+		error_exit(strerror(errno), SYS_ERR, cube);
+}
+
 void	get_map(t_cube *cube, char *line, int fd)
 {
 	char	*super_string;
-	char	*aux;
 
 	super_string = line;
 	line = read_true_line(fd);
-	while (line && *line != '\n')
-	{
-		aux = ft_strjoin(super_string, line); // revisar
-		free(line);
-		free(super_string);
-		super_string = aux;
-		line = get_next_line(fd);
-	}
-	if (line)
-		error_exit(MAP_SEPARATED, GENERAL_ERR, cube);
-	else
-		cube->map.map = ft_split(super_string, '\n');
-	if (!cube->map.map)
-		error_exit(strerror(errno), SYS_ERR, cube);
+	read_map(cube, &super_string, line, fd);
+	cube->map.map = ft_split(super_string, '\n');
 	free(super_string);
 	close(fd);
+	if (!cube->map.map)
+		error_exit(strerror(errno), SYS_ERR, cube);
 	cube->map.player_x = 0;
 	cube->map.player_y = 0;
 	check_chars(cube, 0, 0, 0);

@@ -6,7 +6,7 @@
 #    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
-#    Updated: 2023/10/21 00:34:16 by rgallego         ###   ########.fr        #
+#    Updated: 2023/10/24 23:12:36 by rgallego         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,9 @@ STACK	=			$(addprefix $(STACK_DIR), \
 					)
 
 PARSER		=		$(addprefix $(PARSER_DIR), \
-						read_file.c \
-						map.c \
 						floodfill.c \
+						read_file.c \
+						read_map.c \
 						read_textures.c \
 					)
 
