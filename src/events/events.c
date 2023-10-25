@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:13:25 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/22 14:56:51 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/23 16:25:04 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int	key_release(int keycode, t_cube *cube)
 int	event_management(t_cube *cube)
 {
 	double	speed;
+	int		x_mouse;
+	int		y_mouse;
 
 	speed = SPEED;
 	if ((cube->keys.a || cube->keys.d) && (cube->keys.w || cube->keys.s))
@@ -96,9 +98,10 @@ int	event_management(t_cube *cube)
 		move(cube, -cube->map.dir_x * speed, -cube->map.dir_y * speed);
 	if (cube->keys.d)
 		move(cube, -cube->map.dir_y * speed, cube->map.dir_x * speed);
-	if (cube->keys.left)
+	mlx_mouse_get_pos(cube->mlx.mlx, cube->mlx.win, &x_mouse, &y_mouse);
+	if (cube->keys.left || (x_mouse >= 0 && x_mouse <  360))
 		rotation(cube, -M_PI / ALPHA_RATIO);
-	if (cube->keys.right)
+	if (cube->keys.right || (x_mouse >= 720 && x_mouse <  1080))
 		rotation(cube, M_PI / ALPHA_RATIO);
 	raycasting(cube);
 	return (0);

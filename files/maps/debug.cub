@@ -1,7 +1,7 @@
-NO ./files/textures/north.txt
-SO ./files/textures/south.txt
-WE ./files/textures/west.txt
-EA ./files/textures/east.txt
+NO ./files/textures/wall.xpm
+SO ./files/textures/wall.xpm
+WE ./files/textures/wall.xpm
+EA ./files/textures/wall.xpm
 
 F 46,219,0
 C 42,9,219

@@ -1,0 +1,19 @@
+NO ./files/textures/nope.txt
+SO ./files/textures/nope.txt
+WE ./files/textures/nope.txt
+EA ./files/textures/nope.txt
+
+C 46,219,0
+F 42,9,219
+
+
+11111111111
+10000000001
+10000000001
+10000100001
+10001110001
+10000100001
+10000000001
+10000W00001
+10000000001
+11111111111

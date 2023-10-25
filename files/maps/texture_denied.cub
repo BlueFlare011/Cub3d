@@ -1,0 +1,19 @@
+NO ./files/textures/forbidden.txt
+SO ./files/textures/forbidden.txt
+WE ./files/textures/forbidden.txt
+EA ./files/textures/forbidden.txt
+
+C 46,219,0
+F 42,9,219
+
+
+11111111111
+10000000001
+10000000001
+10000100001
+10001110001
+10000100001
+10000000001
+10000W00001
+10000000001
+11111111111

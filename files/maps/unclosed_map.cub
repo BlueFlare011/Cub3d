@@ -1,16 +1,16 @@
-NO      ./files/textures/north.txt
+NO      ./files/textures/wall.xpm
 C      200,200,200
 
-WE      ./files/textures/west.txt
+WE      ./files/textures/wall.xpm
 
 F     200,200,200
 
 
-SO    ./files/textures/south.txt
+SO    ./files/textures/wall.xpm
 
 
 
-EA     ./files/textures/east.txt
+EA     ./files/textures/wall.xpm
 
 111111   1111
 110W01   1001
