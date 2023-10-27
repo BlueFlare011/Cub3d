@@ -99,9 +99,11 @@ int	event_management(t_cube *cube)
 	if (cube->keys.d)
 		move(cube, -cube->map.dir_y * speed, cube->map.dir_x * speed);
 	mlx_mouse_get_pos(cube->mlx.mlx, cube->mlx.win, &x_mouse, &y_mouse);
-	if (cube->keys.left || (x_mouse >= 0 && x_mouse <  360))
+	if (cube->keys.left || (x_mouse >= 0 && x_mouse < 360
+		&& y_mouse >= 0 && y_mouse < 720))
 		rotation(cube, -M_PI / ALPHA_RATIO);
-	if (cube->keys.right || (x_mouse >= 720 && x_mouse <  1080))
+	if (cube->keys.right || (x_mouse >= 720 && x_mouse < 1080 &&
+		y_mouse >= 0 && y_mouse < 720))
 		rotation(cube, M_PI / ALPHA_RATIO);
 	raycasting(cube);
 	return (0);

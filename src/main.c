@@ -31,6 +31,7 @@ int	main(int argc, char **argv)
 	raycasting(&cube);
 	mlx_hook(cube.mlx.win, ON_KEYDOWN, PRESS_MASK, key_down, &cube);
 	mlx_hook(cube.mlx.win, ON_KEYRELEASE, RELEASE_MASK, key_release, &cube);
+	mlx_hook(cube.mlx.win, 17, 1L << 17, close_window_x, &cube);
 	mlx_loop_hook(cube.mlx.mlx, event_management, &cube);
 	mlx_loop(cube.mlx.mlx);
 	free_cube(&cube);

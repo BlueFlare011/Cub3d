@@ -5,12 +5,9 @@ WE      ./files/textures/wall.xpm
 
 F     200,200,200
 
+EA     ./files/textures/wall.xpm
 
 SO    ./files/textures/wall.xpm
-
-
-
-EA     ./files/textures/wall.xpm
 
 111111
 110W01

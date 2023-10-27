@@ -54,6 +54,7 @@ EVENTS	=		$(addprefix $(EVENTS_DIR), \
 
 UTILS		=		$(addprefix $(UTILS_DIR), \
 						utils.c \
+						more_utils.c \
 						errors.c \
 					)
 

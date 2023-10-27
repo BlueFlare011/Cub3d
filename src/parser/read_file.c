@@ -12,13 +12,39 @@
 
 #include "parser.h"
 
-static int	get_color(t_cube *cube, char **data, int fd)
+static int get_attribute(char **data, int *bool_array)
+{
+	int	id;
+
+	id = 0;
+	if (!ft_strncmp(data[0], "C", 2))
+		id = SKY;
+	else if (!ft_strncmp(data[0], "F", 2))
+		id = FLOOR;
+	else if (!ft_strncmp(data[0], "NO", 3))
+		id = NORTH + 2;
+	else if (!ft_strncmp(data[0], "SO", 3))
+		id = SOUTH + 2;
+	else if (!ft_strncmp(data[0], "EA", 3))
+		id = EAST + 2;
+	else if (!ft_strncmp(data[0], "WE", 3))
+		id = WEST + 2;
+	else
+		return (1);
+	if (bool_array[id] == 1){
+		return (1);
+	}
+	bool_array[id] = 1;
+	return (0);
+}
+
+static void	get_color(t_cube *cube, char **data, int fd)
 {
 	char			**rgb;
 	unsigned int	id;
 
 	if (ft_strncmp(data[0], "C", 2) && ft_strncmp(data[0], "F", 2))
-		return (1);
+		return ;
 	rgb = ft_split(data[1], ',');
 	if (!rgb)
 		error_exit(strerror(errno), SYS_ERR, cube);
@@ -38,15 +64,14 @@ static int	get_color(t_cube *cube, char **data, int fd)
 		error_exit(NOT_VALID_NUM, SYS_ERR, cube);
 	}
 	free_double_pointer(&rgb);
-	return (0);
 }
 
-static int	analyse_line(t_cube *cube, char *line, int status, int fd)
+static void	analyse_line(t_cube *cube, char *line, int *bool_array, int fd)
 {
 	char	**data;
 
 	if (*line == '\0')
-		return (status);
+		return ;
 	data = ft_split(line, ' ');
 	if (!data)
 		error_exit(strerror(errno), SYS_ERR, cube);
@@ -56,8 +81,11 @@ static int	analyse_line(t_cube *cube, char *line, int status, int fd)
 		free_double_pointer(&data);
 		error_exit(TO_MUCH_INFO, GENERAL_ERR, cube);
 	}
-	if (!get_texture(cube, data, fd) || !get_color(cube, data, fd))
-		status++;
+	if (!get_attribute(data, bool_array))
+	{
+		get_texture(cube, data, fd);
+		get_color(cube, data, fd);
+	}
 	else
 	{
 		close(fd);
@@ -65,27 +93,33 @@ static int	analyse_line(t_cube *cube, char *line, int status, int fd)
 		error_exit(INVALID_LINE, GENERAL_ERR, cube);
 	}
 	free_double_pointer(&data);
-	return (status);
 }
 
 void	extract_file_info(t_cube *cube, char *file)
 {
 	char	*line;
-	int		limit;
+	int		*bool_array;
 	int		fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		error_exit(strerror(errno), SYS_ERR, NULL);
-	limit = 0;
+	bool_array = malloc(sizeof(int) * 6);
+	if (!bool_array)
+	{
+		close(fd);
+		error_exit(strerror(errno), SYS_ERR, cube);
+	}
+	ft_bzero(bool_array, sizeof(int) * 6);
 	ft_mlx_init(cube);
 	line = process_line(cube, fd);
-	while (line && limit < 6)
+	while (line && check_bool_array(bool_array))
 	{
-		limit = analyse_line(cube, line, limit, fd);
+		analyse_line(cube, line, bool_array, fd);
 		free(line);
 		line = process_line(cube, fd);
 	}
+	free(bool_array);
 	get_map(cube, line, fd);
 }
 

@@ -80,7 +80,7 @@ static int	read_texture(t_cube cube, char *file_name, t_texture *texture)
 	return (0);
 }
 
-int	get_texture(t_cube *cube, char **data, int fd)
+void	get_texture(t_cube *cube, char **data, int fd)
 {
 	char	*aux;
 	int		id;
@@ -94,7 +94,7 @@ int	get_texture(t_cube *cube, char **data, int fd)
 	else if (!ft_strncmp(data[0], "WE", 3))
 		id = WEST;
 	else
-		return (1);
+		return ;
 	aux = ft_strtrim(data[1], "\n");
 	if (aux && read_texture(*cube, aux, &(cube->texture[id])))
 	{
@@ -106,5 +106,4 @@ int	get_texture(t_cube *cube, char **data, int fd)
 		error_exit(IMAGE_ERROR, GENERAL_ERR, cube);
 	}
 	free(aux);
-	return (0);
 }
