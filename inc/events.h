@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 22:39:55 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/22 14:54:39 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/28 09:58:08 by socana-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "raycasting.h"
 # include "keys.h"
 
-# define SPEED 0.025
+# define SPEED 0.050
 # define ALPHA_RATIO 64
 
 int		key_down(int keycode, t_cube *cube);

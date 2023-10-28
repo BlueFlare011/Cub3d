@@ -1,16 +1,17 @@
 NO ./files/textures/wall.xpm
-SO ./files/textures/wall.xpm
-WE ./files/textures/wall.xpm
-EA ./files/textures/wall.xpm
-
 F 46,219,0
+SO ./files/textures/wall.xpm
+
+EA ./files/textures/white_square.xpm
 C 42,9,219
+WE ./files/textures/white_square.xpm
+
 
 111111111111111
 100100000001011
 100100100100011
 100000100111111
-1000000N0000001
+1000000E0000001
 100010000000001
 100111000101111
 100010000100001

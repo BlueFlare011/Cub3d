@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:13:25 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/23 16:25:04 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/10/28 14:08:55 by socana-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	event_management(t_cube *cube)
 
 	speed = SPEED;
 	if ((cube->keys.a || cube->keys.d) && (cube->keys.w || cube->keys.s))
-		speed = sqrt(2 * (pow(SPEED, 2)));
+		speed = SPEED * 0.7;
 	if (cube->keys.a)
 		move(cube, cube->map.dir_y * speed, -cube->map.dir_x * speed);
 	if (cube->keys.w)
@@ -98,12 +98,13 @@ int	event_management(t_cube *cube)
 		move(cube, -cube->map.dir_x * speed, -cube->map.dir_y * speed);
 	if (cube->keys.d)
 		move(cube, -cube->map.dir_y * speed, cube->map.dir_x * speed);
-	mlx_mouse_get_pos(cube->mlx.mlx, cube->mlx.win, &x_mouse, &y_mouse);
-	if (cube->keys.left || (x_mouse >= 0 && x_mouse < 360
-		&& y_mouse >= 0 && y_mouse < 720))
+	mlx_mouse_get_pos(cube->mlx.win, &x_mouse, &y_mouse); // MacOs
+	//mlx_mouse_get_pos(cube->mlx.mlx, cube->mlx.win, &x_mouse, &y_mouse); // Linux
+	if (cube->keys.left || (x_mouse >= 0 && x_mouse < 360 
+			&& y_mouse >= 0 && y_mouse < 720))
 		rotation(cube, -M_PI / ALPHA_RATIO);
-	if (cube->keys.right || (x_mouse >= 720 && x_mouse < 1080 &&
-		y_mouse >= 0 && y_mouse < 720))
+	if (cube->keys.right || (x_mouse >= 720 && x_mouse < 1080
+			&& y_mouse >= 0 && y_mouse < 720))
 		rotation(cube, M_PI / ALPHA_RATIO);
 	raycasting(cube);
 	return (0);

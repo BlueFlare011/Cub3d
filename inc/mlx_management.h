@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_management.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 23:36:12 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/22 15:16:02 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/28 11:33:29 by socana-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@
 void	ft_mlx_init(t_cube *cube);
 void	my_pixel_put(t_img img, int x, int y, int colour);
 char	*mlx_get_texture(t_cube cube, t_img *img, t_texture *texture,
-	char *file_name);
+			char *file_name);
 
 #endif

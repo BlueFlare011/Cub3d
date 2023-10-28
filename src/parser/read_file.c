@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/23 00:12:48 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/28 11:32:44 by socana-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int get_attribute(char **data, int *bool_array)
+static int	get_attribute(char **data, int *bool_array)
 {
 	int	id;
 
@@ -31,9 +31,8 @@ static int get_attribute(char **data, int *bool_array)
 		id = WEST + 2;
 	else
 		return (1);
-	if (bool_array[id] == 1){
+	if (bool_array[id] == 1)
 		return (1);
-	}
 	bool_array[id] = 1;
 	return (0);
 }
