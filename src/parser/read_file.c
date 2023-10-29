@@ -6,7 +6,7 @@
 /*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/28 11:32:44 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/10/29 16:14:46 by socana-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ static void	get_color(t_cube *cube, char **data, int fd)
 	rgb = ft_split(data[1], ',');
 	if (!rgb)
 		error_exit(strerror(errno), SYS_ERR, cube);
+	if (len_double_pointer(rgb) != 3)
+		error_exit(TOO_MANY_NUM, SYS_ERR, cube);
 	id = 0;
+	id = FLOOR;
 	if (!ft_strncmp(data[0], "C", 2))
 		id = SKY;
-	else if (!ft_strncmp(data[0], "F", 2))
-		id = FLOOR;
 	if (!is_num(rgb))
 		error_exit(NO_NUMBER, SYS_ERR, cube);
 	cube->colour[id] = check_and_get_colour(0, ft_atoi(rgb[RED]),
@@ -127,10 +128,10 @@ void	check_arguments(int num, char **args)
 	char	*extension;
 
 	if (num != 2)
-		return (error_exit(ERROR_NUM_ARGS, GENERAL_ERR, NULL));
+		error_exit(ERROR_NUM_ARGS, GENERAL_ERR, NULL);
 	extension = ft_strrchr(args[1], '.');
 	if (!extension)
-		return (error_exit(NO_EXTENSION, GENERAL_ERR, NULL));
+		error_exit(NO_EXTENSION, GENERAL_ERR, NULL);
 	if (ft_strncmp(extension, ".cub", 4))
-		return (error_exit(NO_VALID_EXTENSION, GENERAL_ERR, NULL));
+		error_exit(NO_VALID_EXTENSION, GENERAL_ERR, NULL);
 }

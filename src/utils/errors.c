@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:28 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/21 18:14:30 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/10/29 16:04:48 by socana-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	free_cube(t_cube *cube)
 	int	i;
 	int	j;
 
+	if (!cube)
+		return ;
 	if (cube->map.map)
 		free_double_pointer(&cube->map.map);
 	i = 0;

@@ -1,6 +1,7 @@
-NO ./files/textures/wall.xpm
-F 46,219,0
+NO  ./files/textures/wall.xpm
+F	255,255,255
 SO ./files/textures/wall.xpm
+
 
 EA ./files/textures/white_square.xpm
 C 42,9,219
