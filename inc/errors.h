@@ -30,7 +30,7 @@
 # define NO_VALID_EXTENSION "Not a valid extension"
 
 /* ******************************** ELEMENTS ******************************** */
-# define INVALID_LINE "Invalid information in element: "
+# define INVALID_LINE "Invalid information in one element"
 # define TO_MUCH_INFO "Too much information in one element"
 # define TOO_MANY_NUM "RGB element must have only 3 numbers"
 # define NO_NUMBER "No number specified in RGB element"

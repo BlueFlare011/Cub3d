@@ -41,26 +41,27 @@ static void	settle_player(t_cube *cube, int *num_player, int i, int j)
 
 static void	check_chars(t_cube *cube, int num_player, int i, int j)
 {
-	while (cube->map.map[i] && (!i || !cube->map.map[i - 1][j]))
+	while (cube->map.map[i])
 	{
 		j = 0;
-		while (cube->map.map[i][j]
-			&& ft_strchr("NESW10 ", cube->map.map[i][j]) && num_player <= 1)
+		while (cube->map.map[i][j])
 		{
 			if (ft_strchr("NESW", cube->map.map[i][j]))
 				settle_player(cube, &num_player, i, j);
-			if (ft_strchr("NESW10 ", cube->map.map[i][j]))
-				j++;
+			if (!ft_strchr("NESW10 ", cube->map.map[i][j]))
+				break;
+			j++;
 		}
 		if (!cube->map.map[i][j] && j > cube->map.max_x)
 			cube->map.max_x = j - 1;
-		if (!cube->map.map[i][j])
-			i++;
+		if (!ft_strchr("NESW10 ", cube->map.map[i][j]))
+			break;
+		i++;
 	}
-	if (num_player != 1)
-		error_exit(TOO_MUCH_PLAYERS, GENERAL_ERR, cube);
-	else if (cube->map.map[i])
+	if (cube->map.map[i] && cube->map.map[i][j])
 		error_exit(INVALID_CHAR, GENERAL_ERR, cube);
+	else if (num_player != 1)
+		error_exit(TOO_MUCH_PLAYERS, GENERAL_ERR, cube);
 	cube->map.max_y = i - 1;
 }
 
@@ -69,10 +70,15 @@ static char	*read_true_line(int fd)
 	char	*line;
 
 	line = get_next_line(fd);
-	while (line && *line == '\n')
+	while (!ft_strchr(line, '1') && !ft_strncmp(line, "\n", 2))
 	{
 		free(line);
 		line = get_next_line(fd);
+	}
+	if (!ft_strchr(line, '1'))
+	{
+		free(line);
+		return (NULL);
 	}
 	return (line);
 }
@@ -102,12 +108,14 @@ static void	read_map(t_cube *cube, char **super_string, char *line, int fd)
 		error_exit(strerror(errno), SYS_ERR, cube);
 }
 
-void	get_map(t_cube *cube, char *line, int fd)
+void	get_map(t_cube *cube, int fd)
 {
 	char	*super_string;
+	char	*line;
 
-	super_string = line;
 	line = read_true_line(fd);
+	if (!line)
+		error_exit(INVALID_LINE, GENERAL_ERR, cube);
 	read_map(cube, &super_string, line, fd);
 	cube->map.map = ft_split(super_string, '\n');
 	free(super_string);

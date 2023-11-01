@@ -37,7 +37,7 @@
 # define W_Y 0.0
 
 void	extract_file_info(t_cube *cube, char *file);
-void	get_map(t_cube *cube, char *line, int fd);
+void	get_map(t_cube *cube	, int fd);
 void	floodfill(t_cube *cube);
 void	get_texture(t_cube *cube, char **data, int fd);
 void	check_arguments(int num, char **args);

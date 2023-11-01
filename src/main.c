@@ -27,8 +27,8 @@ int	main(int argc, char **argv)
 	init_cube(&cube);
 	check_arguments(argc, argv);
 	extract_file_info(&cube, argv[1]);
-	mlx_mouse_move(cube.mlx.win, WIN_X / 2, WIN_Y / 2); // MacOs
-	//mlx_mouse_move(cube.mlx.mlx, cube.mlx.win, WIN_X / 2, WIN_Y / 2); // Linux
+	//mlx_mouse_move(cube.mlx.win, WIN_X / 2, WIN_Y / 2); // MacOs
+	mlx_mouse_move(cube.mlx.mlx, cube.mlx.win, WIN_X / 2, WIN_Y / 2); // Linux
 	raycasting(&cube);
 	mlx_hook(cube.mlx.win, ON_KEYDOWN, PRESS_MASK, key_down, &cube);
 	mlx_hook(cube.mlx.win, ON_KEYRELEASE, RELEASE_MASK, key_release, &cube);

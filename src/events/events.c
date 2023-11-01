@@ -98,8 +98,8 @@ int	event_management(t_cube *cube)
 		move(cube, -cube->map.dir_x * speed, -cube->map.dir_y * speed);
 	if (cube->keys.d)
 		move(cube, -cube->map.dir_y * speed, cube->map.dir_x * speed);
-	mlx_mouse_get_pos(cube->mlx.win, &x_mouse, &y_mouse); // MacOs
-	//mlx_mouse_get_pos(cube->mlx.mlx, cube->mlx.win, &x_mouse, &y_mouse); // Linux
+	//mlx_mouse_get_pos(cube->mlx.win, &x_mouse, &y_mouse); // MacOs
+	mlx_mouse_get_pos(cube->mlx.mlx, cube->mlx.win, &x_mouse, &y_mouse); // Linux
 	if (cube->keys.left || (x_mouse >= 0 && x_mouse < 360 
 			&& y_mouse >= 0 && y_mouse < 720))
 		rotation(cube, -M_PI / ALPHA_RATIO);

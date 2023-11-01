@@ -117,10 +117,11 @@ void	extract_file_info(t_cube *cube, char *file)
 	{
 		analyse_line(cube, line, bool_array, fd);
 		free(line);
-		line = process_line(cube, fd);
+		if (check_bool_array(bool_array))
+			line = process_line(cube, fd);
 	}
 	free(bool_array);
-	get_map(cube, line, fd);
+	get_map(cube, fd);
 }
 
 void	check_arguments(int num, char **args)
