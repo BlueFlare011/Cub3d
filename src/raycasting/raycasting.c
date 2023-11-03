@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:10:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/24 23:42:58 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/02 18:00:51 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycasting.h"
-
+#include "bonus.h"
 /**
  * Function which sets delta for the 2 axis, after a few demonstrations
  * the formula is delta_i = 1 / ray_dir_i. REMINDER: keep in mind the case when
@@ -129,4 +129,5 @@ void	raycasting(t_cube *cube)
 	}
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win,
 		cube->mlx.img.img, 0, 0);
+	print_minimap(cube);
 }

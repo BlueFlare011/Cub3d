@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:13:25 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/28 14:08:55 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/11/02 15:53:06 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ static void	move(t_cube *cube, double move_x, double move_y)
 
 	x = cube->map.player_x + move_x;
 	y = cube->map.player_y + move_y;
-	if (cube->map.map[(int)y][(int)x] != '1')
+	
+	if (cube->map.map[(int)cube->map.player_y][(int)x] == '1'
+		&& cube->map.map[(int)y][(int)cube->map.player_x] == '1')
+		return ;
+	else if (cube->map.map[(int)y][(int)x] != '1')
 	{
 		cube->map.player_x = x;
 		cube->map.player_y = y;

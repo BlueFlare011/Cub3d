@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/29 16:14:46 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:16:22 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static void	get_color(t_cube *cube, char **data, int fd)
 
 	if (ft_strncmp(data[0], "C", 2) && ft_strncmp(data[0], "F", 2))
 		return ;
-	rgb = ft_split(data[1], ',');
+	rgb = split_simple_comas(data[1]);
 	if (!rgb)
-		error_exit(strerror(errno), SYS_ERR, cube);
+		error_exit(INVALID_LINE, GENERAL_ERR, cube);
 	if (len_double_pointer(rgb) != 3)
 		error_exit(TOO_MANY_NUM, SYS_ERR, cube);
 	id = 0;
@@ -55,8 +55,7 @@ static void	get_color(t_cube *cube, char **data, int fd)
 		id = SKY;
 	if (!is_num(rgb))
 		error_exit(NO_NUMBER, SYS_ERR, cube);
-	cube->colour[id] = check_and_get_colour(0, ft_atoi(rgb[RED]),
-			ft_atoi(rgb[GREEN]), ft_atoi(rgb[BLUE]));
+	cube->colour[id] = check_and_get_colour(rgb);
 	if (cube->colour[id] < 0)
 	{
 		close(fd);

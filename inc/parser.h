@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 23:48:57 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/28 11:34:14 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:20:48 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ void	get_map(t_cube *cube	, int fd);
 void	floodfill(t_cube *cube);
 void	get_texture(t_cube *cube, char **data, int fd);
 void	check_arguments(int num, char **args);
-int		check_and_get_colour(int t, int r, int g, int b);
+int		check_and_get_colour(char **rgb);
 
 #endif

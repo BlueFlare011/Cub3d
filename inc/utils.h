@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 23:57:53 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 17:59:39 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:03:15 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,5 @@ char	*process_line(t_cube *cube, int fd);
 void	free_cube(t_cube *cube);
 int		check_bool_array(int *bool_array);
 int		close_window_x(t_cube *cube);
+char	**split_simple_comas(char *str);
 #endif

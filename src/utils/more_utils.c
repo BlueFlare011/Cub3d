@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 11:30:53 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/28 11:31:34 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:05:12 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,22 @@ int	close_window_x(t_cube *cube)
 {
 	free_cube(cube);
 	exit(0);
+}
+
+char	**split_simple_comas(char *str)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == ',')
+			count++;
+		i++;
+	}
+	if (count == 2)
+		return(ft_split(str, ','));
+	return (NULL);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    vbles.mk                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
+#    By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
-#    Updated: 2023/10/24 23:12:36 by rgallego         ###   ########.fr        #
+#    Updated: 2023/11/02 17:45:27 by blueflare01      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ MLX_MANAGEMENT_DIR	=	mlx_management/
 EVENTS_DIR	=		events/
 
 UTILS_DIR	=		utils/
+
+BONUS_DIR	=		bonus/
 
 CUBE		=		main.c
 
@@ -58,6 +60,10 @@ UTILS		=		$(addprefix $(UTILS_DIR), \
 						errors.c \
 					)
 
+BONUS		=		$(addprefix $(BONUS_DIR), \
+						minimap.c \
+					)
+
 SRCS		= 		$(addprefix $(SRC_DIR), \
 						$(STACK) \
 						$(PARSER) \
@@ -65,6 +71,7 @@ SRCS		= 		$(addprefix $(SRC_DIR), \
 						$(MLX_MANAGEMENT) \
 						$(EVENTS) \
 						$(UTILS) \
+						$(BONUS) \
 						main.c	\
 					)
 

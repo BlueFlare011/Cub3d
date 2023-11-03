@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:59:01 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/23 00:00:52 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:20:19 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,20 @@ static int	get_colour(unsigned char t, unsigned char r, unsigned char g,
 	return ((t << 24) + (r << 16) + (g << 8) + b);
 }
 
-int	check_and_get_colour(int t, int r, int g, int b)
+int	check_and_get_colour(char **rgb)
 {
-	if (t > 255 || r > 255 || g > 255 || b > 255)
+	int r;
+	int g;
+	int b;
+
+	if (ft_strlen(rgb[0]) > 3 || ft_strlen(rgb[1]) > 3 || ft_strlen(rgb[2]) > 3)
 		return (-1);
-	return (get_colour(t, r, g, b));
+	r = ft_atoi(rgb[0]);
+	g = ft_atoi(rgb[1]);
+	b = ft_atoi(rgb[2]);
+	if (r > 255 || g > 255 || b > 255)
+		return (-1);
+	return (get_colour(0, r, g, b));
 }
 
 static int	create_texture_img(t_texture *texture)
