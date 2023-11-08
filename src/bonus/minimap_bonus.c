@@ -1,4 +1,4 @@
-#include "bonus.h"
+#include "minimap_bonus.h"
 
 static void	print_wall(t_cube *cube, int i, int j)
 {

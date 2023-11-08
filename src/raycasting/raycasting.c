@@ -6,12 +6,12 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:10:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/08 14:28:10 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:55:53 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "raycasting.h"
-#include "bonus.h"
+#include "minimap_bonus.h"
 /**
  * Function which sets delta for the 2 axis, after a few demonstrations
  * the formula is delta_i = 1 / ray_dir_i. REMINDER: keep in mind the case when
