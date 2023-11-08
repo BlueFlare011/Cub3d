@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:49:32 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/24 23:10:40 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:17:17 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	get_map(t_cube *cube, int fd)
 	line = read_true_line(fd);
 	if (!line)
 		error_exit(INVALID_LINE, GENERAL_ERR, cube);
+	super_string = NULL;
 	read_map(cube, &super_string, line, fd);
 	cube->map.map = ft_split(super_string, '\n');
 	free(super_string);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:10:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/02 18:00:51 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/11/08 14:28:10 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,5 @@ void	raycasting(t_cube *cube)
 	}
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win,
 		cube->mlx.img.img, 0, 0);
-	print_minimap(cube);
+	// print_minimap(cube);
 }

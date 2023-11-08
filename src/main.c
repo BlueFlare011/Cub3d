@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:12 by socana-b          #+#    #+#             */
-/*   Updated: 2023/11/02 18:00:37 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/11/08 14:09:30 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	main(int argc, char **argv)
 	init_cube(&cube);
 	check_arguments(argc, argv);
 	extract_file_info(&cube, argv[1]);
-	//mlx_mouse_move(cube.mlx.win, WIN_X / 2, WIN_Y / 2); // MacOs
-	mlx_mouse_move(cube.mlx.mlx, cube.mlx.win, WIN_X / 2, WIN_Y / 2); // Linux
+	mlx_mouse_move(cube.mlx.win, WIN_X / 2, WIN_Y / 2); // MacOs
+	// mlx_mouse_move(cube.mlx.mlx, cube.mlx.win, WIN_X / 2, WIN_Y / 2); // Linux
 	raycasting(&cube);
 	mlx_hook(cube.mlx.win, ON_KEYDOWN, PRESS_MASK, key_down, &cube);
 	mlx_hook(cube.mlx.win, ON_KEYRELEASE, RELEASE_MASK, key_release, &cube);
