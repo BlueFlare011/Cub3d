@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    vbles.mk                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+         #
+#    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
-#    Updated: 2023/11/02 17:45:27 by blueflare01      ###   ########.fr        #
+#    Updated: 2023/11/08 14:49:24 by rgallego         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ UTILS		=		$(addprefix $(UTILS_DIR), \
 					)
 
 BONUS		=		$(addprefix $(BONUS_DIR), \
-						minimap.c \
+						minimap_bonus.c \
 					)
 
 SRCS		= 		$(addprefix $(SRC_DIR), \

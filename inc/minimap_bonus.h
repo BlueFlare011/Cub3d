@@ -8,4 +8,5 @@
 # define MINI_MAP 180
 
 void	print_minimap(t_cube *cube);
+
 #endif
