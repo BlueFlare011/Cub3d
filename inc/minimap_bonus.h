@@ -9,9 +9,10 @@
 # define MINIMAP_SIZE 180
 # define CUBE_SIZE 20
 
-# define WALL_COLOUR 0xB0B0B0
-# define FLOOR_COLOUR 0x000000
-# define PLAYER_COLOUR 0x00FF00
+# define WALL_COLOUR 0x45B0B0B0
+# define FLOOR_COLOUR 0x45000000
+# define PLAYER_COLOUR 0x4500FF00
+# define BORDER_COLOUR 0x45505050
 
 void	print_minimap(t_cube *cube);
 
