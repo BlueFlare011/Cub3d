@@ -16,8 +16,9 @@ static void	print_wall(t_cube *cube, int i, int j)
 		return ;
 	if (j % CUBE_SIZE == 0 || i % CUBE_SIZE == 0)
 		return (my_pixel_put(cube->mlx.img, j, i, BORDER_COLOUR));
-	if ((int)cube->map.player_x == map_x && (int)cube->map.player_y == map_y)
-		return (my_pixel_put(cube->mlx.img, j, i, PLAYER_COLOUR));
+	if (fabs(cube->map.player_x - ((double)j / CUBE_SIZE + cube->map.player_x - 4)) < (0.2)
+		&& fabs(cube->map.player_y - ((double)i / CUBE_SIZE + cube->map.player_y - 4)) < (0.2))
+			return (my_pixel_put(cube->mlx.img, j, i, PLAYER_COLOUR));
 	if (cube->map.map[map_y][map_x] == '1')
 		return (my_pixel_put(cube->mlx.img, j, i, WALL_COLOUR));
 	my_pixel_put(cube->mlx.img, j, i, FLOOR_COLOUR);

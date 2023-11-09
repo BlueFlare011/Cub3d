@@ -1,6 +1,7 @@
 #ifndef BONUS_H
 # define BONUS_H
 
+# include <math.h>
 # include "cube.h"
 # include "errors.h"
 # include "mlx_management.h"
