@@ -6,23 +6,31 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 23:42:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/10/21 18:03:24 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/11 18:26:45 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	check_square(char **map, t_node *square)
+static int is_in_map(char **map, int x, int y)
 {
-	if (!square->x || !square->y
-		|| !map[square->y + 1][square->x + 1] || !map[square->y][square->x + 1]
-		|| !map[square->y - 1][square->x + 1] || !map[square->y + 1][square->x]
-		|| !map[square->y - 1][square->x - 1])
+	if (y < 0 || x < 0 || y >= len_double_pointer(map)
+		|| x >= (int)ft_strlen(map[y]))
+			return (0);
+	return (1);
+}
+
+static int	check_square(char **map, t_node *square)
+{
+	if (!is_in_map(map, square->x + 1, square->y) 
+		|| !is_in_map(map, square->x - 1, square->y)
+		|| !is_in_map(map, square->x, square->y + 1)
+		|| !is_in_map(map, square->x, square->y - 1))
 		return (1);
 	return (0);
 }
 
-void	add_nearest(t_node **stack, char **map, int x, int y)
+static void	add_nearest(t_node **stack, char **map, int x, int y)
 {
 	if (ft_strchr("0 ", map[y + 1][x]))
 		push(stack, y + 1, x);
@@ -32,14 +40,6 @@ void	add_nearest(t_node **stack, char **map, int x, int y)
 		push(stack, y - 1, x);
 	if (ft_strchr("0 ", map[y][x - 1]))
 		push(stack, y, x - 1);
-	if (ft_strchr("0 ", map[y + 1][x - 1]))
-		push(stack, y + 1, x - 1);
-	if (ft_strchr("0 ", map[y + 1][x + 1]))
-		push(stack, y + 1, x + 1);
-	if (ft_strchr("0 ", map[y - 1][x + 1]))
-		push(stack, y - 1, x + 1);
-	if (ft_strchr("0 ", map[y - 1][x - 1]))
-		push(stack, y - 1, x - 1);
 }
 
 void	floodfill(t_cube *cube)
