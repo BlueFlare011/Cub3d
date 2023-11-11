@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 17:39:36 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/11 12:38:13 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/11 16:05:14 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define ON_KEYDOWN 2
 # define ON_KEYRELEASE 3
+# define ON_DESTROY 17
 
 /* **************************** KEY CODES MACOS ***************************** */
 # define PRESS_MASK 0
@@ -41,6 +42,8 @@
 /* *************************** KEY CODES WINDOWS **************************** */
 // # define PRESS_MASK 1L<<0
 // # define RELEASE_MASK 1L<<1
+// # define CLOSE_MASK 1L<<17
+
 // # define KEY_A 97
 // # define KEY_S 115
 // # define KEY_D 100

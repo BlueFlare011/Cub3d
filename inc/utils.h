@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 23:57:53 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/02 17:03:15 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/11/11 15:29:15 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,7 @@ void	free_cube(t_cube *cube);
 int		check_bool_array(int *bool_array);
 int		close_window_x(t_cube *cube);
 char	**split_simple_comas(char *str);
+int		ft_max(int nb1, int nb2);
+int		ft_min(int a, int b);
+
 #endif

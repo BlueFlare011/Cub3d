@@ -6,7 +6,7 @@
 #    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
-#    Updated: 2023/11/11 14:19:04 by rgallego         ###   ########.fr        #
+#    Updated: 2023/11/11 15:28:00 by rgallego         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ UTILS		=		$(addprefix $(UTILS_DIR), \
 
 BONUS		=		$(addprefix $(BONUS_DIR), \
 						minimap_bonus.c \
+						bresenham_bonus.c \
 					)
 
 SRCS		= 		$(addprefix $(SRC_DIR), \

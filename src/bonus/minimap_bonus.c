@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 14:35:50 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/11 14:36:43 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/11 15:59:21 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	print_cell(t_cube *cube, int i, int j, char cell_type)
 		{
 			if (is_player(cube, j + l, i + k))
 				my_pixel_put(cube->mlx.img, x + l, y + k, PLAYER_COLOUR);
-			else if (!k || !l || !(k - CELL_SIZE - 1) || !(l - CELL_SIZE - 1))
+			else if (!k || !l || !(k - CELL_SIZE + 1) || !(l - CELL_SIZE + 1))
 				my_pixel_put(cube->mlx.img, x + l, y + k, BORDER_COLOUR);
 			else if (cell_type == '1')
 				my_pixel_put(cube->mlx.img, x + l, y + k, WALL_COLOUR);
@@ -70,4 +70,6 @@ void	print_minimap(t_cube *cube)
 		}
 		i++;
 	}
+	prepare_bresenham(cube, cube->map.player_x - (int)cube->map.player_x,
+		cube->map.player_y - (int)cube->map.player_y);
 }
