@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:10:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/08 17:22:36 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/11 01:10:38 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	raycasting(t_cube *cube)
 		set_and_paint_ray(cube, i);
 		i++;
 	}
+	print_minimap(cube);
 	mlx_put_image_to_window(cube->mlx.mlx, cube->mlx.win,
 		cube->mlx.img.img, 0, 0);
-	print_minimap(cube);
 }

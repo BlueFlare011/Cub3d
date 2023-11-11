@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:13:25 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/08 17:20:26 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/11 01:15:24 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ int	event_management(t_cube *cube)
 	if (cube->keys.right || ((3 * WIN_X / 4) < x_mouse && x_mouse < WIN_X
 		&& 0 <= y_mouse && y_mouse < WIN_Y))
 		rotation(cube, M_PI / ALPHA_RATIO);
-	raycasting(cube);
+	if (cube->keys.a || cube->keys.d || cube->keys.w || cube->keys.s
+		|| cube->keys.left || cube->keys.right)
+		raycasting(cube);
 	return (0);
 }

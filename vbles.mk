@@ -6,7 +6,7 @@
 #    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
-#    Updated: 2023/11/08 17:07:30 by rgallego         ###   ########.fr        #
+#    Updated: 2023/11/11 01:09:55 by rgallego         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ MLX_MANAGEMENT	=	$(addprefix $(MLX_MANAGEMENT_DIR), \
 						mlx_management.c \
 					)
 
-EVENTS	=		$(addprefix $(EVENTS_DIR), \
+EVENTS	=			$(addprefix $(EVENTS_DIR), \
 						events.c \
 					)
 
