@@ -6,7 +6,7 @@
 #    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
-#    Updated: 2023/11/11 01:09:55 by rgallego         ###   ########.fr        #
+#    Updated: 2023/11/11 14:19:04 by rgallego         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ LDFLAGS	=			\
 					$(GNLNAME) \
 					$(MLXNAME)
 
-NAME	=			cub3d
+NAME	=			cub3D
 
 INC_ALL	=			\
 					$(INC_DIR) \

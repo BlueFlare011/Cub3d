@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:49:32 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/08 14:17:17 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/11 14:21:53 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ static void	check_chars(t_cube *cube, int num_player, int i, int j)
 			if (ft_strchr("NESW", cube->map.map[i][j]))
 				settle_player(cube, &num_player, i, j);
 			if (!ft_strchr("NESW10 ", cube->map.map[i][j]))
-				break;
+				break ;
 			j++;
 		}
 		if (!cube->map.map[i][j] && j > cube->map.max_x)
 			cube->map.max_x = j - 1;
 		if (!ft_strchr("NESW10 ", cube->map.map[i][j]))
-			break;
+			break ;
 		i++;
 	}
 	if (cube->map.map[i] && cube->map.map[i][j])

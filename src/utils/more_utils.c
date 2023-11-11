@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 11:30:53 by socana-b          #+#    #+#             */
-/*   Updated: 2023/11/02 17:05:12 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/11/11 14:21:09 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ char	**split_simple_comas(char *str)
 		i++;
 	}
 	if (count == 2)
-		return(ft_split(str, ','));
+		return (ft_split(str, ','));
 	return (NULL);
 }

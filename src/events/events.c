@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:13:25 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/11 01:20:32 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/11 14:23:09 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	move(t_cube *cube, double move_x, double move_y)
 
 	x = cube->map.player_x + move_x;
 	y = cube->map.player_y + move_y;
-	
 	if (cube->map.map[(int)cube->map.player_y][(int)x] == '1'
 		&& cube->map.map[(int)y][(int)cube->map.player_x] == '1')
 		return ;
@@ -92,7 +91,8 @@ int	event_management(t_cube *cube)
 	int		y_mouse;
 
 	speed = SPEED;
-	if ((cube->keys.a || cube->keys.d) && (cube->keys.w || cube->keys.s))
+	if ((cube->keys.a || cube->keys.d)
+		&& (cube->keys.w || cube->keys.s))
 		speed = SPEED * 0.7;
 	if (cube->keys.a)
 		move(cube, cube->map.dir_y * speed, -cube->map.dir_x * speed);
@@ -102,13 +102,13 @@ int	event_management(t_cube *cube)
 		move(cube, -cube->map.dir_x * speed, -cube->map.dir_y * speed);
 	if (cube->keys.d)
 		move(cube, -cube->map.dir_y * speed, cube->map.dir_x * speed);
-	// mlx_mouse_get_pos(cube->mlx.win, &x_mouse, &y_mouse); // MacOs
-	mlx_mouse_get_pos(cube->mlx.mlx, cube->mlx.win, &x_mouse, &y_mouse); // Linux
+	mlx_mouse_get_pos(cube->mlx.win, &x_mouse, &y_mouse); // MacOs
+	// mlx_mouse_get_pos(cube->mlx.mlx, cube->mlx.win, &x_mouse, &y_mouse); // Linux
 	if (cube->keys.left || (0 <= x_mouse && x_mouse < (WIN_X / 4)
-		&& 0 <= y_mouse && y_mouse < WIN_Y))
+			&& 0 <= y_mouse && y_mouse < WIN_Y))
 		rotation(cube, -M_PI / ALPHA_RATIO);
 	if (cube->keys.right || ((3 * WIN_X / 4) < x_mouse && x_mouse < WIN_X
-		&& 0 <= y_mouse && y_mouse < WIN_Y))
+			&& 0 <= y_mouse && y_mouse < WIN_Y))
 		rotation(cube, M_PI / ALPHA_RATIO);
 	raycasting(cube);
 	return (0);
