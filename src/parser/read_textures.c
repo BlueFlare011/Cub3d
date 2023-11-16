@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:59:01 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/11 14:21:21 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/16 21:24:44 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	check_and_get_colour(char **rgb)
 	int	g;
 	int	b;
 
-	if (ft_strlen(rgb[0]) > 3 || ft_strlen(rgb[1]) > 3 || ft_strlen(rgb[2]) > 3)
+	r = ft_atoi(rgb[RED]);
+	g = ft_atoi(rgb[GREEN]);
+	b = ft_atoi(rgb[BLUE]);
+	if (is_rgb(rgb[RED]) || is_rgb(rgb[GREEN]) || is_rgb(rgb[BLUE]))
 		return (-1);
-	r = ft_atoi(rgb[0]);
-	g = ft_atoi(rgb[1]);
-	b = ft_atoi(rgb[2]);
 	if (r > 255 || g > 255 || b > 255)
 		return (-1);
 	return (get_colour(0, r, g, b));
@@ -89,30 +89,23 @@ static int	read_texture(t_cube cube, char *file_name, t_texture *texture)
 	return (0);
 }
 
-void	get_texture(t_cube *cube, char **data, int fd)
+void	get_texture(t_cube *cube, char *trimmed_line, int fd, char *line)
 {
-	char	*aux;
 	int		id;
 
-	if (!ft_strncmp(data[0], "NO", 3))
+	if (!ft_strncmp(line, "NO ", 3))
 		id = NORTH;
-	else if (!ft_strncmp(data[0], "SO", 3))
+	else if (!ft_strncmp(line, "SO ", 3))
 		id = SOUTH;
-	else if (!ft_strncmp(data[0], "EA", 3))
+	else if (!ft_strncmp(line, "EA ", 3))
 		id = EAST;
-	else if (!ft_strncmp(data[0], "WE", 3))
-		id = WEST;
 	else
-		return ;
-	aux = ft_strtrim(data[1], "\n");
-	if (aux && read_texture(*cube, aux, &(cube->texture[id])))
+		id = WEST;
+	if (read_texture(*cube, trimmed_line, &(cube->texture[id])))
 	{
 		close(fd);
-		free_double_pointer(&data);
-		if (!aux)
-			error_exit(strerror(errno), SYS_ERR, cube);
-		free(aux);
+		free(trimmed_line);
+		free(line);
 		error_exit(IMAGE_ERROR, GENERAL_ERR, cube);
 	}
-	free(aux);
 }

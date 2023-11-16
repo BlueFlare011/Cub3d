@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:18 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/29 15:55:26 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/11/16 21:24:02 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,26 @@ void	init_cube(t_cube *cube)
 	cube->keys.right = 0;
 }
 
-int	is_num(char **rgb)
+int	is_rgb(char *rgb)
 {
 	int	i;
 	int	j;
 
 	i = 0;
+	while (rgb[i] && ft_strchr(" \t\n\v\f\r", rgb[i]))
+		i++;
+	if (rgb[i] == '+')
+		i++;
 	j = 0;
-	while (rgb[i] && (!rgb[i][j] || ft_isdigit(rgb[i][j])))
-	{
-		while (rgb[i][j] && ft_isdigit(rgb[i][j]))
-			if (ft_isdigit(rgb[i][j]))
-				j++;
-		if (!rgb[i][j])
-			i++;
-		j = 0;
-	}
-	return (!rgb[i]);
+	while (rgb[i + j] && ft_isdigit(rgb[i + j]))
+		j++;
+	if (!j || j > 3)
+		return (1);
+	while (rgb[i + j] && ft_strchr(" \t\n\v\f\r", rgb[i]))
+		i++;
+	if (rgb[i + j])
+		return (1);
+	return (0);
 }
 
 char	*process_line(t_cube *cube, int fd)

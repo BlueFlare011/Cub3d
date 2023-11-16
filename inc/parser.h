@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 23:48:57 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/02 17:20:48 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/11/16 21:14:21 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 void	extract_file_info(t_cube *cube, char *file);
 void	get_map(t_cube *cube	, int fd);
 void	floodfill(t_cube *cube);
-void	get_texture(t_cube *cube, char **data, int fd);
+void	get_texture(t_cube *cube, char *trimmed_line, int fd, char *line);
 void	check_arguments(int num, char **args);
 int		check_and_get_colour(char **rgb);
 

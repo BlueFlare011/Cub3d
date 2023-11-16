@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 23:57:53 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/11 15:29:15 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/16 21:04:52 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 void	init_cube(t_cube *cube);
 void	free_double_pointer(char ***matrix);
 int		len_double_pointer(char **matrix);
-int		is_num(char **rgb);
+int		is_rgb(char *rgb);
 char	*process_line(t_cube *cube, int fd);
 void	free_cube(t_cube *cube);
 int		check_bool_array(int *bool_array);

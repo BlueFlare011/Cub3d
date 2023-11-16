@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:45 by socana-b          #+#    #+#             */
-/*   Updated: 2023/10/29 16:14:39 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/11/16 17:57:16 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 /* ******************************** ELEMENTS ******************************** */
 # define INVALID_LINE "Invalid information in one element"
-# define TO_MUCH_INFO "Too much information in one element"
+# define TOO_MUCH_INFO "Too much information in one element"
 # define TOO_MANY_NUM "RGB element must have only 3 numbers"
 # define NO_NUMBER "No number specified in RGB element"
 # define NOT_VALID_NUM "The number must be between 0 and 255"
