@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:59:01 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/16 21:24:44 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:57:06 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	read_texture(t_cube cube, char *file_name, t_texture *texture)
 	return (0);
 }
 
-void	get_texture(t_cube *cube, char *trimmed_line, int fd, char *line)
+void	get_texture(t_cube *cube, char *trimmed_line, int fd, int id)
 {
 	int		id;
 

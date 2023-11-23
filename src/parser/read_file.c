@@ -6,44 +6,45 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/11/16 21:12:35 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:56:59 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int	get_attribute(char *line, int *bool_array)
+static int	get_attribute(char *line, int *bool_array, int *id)
 {
-	int	id;
-
-	id = 0;
+	*id = 0;
 	if (!ft_strncmp(line, "C ", 2))
-		id = SKY;
+		*id = SKY;
 	else if (!ft_strncmp(line, "F ", 2))
-		id = FLOOR;
+		*id = FLOOR;
 	else if (!ft_strncmp(line, "NO ", 3))
-		id = NORTH + 2;
+		*id = NORTH + 2;
 	else if (!ft_strncmp(line, "SO ", 3))
-		id = SOUTH + 2;
+		*id = SOUTH + 2;
 	else if (!ft_strncmp(line, "EA ", 3))
-		id = EAST + 2;
+		*id = EAST + 2;
 	else if (!ft_strncmp(line, "WE ", 3))
-		id = WEST + 2;
+		*id = WEST + 2;
 	else
 		return (1);
-	if (bool_array[id])
+	if (bool_array[*id])
 		return (1);
-	bool_array[id] = 1;
+	bool_array[*id] = 1;
 	return (0);
 }
 
-static void	get_color(t_cube *cube, char **rgb, int fd, int type)
+static void	get_color(t_cube *cube, char* trimmed_line, int fd, int type)
 {
 	unsigned int	id;
+	char			**rgb;
 
+	rgb = ft_split(trimmed_line, ',');
 	if (len_double_pointer(rgb) != 3)
 	{
 		close(fd);
+		free(trimmed_line);
 		free_double_pointer(&rgb);
 		error_exit(TOO_MANY_NUM, SYS_ERR, cube);
 	}
@@ -55,6 +56,7 @@ static void	get_color(t_cube *cube, char **rgb, int fd, int type)
 	if (cube->colour[id] < 0)
 	{
 		close(fd);
+		free(trimmed_line);
 		error_exit(NOT_VALID_NUM, SYS_ERR, cube);
 	}
 }
@@ -62,28 +64,28 @@ static void	get_color(t_cube *cube, char **rgb, int fd, int type)
 static void	analyse_line(t_cube *cube, char *line, int *bool_array, int fd)
 {
 	char	*trimmed_line;
+	int		id;
 
 	if (*line == '\0')
 		return ;
-	if (get_attribute(line, bool_array))
-	{
-		close(fd);
-		error_exit(INVALID_LINE, GENERAL_ERR, cube);
-	}
-	trimmed_line = ft_strtrim(ft_strchr(line, ' ') + 1, " \t\n\v\f\r");
-	if (!trimmed_line)
+	if (get_attribute(line, bool_array, &id))
 	{
 		close(fd);
 		free(line);
+		error_exit(INVALID_LINE, GENERAL_ERR, cube);
+	}
+	trimmed_line = ft_strtrim(ft_strchr(line, ' ') + 1, " \t\n\v\f\r");
+	free(line);
+	if (!trimmed_line)
+	{
+		close(fd);
 		error_exit(strerror(errno), SYS_ERR, cube);
 	}
-	if (!ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2))
-		get_color(cube, ft_split(trimmed_line, ','), fd,
-			ft_strncmp(line, "C ", 2));
+	if (id == FLOOR || id == SKY)
+		get_color(cube, trimmed_line, fd, id);
 	else
-		get_texture(cube, trimmed_line, fd, line);
+		get_texture(cube, trimmed_line, fd, id);
 	free(trimmed_line);
-	free(line);
 }
 
 void	extract_file_info(t_cube *cube, char *file)

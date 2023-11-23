@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:18 by socana-b          #+#    #+#             */
-/*   Updated: 2023/11/16 21:24:02 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:54:43 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	len_double_pointer(char **matrix)
 {
 	int	i;
 
+	if (!matrix)
+		return (0);
 	i = 0;
 	while (matrix && matrix[i])
 		i++;
@@ -26,8 +28,10 @@ void	free_double_pointer(char ***matrix)
 {
 	int	i;
 
+	if (!*matrix)
+		return ;
 	i = 0;
-	while (*matrix && (*matrix)[i])
+	while ((*matrix)[i])
 	{
 		free((*matrix)[i]);
 		i++;
