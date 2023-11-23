@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:59:01 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/23 20:57:06 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/23 21:33:32 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,23 +89,13 @@ static int	read_texture(t_cube cube, char *file_name, t_texture *texture)
 	return (0);
 }
 
-void	get_texture(t_cube *cube, char *trimmed_line, int fd, int id)
+void	get_texture(t_cube *cube, char *trimmed_line, int id, int fd)
 {
-	int		id;
-
-	if (!ft_strncmp(line, "NO ", 3))
-		id = NORTH;
-	else if (!ft_strncmp(line, "SO ", 3))
-		id = SOUTH;
-	else if (!ft_strncmp(line, "EA ", 3))
-		id = EAST;
-	else
-		id = WEST;
+	id -= OFFSET;
 	if (read_texture(*cube, trimmed_line, &(cube->texture[id])))
 	{
 		close(fd);
 		free(trimmed_line);
-		free(line);
 		error_exit(IMAGE_ERROR, GENERAL_ERR, cube);
 	}
 }

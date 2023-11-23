@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/11/23 20:56:59 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/23 21:34:02 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static int	get_attribute(char *line, int *bool_array, int *id)
 	else if (!ft_strncmp(line, "F ", 2))
 		*id = FLOOR;
 	else if (!ft_strncmp(line, "NO ", 3))
-		*id = NORTH + 2;
+		*id = NORTH + OFFSET;
 	else if (!ft_strncmp(line, "SO ", 3))
-		*id = SOUTH + 2;
+		*id = SOUTH + OFFSET;
 	else if (!ft_strncmp(line, "EA ", 3))
-		*id = EAST + 2;
+		*id = EAST + OFFSET;
 	else if (!ft_strncmp(line, "WE ", 3))
-		*id = WEST + 2;
+		*id = WEST + OFFSET;
 	else
 		return (1);
 	if (bool_array[*id])
@@ -35,9 +35,8 @@ static int	get_attribute(char *line, int *bool_array, int *id)
 	return (0);
 }
 
-static void	get_color(t_cube *cube, char* trimmed_line, int fd, int type)
+static void	get_color(t_cube *cube, char* trimmed_line, int id, int fd)
 {
-	unsigned int	id;
 	char			**rgb;
 
 	rgb = ft_split(trimmed_line, ',');
@@ -48,9 +47,6 @@ static void	get_color(t_cube *cube, char* trimmed_line, int fd, int type)
 		free_double_pointer(&rgb);
 		error_exit(TOO_MANY_NUM, SYS_ERR, cube);
 	}
-	id = FLOOR;
-	if (!type)
-		id = SKY;
 	cube->colour[id] = check_and_get_colour(rgb);
 	free_double_pointer(&rgb);
 	if (cube->colour[id] < 0)
