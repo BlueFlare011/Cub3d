@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/11/23 21:34:02 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/23 22:02:25 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static int	get_attribute(char *line, int *bool_array, int *id)
 	return (0);
 }
 
-static void	get_color(t_cube *cube, char* trimmed_line, int id, int fd)
+static void	get_colour(t_cube *cube, char *trimmed_line, int id, int fd)
 {
-	char			**rgb;
+	char	**rgb;
 
 	rgb = ft_split(trimmed_line, ',');
 	if (len_double_pointer(rgb) != 3)
@@ -78,9 +78,9 @@ static void	analyse_line(t_cube *cube, char *line, int *bool_array, int fd)
 		error_exit(strerror(errno), SYS_ERR, cube);
 	}
 	if (id == FLOOR || id == SKY)
-		get_color(cube, trimmed_line, fd, id);
+		get_colour(cube, trimmed_line, id, fd);
 	else
-		get_texture(cube, trimmed_line, fd, id);
+		get_texture(cube, trimmed_line, id, fd);
 	free(trimmed_line);
 }
 

@@ -6,23 +6,23 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 23:42:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/11 18:26:45 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/23 22:02:56 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static int is_in_map(char **map, int x, int y)
+static int	is_in_map(char **map, int x, int y)
 {
 	if (y < 0 || x < 0 || y >= len_double_pointer(map)
 		|| x >= (int)ft_strlen(map[y]))
-			return (0);
+		return (0);
 	return (1);
 }
 
 static int	check_square(char **map, t_node *square)
 {
-	if (!is_in_map(map, square->x + 1, square->y) 
+	if (!is_in_map(map, square->x + 1, square->y)
 		|| !is_in_map(map, square->x - 1, square->y)
 		|| !is_in_map(map, square->x, square->y + 1)
 		|| !is_in_map(map, square->x, square->y - 1))

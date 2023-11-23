@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:41 by socana-b          #+#    #+#             */
-/*   Updated: 2023/11/02 17:39:30 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/11/23 22:01:18 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ enum e_direction
 	WEST = 3,
 };
 
-enum e_color
+enum e_colour
 {
 	FLOOR = 0,
 	SKY = 1,
