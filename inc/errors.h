@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:45 by socana-b          #+#    #+#             */
-/*   Updated: 2023/11/16 17:57:16 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/25 13:33:55 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,13 @@
 # define NO_VALID_EXTENSION "Not a valid extension"
 
 /* ******************************** ELEMENTS ******************************** */
-# define INVALID_LINE "Invalid information in one element"
-# define TOO_MUCH_INFO "Too much information in one element"
-# define TOO_MANY_NUM "RGB element must have only 3 numbers"
-# define NO_NUMBER "No number specified in RGB element"
-# define NOT_VALID_NUM "The number must be between 0 and 255"
+# define INVALID_ELEMENT "Invalid element in file"
+# define INVALID_TEXTURE "Invalid texture element"
+# define INVALID_COLOR "Invalid color element"
 
 /* ********************************** MAP *********************************** */
 # define TOO_MUCH_PLAYERS "The map must contain only one player"
 # define INVALID_CHAR "The map can't contain other char than '1', '0' or ' '"
-# define MAP_SEPARATED "The map can't contain empty lines"
 # define MAP_NOT_CLOSED "The map is not closed"
 
 /* ********************************** MLX *********************************** */

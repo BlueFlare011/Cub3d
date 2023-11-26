@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 17:34:32 by socana-b          #+#    #+#             */
-/*   Updated: 2023/11/23 22:02:25 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/25 13:46:11 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	get_colour(t_cube *cube, char *trimmed_line, int id, int fd)
 		close(fd);
 		free(trimmed_line);
 		free_double_pointer(&rgb);
-		error_exit(TOO_MANY_NUM, SYS_ERR, cube);
+		error_exit(INVALID_COLOR, SYS_ERR, cube);
 	}
 	cube->colour[id] = check_and_get_colour(rgb);
 	free_double_pointer(&rgb);
@@ -53,7 +53,7 @@ static void	get_colour(t_cube *cube, char *trimmed_line, int id, int fd)
 	{
 		close(fd);
 		free(trimmed_line);
-		error_exit(NOT_VALID_NUM, SYS_ERR, cube);
+		error_exit(INVALID_COLOR, SYS_ERR, cube);
 	}
 }
 
@@ -63,12 +63,12 @@ static void	analyse_line(t_cube *cube, char *line, int *bool_array, int fd)
 	int		id;
 
 	if (*line == '\0')
-		return ;
+		return (free(line));
 	if (get_attribute(line, bool_array, &id))
 	{
 		close(fd);
 		free(line);
-		error_exit(INVALID_LINE, GENERAL_ERR, cube);
+		error_exit(INVALID_ELEMENT, GENERAL_ERR, cube);
 	}
 	trimmed_line = ft_strtrim(ft_strchr(line, ' ') + 1, " \t\n\v\f\r");
 	free(line);

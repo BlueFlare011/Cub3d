@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 23:59:01 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/23 22:00:17 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:53:15 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ void	get_texture(t_cube *cube, char *trimmed_line, int id, int fd)
 	{
 		close(fd);
 		free(trimmed_line);
-		error_exit(IMAGE_ERROR, GENERAL_ERR, cube);
+		error_exit(INVALID_TEXTURE, GENERAL_ERR, cube);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:49:32 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/11 14:21:53 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/11/25 13:48:17 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static void	read_map(t_cube *cube, char **super_string, char *line, int fd)
 	if (line)
 	{
 		free(line);
-		error_exit(MAP_SEPARATED, GENERAL_ERR, cube);
+		error_exit(MAP_NOT_CLOSED, GENERAL_ERR, cube);
 	}
 	if (!aux)
 		error_exit(strerror(errno), SYS_ERR, cube);
@@ -115,7 +115,7 @@ void	get_map(t_cube *cube, int fd)
 
 	line = read_true_line(fd);
 	if (!line)
-		error_exit(INVALID_LINE, GENERAL_ERR, cube);
+		error_exit(MAP_NOT_CLOSED, GENERAL_ERR, cube);
 	super_string = NULL;
 	read_map(cube, &super_string, line, fd);
 	cube->map.map = ft_split(super_string, '\n');
