@@ -6,7 +6,7 @@
 /*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:49:32 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/25 13:48:17 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/11/28 22:57:56 by blueflare01      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ static void	read_map(t_cube *cube, char **super_string, char *line, int fd)
 	}
 	if (line)
 	{
+		printf("-%s-\n", line);
 		free(line);
 		error_exit(MAP_NOT_CLOSED, GENERAL_ERR, cube);
 	}
@@ -126,5 +127,5 @@ void	get_map(t_cube *cube, int fd)
 	cube->map.player_x = 0;
 	cube->map.player_y = 0;
 	check_chars(cube, 0, 0, 0);
-	floodfill(cube);
+	shitty_check(cube);
 }

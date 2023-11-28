@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    vbles.mk                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+         #
+#    By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/16 23:30:56 by rgallego          #+#    #+#              #
-#    Updated: 2023/11/11 15:28:00 by rgallego         ###   ########.fr        #
+#    Updated: 2023/11/28 21:56:05 by blueflare01      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ STACK	=			$(addprefix $(STACK_DIR), \
 					)
 
 PARSER		=		$(addprefix $(PARSER_DIR), \
-						floodfill.c \
+						shitty_check.c \
 						read_file.c \
 						read_map.c \
 						read_textures.c \
