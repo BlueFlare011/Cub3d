@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: blueflare011 <blueflare011@student.42.f    +#+  +:+       +#+        */
+/*   By: socana-b <socana-b@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 21:13:25 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/24 20:17:34 by blueflare01      ###   ########.fr       */
+/*   Updated: 2023/12/01 16:44:34 by socana-b         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ int	event_management(t_cube *cube)
 		move(cube, -cube->map.dir_x * speed, -cube->map.dir_y * speed);
 	if (cube->keys.d)
 		move(cube, -cube->map.dir_y * speed, cube->map.dir_x * speed);
-	//mlx_mouse_get_pos(cube->mlx.win, &x_mouse, &y_mouse); // MacOs
-	mlx_mouse_get_pos(cube->mlx.mlx, cube->mlx.win, &x_mouse, &y_mouse); // Linux
+	mlx_mouse_get_pos(cube->mlx.win, &x_mouse, &y_mouse); // MacOs
+	//mlx_mouse_get_pos(cube->mlx.mlx, cube->mlx.win, &x_mouse, &y_mouse); // Linux
 	if (cube->keys.left || (0 <= x_mouse && x_mouse < (WIN_X / 4)
 			&& 0 <= y_mouse && y_mouse < WIN_Y))
 		rotation(cube, -M_PI / ALPHA_RATIO);
