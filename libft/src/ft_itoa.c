@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: socana-b <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 10:11:12 by socana-b          #+#    #+#             */
-/*   Updated: 2021/09/30 10:11:13 by socana-b         ###   ########.fr       */
+/*   Updated: 2023/12/01 19:48:34 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	reverse(char *str)
 		str[i] = str[ft_strlen(str) - i - 1];
 		str[ft_strlen(str) - i - 1] = aux;
 		i++;
-	}	
+	}
 }
 
 static int	minus(int n, char *str)

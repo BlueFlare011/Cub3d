@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 10:17:56 by socana-b          #+#    #+#             */
-/*   Updated: 2023/08/03 18:51:03 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/12/01 19:47:57 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putchar_fd('-', fd);
 		n *= -1;
 		print(n, fd);
-	}		
+	}
 	else
 		print(n, fd);
 }

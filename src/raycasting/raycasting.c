@@ -6,7 +6,7 @@
 /*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 02:10:52 by rgallego          #+#    #+#             */
-/*   Updated: 2023/11/11 01:10:38 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/12/01 19:47:28 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void	collider(t_raycast *raycast, t_cube cube)
 }
 
 static void	set_and_paint_ray(t_cube *cube, int x)
-{	
+{
 	if (cube->raycast.collided_side == X)
 		cube->raycast.dist = cube->raycast.side_dist_x - cube->raycast.delta_x;
 	else

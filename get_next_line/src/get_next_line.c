@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rgallego <rgallego@student.42madrid>       +#+  +:+       +#+        */
+/*   By: rgallego <rgallego@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 10:02:13 by rgallego          #+#    #+#             */
-/*   Updated: 2022/02/21 14:37:59 by rgallego         ###   ########.fr       */
+/*   Updated: 2023/12/01 19:47:37 by rgallego         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 char	*get_next_line(int fd)
-{	
+{
 	static char	*rest = NULL;
 	char		*line;
 	int			len;
